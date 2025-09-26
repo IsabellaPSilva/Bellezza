@@ -1,0 +1,82 @@
+<ion-content class="perfil-page">
+
+  <!-- Foto -->
+  <div class="foto-container">
+    <ion-avatar class="foto">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-avatar>
+    <p>Alterar foto</p>
+  </div>
+
+  <!-- Informações da conta -->
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label><b>Nome de usuário:</b><br>Isabella Pacheco Da Silva</ion-label>
+      <ion-icon slot="end" name="create-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Número de telefone:</b><br>+55 ** *****-7892</ion-label>
+      <ion-icon slot="end" name="call-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Endereço de e-mail:</b><br>j*****************@gmail.com</ion-label>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="medium" (click)="salvar()">Salvar</ion-button>
+
+  <!-- Métodos de entrada -->
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label><b>Chave de acesso:</b><br>1 chave(s) de acesso adicionada(s)</ion-label>
+      <ion-button size="small" (click)="gerenciar()">Gerenciar</ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Senha:</b><br>*******</ion-label>
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <!-- Pessoal -->
+  <ion-list>
+    <ion-label><b>Gênero (opcional)</b></ion-label>
+    <ion-radio-group>
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="feminino"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="masculino"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <!-- Botões de ação -->
+  <ion-button expand="block" class ="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
+  <ion-button expand="block" class ="botao-excluir" (click)="excluir()">Excluir</ion-button>
+</ion-content>
+
+<!-- Rodapé -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" color="light">
+    <ion-tab-button tab="inicio" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Início</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="agendamentos" routerLink="/agendamentos">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label>Agendamentos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="perfil" routerLink="/perfil">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

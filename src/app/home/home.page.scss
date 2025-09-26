@@ -1,27 +1,72 @@
-#container {
+.custom-background {
+  --background: #f2efeb; // cor de fundo clara (bege)
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
+.logo-container {
+  margin-top: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.logo-text {
+  font-family: 'Georgia', serif;
+  font-size: 28px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.title {
+  margin-top: 30px;
   font-size: 20px;
-  line-height: 26px;
+  color: #333;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.button-group {
+  margin: 20px auto;
+  width: 70%;
 }
 
-#container a {
-  text-decoration: none;
+.btn-cliente {
+  --background: #d89cb4; // rosa claro
+  --border-radius: 12px;
+  margin-bottom: 15px;
 }
+
+.btn-profissional {
+  --background: #7d8c6a; // verde musgo
+  --border-radius: 12px;
+}
+
+.divider {
+  height: 2px;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.star {
+  color: #d48aa7;
+  font-size: 18px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d48aa7; /* rosa */
+  margin-bottom: 8px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #d48aa7;
+  margin: 0 10px}
