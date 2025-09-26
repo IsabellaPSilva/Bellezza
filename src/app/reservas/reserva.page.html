@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Salão Mãe & Filhas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Imagem e ícones -->
+  <div class="header">
+    <img src="assets/logo.png" alt="Logo do Salão" class="logo">
+    <div class="icons">
+      <ion-icon name="share-outline"></ion-icon>
+      <ion-icon name="heart-outline"></ion-icon>
+    </div>
+  </div>
+
+  <ion-chip color="light" outline>
+    <ion-label>Recomendado pelo Bellezza</ion-label>
+  </ion-chip>
+
+  <!-- Combos -->
+  <h2>Combos</h2>
+  <ion-card class="lala" *ngFor="let combo of combos">
+    <ion-card-content>
+      <div class="service-info">
+        <span>{{combo.name}}</span>
+        <span>{{combo.price}}</span>
+        <span class="duration">{{combo.duration}}</span>
+      </div>
+      <ion-button class="botao" (click)="reservar(combo)">reservar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Cabelo -->
+  <h2>Cabelo</h2>
+  <ion-card *ngFor="let item of cabelo">
+    <ion-card-content>
+      <div class="service-info">
+        <span>{{item.name}}</span>
+        <span>{{item.price}}</span>
+        <span class="duration">{{item.duration}}</span>
+      </div>
+      <ion-button class="botao" (click)="reservar(item)">reservar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<!-- Menu inferior -->
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Início</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="agendamentos">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Agendamentos</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="perfil">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>
