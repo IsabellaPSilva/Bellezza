@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="agendamento.page.scss">
+</head>
+
+<body>
+
+  <ion-content class="custom-background">
+
+    <div class="header-container">
+      <!-- Enfeite rosa -->
+      <div class="divider">
+        <span class="star">✦</span>
+      </div>
+    </div>
+
+      <!-- Logo + Título -->
+      <div class="title-row">
+        <img src="assets/icon/bellezza.jpg" alt="Logo" class="logo" />
+        <div >
+          <p class="agendamento">Agendamento</p>
+        </div>
+
+      </div>
+    
+
+    <!-- Agendamento Atual -->
+    <ion-card class="card-agendamento">
+      <ion-card-content>
+        <div class="linha-topo">
+          <strong>Serviço: Manicure</strong>
+          <span class="data">5 JUN</span>
+        </div>
+
+        <p class="nome">Juliana Dias</p>
+        <p class="preco">R$ 00,0</p>
+
+        <div class="acoes">
+          <ion-button class="btn-confirmada" fill="outline" size="small" (click)="irParaReserva()">Confirmar
+        </ion-button>
+
+          <ion-button class="btn-cancelar" >Cancelar</ion-button>
+        </div>
+
+        <p class="hora">h 14:00</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Reservas Finalizadas -->
+    <ion-list class="list">
+      <ion-item-divider class="finalizados">
+        <ion-label>Reservas Finalizadas</ion-label>
+      </ion-item-divider>
+
+      <!-- Item 1 -->
+      <ion-card class="card-finalizado">
+        <ion-card-content>
+          <div class="linha-topo">
+            <strong>Serviço: Cabelo</strong>
+            <span class="data">28 ABR</span>
+          </div>
+
+          <p class="nome">Carol Azevedo</p>
+          <p class="preco">R$ 40,0</p>
+
+          <div class="acoes">
+            <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
+          </div>
+
+          <p class="hora">h 10:00</p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Item 2 -->
+      <ion-card class="card-finalizado">
+        <ion-card-content>
+          <div class="linha-topo">
+            <strong>Serviço: Cílios</strong>
+            <span class="data">02 MAI</span>
+          </div>
+
+          <p class="nome">Estefane Souza</p>
+          <p class="preco">R$ 35,0</p>
+
+          <div class="acoes">
+            <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
+          </div>
+
+          <p class="hora">h 15:00</p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Item 3 -->
+      <ion-card class="card-finalizado">
+        <ion-card-content>
+          <div class="linha-topo">
+            <strong>Serviço: Sobrancelha</strong>
+            <span class="data">17 JUN</span>
+          </div>
+
+          <p class="nome">Amanda Rocha</p>
+          <p class="preco">R$ 50,0</p>
+
+          <div class="acoes">
+            <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
+          </div>
+
+          <p class="hora">h 14:00</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="inicio">
+            <ion-icon name="home-outline"></ion-icon>
+            <ion-label>Início</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="agendamentos">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <ion-label>Agendamentos</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="perfil">
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-toolbar>
+  </ion-footer>
+
+</body>
+
+</html>
