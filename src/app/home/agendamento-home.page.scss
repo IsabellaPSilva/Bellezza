@@ -1,0 +1,93 @@
+.pagina-home {
+  --background: #f8f5f5;
+  padding: 10px;
+}
+
+/* Logo */
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+}
+
+/* Barra de pesquisa */
+.barra-pesquisa {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  ion-searchbar {
+    --background: #f1e4e9;
+    border-radius: 10px;
+    width: 90%;
+  }
+}
+
+/* Categorias */
+.categorias {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+
+  .btn-categoria {
+    --background: #d8a4be;
+    color: #fff;
+    border-radius: 20px;
+    font-weight: 600;
+    width: 30%;
+  }
+}
+
+/* Espaço dos logos */
+.carrossel-logos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  .logo-placeholder {
+    width: 70px;
+    height: 70px;
+    background-color: #e3c5d5;
+    border-radius: 50%;
+    margin: 8px;
+  }
+}
+
+/* Espaço dos banners */
+.banners {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  .banner-placeholder {
+    width: 90%;
+    height: 120px;
+    background-color: #d8a4be;
+    border-radius: 12px;
+  }
+}
+
+/* Rodapé */
+.rodape {
+  ion-toolbar {
+    --background: #d8a4be;
+    color: #fff;
+  }
+
+  .menu-inferior {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    ion-button {
+      --color: #fff;
+      flex-direction: column;
+      font-size: 12px;
+
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}

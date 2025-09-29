@@ -15,6 +15,6 @@ export class CadastroClientePage {
 
   cadastrar() {
     // navega para a página AtivarLocalizacao
-    this.router.navigate(['/ativar-localizacao']);
+    this.router.navigate(['/localizacao']);
   }
 }
