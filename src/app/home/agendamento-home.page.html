@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title class="titulo-logo">
+      <img src="assets/teste-bellezza-logo.jpeg" alt="Logo" class="logo">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pagina-home">
+
+  <!-- Barra de busca -->
+  <div class="barra-pesquisa">
+    <ion-searchbar placeholder="Buscar..." animated></ion-searchbar>
+  </div>
+
+  <!-- Categorias -->
+  <div class="categorias">
+    <ion-button fill="solid" class="btn-categoria">Unhas</ion-button>
+    <ion-button fill="solid" class="btn-categoria">Cabelo</ion-button>
+    <ion-button fill="solid" class="btn-categoria">Bronze</ion-button>
+  </div>
+
+  <!-- Espaço para logos dos salões -->
+  <div class="carrossel-logos">
+    <div class="logo-placeholder" *ngFor="let i of [1,2,3,4]"></div>
+  </div>
+
+  <!-- Espaço para imagens de promoções / banners -->
+  <div class="banners">
+    <div class="banner-placeholder"></div>
+    <div class="banner-placeholder"></div>
+    <div class="banner-placeholder"></div>
+  </div>
+
+</ion-content>
+
+<!-- Rodapé -->
+<ion-footer class="rodape">
+  <ion-toolbar>
+    <ion-buttons class="menu-inferior" slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon name="home-outline"></ion-icon>
+        <span>Início</span>
+      </ion-button>
+      <ion-button routerLink="/agendamentos">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>Agendamentos</span>
+      </ion-button>
+      <ion-button routerLink="/perfil">
+        <ion-icon name="person-outline"></ion-icon>
+        <span>Perfil</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

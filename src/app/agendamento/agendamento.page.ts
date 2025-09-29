@@ -44,4 +44,7 @@ export class AgendamentosPage {
   irParaReserva() {
     this.router.navigate(['/reserva']); // <-- Caminho da rota
   }
+  irParaHome() {
+  this.router.navigate(['/home']);
+}
 }
