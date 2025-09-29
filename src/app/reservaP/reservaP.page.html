@@ -1,0 +1,87 @@
+<ion-content class="pagina">
+
+  <!-- Cabeçalho -->
+  <div class="header">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <div class="texto-header">
+      <h2>Salão Mãe & Filhas</h2>
+      <div class="acoes">
+        <div class="acao">
+          <ion-icon name="share-outline"></ion-icon>
+          <span>compartilhar</span>
+        </div>
+        <div class="acao">
+          <ion-icon name="heart-outline"></ion-icon>
+          <span>favoritar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recomendação -->
+  <div class="recomendado">
+    <ion-icon name="thumbs-up-outline"></ion-icon>
+    <span>Recomendado pelo</span>
+    <span class="marca">Bellezza</span>
+  </div>
+
+  <!-- Primeiro grupo -->
+  <div class="grupo">
+    <div class="escrever">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <span>Escrever</span>
+    </div>
+
+    <div class="caixa">
+      <div class="linha">
+        <button class="btn">editar serviço</button>
+        <button class="btn">editar preço</button>
+        <button class="reservar">reservar</button>
+      </div>
+      <div class="linha">
+        <button class="btn">editar serviço</button>
+        <button class="btn">editar preço</button>
+        <button class="reservar">reservar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Segundo grupo -->
+  <div class="grupo">
+    <div class="escrever">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <span>Escrever</span>
+    </div>
+
+    <div class="caixa">
+      <div class="linha" *ngFor="let i of [1,2,3,4]">
+        <button class="btn">editar serviço</button>
+        <button class="btn">editar preço</button>
+        <button class="reservar">reservar</button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<!-- Rodapé -->
+<ion-footer>
+  <div class="footer">
+    <div class="item">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Início</span>
+    </div>
+    <div class="item">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Agendamentos</span>
+    </div>
+    <div class="item">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Perfil</span>
+    </div>
+    <div class="item">
+      <ion-icon name="storefront-outline"></ion-icon>
+      <span>Salão</span>
+    </div>
+  </div>
+</ion-footer>
