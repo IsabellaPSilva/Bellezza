@@ -1,0 +1,142 @@
+.pagina {
+  --background: #f3f1eb; /* fundo claro igual ao Canva */
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  color: #000000;
+}
+
+.logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+}
+
+.texto-header {
+  flex: 1;
+  color: #000000;
+}
+
+.texto-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.acoes {
+  display: flex;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.acao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+}
+
+.acao ion-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+/* Recomendação */
+.recomendado {
+  display: inline-flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  padding: 4px 12px;
+  margin: 12px;
+  font-size: 12px;
+}
+
+.recomendado .marca {
+  font-family: cursive;
+  margin-left: 4px;
+  font-weight: bold;
+  
+}
+
+/* Grupos */
+.grupo {
+  margin: 16px;
+}
+
+.escrever {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #000000;
+}
+
+.caixa {
+  border: 1px solid #81a45a;
+  padding: 10px;
+  color: #000000;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  gap: 8px;
+  color: #000000;
+}
+
+.btn {
+  flex: 1;
+  background: white;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 13px;
+  text-transform: lowercase;
+  color: #000000;
+}
+
+.reservar {
+  background: #7a815f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  min-width: 90px;
+  color: #000000;
+  text-transform: lowercase;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #7a815f;
+  color: #000000;
+  padding: 8px 0;
+}
+
+.footer .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.footer ion-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
