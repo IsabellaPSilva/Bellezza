@@ -1,0 +1,67 @@
+<ion-content class="fundo">
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="assets/teste-bellezza-logo.jpeg" alt="Logo do Salão">
+  </div>
+
+  <!-- Calendário -->
+  <ion-card class="card-calendario">
+    <ion-card-content>
+      <ion-datetime
+        [(ngModel)]="selectedDate"
+        presentation="date"
+        locale="pt-BR"
+        class="calendario"
+      ></ion-datetime>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="disponiveis"><p>Horarios Disponiveis:</p></div>
+
+  <!-- Horários disponíveis -->
+  <div class="horarios-container">
+    <ion-button *ngFor="let h of horarios"
+      [ngClass]="{'horario-selecionado': selectedHorario === h}"
+      fill="solid"
+      (click)="selecionarHorario(h)">
+      {{ h }}
+    </ion-button>
+  </div>
+
+  <!-- Card de serviço -->
+  <ion-card class="card-servico">
+    <ion-card-content>
+      <div class="servico-info">
+        <p><b>Combo: Aplique + Unha</b> - R$ 830,00</p>
+      </div>
+      <ion-button fill="clear" class="add-servico" (click)="adicionarHorario()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Adicionar mais serviços
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botão reservar -->
+  <ion-button expand="block" class="btn-reservar" (click)="reservar()">
+    Reservar
+  </ion-button>
+
+  <!-- Footer -->
+  <ion-footer>
+    <ion-toolbar class="footer">
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon slot="icon-only" name="home"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-content>

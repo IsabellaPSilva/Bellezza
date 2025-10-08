@@ -3,12 +3,19 @@
   import { LocalizacaoPage } from './localizacao/localizacao.page';
   import { ReservaPage } from './reservas/reserva.page';
   import { reservaPPage } from './reservaP/reservaP.page';
+  import { CalendarioPPage } from './calendarioP/calendarioP.page';
+  import { CalendarioPage } from './calendario/calendario.page';
+
+  import { NgModule } from '@angular/core';
+  import { RouterModule } from '@angular/router';
 
   export const routes: Routes = [
     {path: '', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
     {path: 'reserva', component: ReservaPage },
     {path: 'reservaP', component: reservaPPage },
+    {path: 'calendarioP', component: CalendarioPPage },
+    {path: 'calendario', component: CalendarioPage },
     {path: 'home',loadComponent: () => import('./home/home.page').then((m) => m.HomePage),},
     {path: '',redirectTo: 'home',pathMatch: 'full',},
     {path: 'details',loadComponent: () => import('./pages/details/details.page').then((m) => m.DetailsPage),},
@@ -17,3 +24,9 @@
     {path: 'perfil',loadComponent: () => import('./home/perfil.page').then(m => m.PerfilPage),},
     {path: 'agendamento-home',loadComponent: () => import('./home/agendamento-home.page').then(m => m.AgendamentoHomePage)},
 ];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class CalendarioPPageRoutingModule {}
