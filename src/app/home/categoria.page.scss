@@ -1,0 +1,74 @@
+ion-content {
+  --background: #f8f8f8;
+}
+
+.ordenar-container {
+  padding: 10px 16px;
+  color: #8b2f4c;
+  font-size: 15px;
+}
+
+.card-salao {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 10px 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.salao-topo {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  gap: 10px;
+}
+
+.salao-foto-perfil {
+  width: 40px;
+  height: 40px;
+  background-color: #e2a7bb;
+  border-radius: 50%;
+}
+
+.salao-nome {
+  font-weight: bold;
+  color: #7d2948;
+}
+
+.salao-imagem {
+  width: 100%;
+  height: 150px;
+  background-color: #d597ac;
+}
+
+.salao-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  color: #444;
+}
+
+.avaliacao {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.estrela {
+  color: #b33f63;
+}
+
+ion-footer {
+  --background: #b5738a;
+  color: white;
+}
+
+ion-tab-bar {
+  background-color: #b5738a;
+}
+
+ion-icon {
+  color: white;
+}

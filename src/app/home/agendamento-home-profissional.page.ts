@@ -4,23 +4,18 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-agendamento-home',
-  templateUrl: './agendamento-home.page.html',
-  styleUrls: ['./agendamento-home.page.scss'],
+  selector: 'app-agendamento-home-profissional',
+  templateUrl: './agendamento-home-profissional.page.html',
+  styleUrls: ['./agendamento-home-profissional.page.scss'],
   standalone: true,
   imports: [
     IonicModule,  // 👈 obrigatório!
     CommonModule
   ]
 })
-export class AgendamentoHomePage {
+export class AgendamentoHomePageProfissional {
 
-constructor(private router: Router) {}
-
-abrirCategoria(nome: string) {
-  this.router.navigate(['/categoria'], { queryParams: { nome } });
-}
-  
+  constructor(private router: Router) {}
 
   irParaPerfil() {
     this.router.navigate(['/perfil']); // 👈 rota da tela de perfil

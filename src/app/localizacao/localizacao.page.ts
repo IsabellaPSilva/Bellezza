@@ -2,14 +2,16 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-localizacao',
   templateUrl: './localizacao.page.html',
   styleUrls: ['./localizacao.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule]
+  imports: [IonicModule, FormsModule, CommonModule, RouterLink]
 })
+
 export class LocalizacaoPage { 
   endereco: string = '';
   mapaUrl: string = this.gerarUrlMapa('');

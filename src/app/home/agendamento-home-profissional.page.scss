@@ -14,7 +14,7 @@ ion-content {
 .search-bar {
   margin: 10px;
   ion-searchbar {
-    --background: #f1d4e5;
+    --background: #a0b18b;
     --placeholder-color: #555;
     border-radius: 10px;
   }
@@ -28,7 +28,7 @@ ion-content {
   gap: 10px;
 
   ion-button.category {
-    --background: #d69bb1;
+    --background: #7d8c6a;
     --color: white;
     font-weight: bold;
     flex-shrink: 0;
@@ -52,7 +52,7 @@ ion-content {
   .circle {
     width: 70px;
     height: 70px;
-    background-color: #d69bb1;
+    background-color: #7d8c6a;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -72,14 +72,14 @@ ion-content {
   .card {
     width: 100%;
     height: 180px;
-    background-color: #d69bb1;
+    background-color: #7d8c6a;
     border-radius: 10px;
   }
 }
 
 /* ⚙️ Rodapé */
 ion-tab-bar {
-  --background: #d69bb1;
+  --background: #7d8c6a;
   --color: white;
   --color-selected: white;
 }
@@ -114,8 +114,7 @@ ion-tab-bar {
 
   /* Efeito quando o botão está selecionado */
   ion-tab-button.tab-selected {
-    background: #c57ea3; /* Rosa mais escuro */
+    background: #5c684c; /* Rosa mais escuro */
     border-radius: 12px 12px 0 0;
   }
 }
-

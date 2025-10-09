@@ -114,18 +114,38 @@
       color: #333;
 } 
 
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
+}
+
 .ion-footer {
   .ion-tab-bar {
-    --background: #e8d6df; // fundo rosado claro
-    --color: #5e2d45;
-    --color-selected: #5e2d45;
+    --background: #d79ab6; /* Rosa combinando com o resto do app */
+  --color: #ffffff; /* Ícones e texto brancos */
+  --color-selected: #ffffff;
+  --ripple-color: #fff;
+  border-top: none;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
 
-    .ion-tab-button {
-      font-size: 12px;
+  }
+    ion-tab-button.tab-selected {
+    background: #c57ea3; /* Rosa mais escuro */
+    border-radius: 12px 12px 0 0;
+  }
+
+  ion-tab-button {
+    flex-direction: column;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 
       .ion-icon {
         font-size: 20px;
       }
+      .ion-label {
+      font-size: 11px;
     }
   }
 }
