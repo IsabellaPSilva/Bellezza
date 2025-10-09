@@ -1,0 +1,48 @@
+<ion-content class="fundo">
+
+  
+  <!-- Calendário interativo -->
+  <ion-card class="fundo">
+    <ion-card-content >
+      <div class="logo-container">
+        <img src="assets/teste-bellezza-logo.jpeg" alt="Logo" class="logo-img" />
+      </div>
+      <ion-datetime class="fundo"
+        presentation="date"
+        [(ngModel)]="selectedDate"
+        locale="pt-BR">
+      </ion-datetime>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botão adicionar -->
+  <ion-button class="horario" expand="block" color="medium" (click)="adicionarHorario()">
+    <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+    Adicionar horário de serviço
+  </ion-button>
+
+  <!-- Card do agendamento -->
+  <ion-card>
+    <ion-card-content class="fundo">
+      <h2>Larissa da Silva</h2>
+      <p><b>R$ 80,00</b></p>
+      <p>Serviço: sobrancelha</p>
+      <p>Horário: 18:00</p>
+
+    <ion-card>
+      <ion-card-content>
+        <div>
+          <ion-button class="recusar">RECUSAR</ion-button>
+          <ion-button class="aceitar">ACEITAR</ion-button>
+        </div>
+      </ion-card-content>
+  </ion-card>
+    </ion-card-content>
+    <ion-item class="trinta" lines="none">
+      <ion-label slot="end">
+        <b>30 ABR</b>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

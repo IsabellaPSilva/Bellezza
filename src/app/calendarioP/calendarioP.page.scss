@@ -1,0 +1,50 @@
+/* ===== FUNDO ===== */
+.fundo {
+  background-color: #efede5;
+  color: black;
+}
+
+/* Fundo geral claro */
+ion-content.fundo {
+  --background: #efede5;
+}
+
+/* ===== ITENS ===== */
+ion-item {
+  --background: #ffffff;
+  --color: #000000;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+/* Calendário - texto do mês e dias */
+ion-datetime {
+  --color: #000000;        /* cor do texto dos dias */
+  --month-year-color: #000; /* cor do mês e ano */
+  --day-header-color: #000; /* cor das letras D S T Q Q S S */
+}
+
+ion-button.recusar,
+ion-button.aceitar {
+  --background: #ffffff; /* fundo branco */
+  --color: #000000;      /* texto preto, para contrastar */
+  border: 1px solid #ccc; /* opcional: borda para destaque */
+}
+
+
+ion-card {
+  background: #ffffff;
+  border-radius: 5px;
+ ;
+}
+
+ion-card-content.fundo {
+  background-color: #ffffff;
+  color: #000;
+ 
+  border: 2px solid rgb(139, 133, 133); // 2px de espessura, linha sólida, cor preta
+  // opcional:
+  border-radius: 4px; // cantos arredondados, se quiser
+}
