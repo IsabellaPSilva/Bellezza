@@ -24,11 +24,8 @@
     {path: 'ativar-localizacao',loadComponent: () => import('./home/ativar-localizacao.page').then((m) => m.AtivarLocalizacaoPage),},
     {path: 'perfil',loadComponent: () => import('./home/perfil.page').then(m => m.PerfilPage),},
     {path: 'agendamento-home',loadComponent: () => import('./home/agendamento-home.page').then(m => m.AgendamentoHomePage)},
-<<<<<<< HEAD
     {path: 'agendamento-home-profissional',loadComponent: () => import('./home/agendamento-home-profissional.page').then(m => m.AgendamentoHomePageProfissional)},
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)}
-];
-=======
 ];
 
 @NgModule({
@@ -36,4 +33,3 @@
   exports: [RouterModule],
 })
 export class CalendarioPPageRoutingModule {}
->>>>>>> origin/isabela
