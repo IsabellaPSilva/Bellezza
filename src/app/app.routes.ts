@@ -1,7 +1,7 @@
   import { Routes } from '@angular/router';
   import { AgendamentosPage } from './agendamento/agendamento.page';
   import { LocalizacaoPage } from './localizacao/localizacao.page';
-  import { LocalizacaoPageP } from './localizacaoP/localizacaoP.page';
+  import { LocalizacaoPPage } from './localizacaoP/localizacaoP.page';
   import { ReservaPage } from './reservas/reserva.page';
   import { reservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
@@ -13,7 +13,7 @@
   export const routes: Routes = [
     {path: '', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
-    {path: 'localizacaoP', component: LocalizacaoPage },
+    {path: 'localizacaoP', component: LocalizacaoPPage },
     {path: 'reserva', component: ReservaPage },
     {path: 'reservaP', component: reservaPPage },
     {path: 'calendarioP', component: CalendarioPPage },
