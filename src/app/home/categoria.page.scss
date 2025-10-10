@@ -2,6 +2,38 @@ ion-content {
   --background: #f8f8f8;
 }
 
+/* Logo */
+.logo {
+  width: 60px;
+  margin: 10px auto;
+  display: block;
+}
+
+/* 🧠 Scroll horizontal das categorias */
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+  gap: 10px;
+}
+  ion-button.category {
+    --background: #d69bb1;
+    --color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+    border-radius: 6px;
+    min-width: 120px;
+  }
+
+  .search-bar {
+  margin: 10px;
+  ion-searchbar {
+    --background: #f1d4e5;
+    --placeholder-color: #555;
+    border-radius: 10px;
+  }
+}
+
 .ordenar-container {
   padding: 10px 16px;
   color: #8b2f4c;
@@ -60,13 +92,16 @@ ion-content {
   color: #b33f63;
 }
 
-ion-footer {
-  --background: #b5738a;
-  color: white;
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
 }
 
-ion-tab-bar {
-  background-color: #b5738a;
+ion-footer {
+  --background: #d69bb1;
+  color: white;
 }
 
 ion-icon {

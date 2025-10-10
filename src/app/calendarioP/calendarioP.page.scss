@@ -48,3 +48,10 @@ ion-card-content.fundo {
   // opcional:
   border-radius: 4px; // cantos arredondados, se quiser
 }
+
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #7d8c6a;
+  --color: white;
+  --color-selected: white;
+}
