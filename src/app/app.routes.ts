@@ -1,6 +1,7 @@
   import { Routes } from '@angular/router';
   import { AgendamentosPage } from './agendamento/agendamento.page';
   import { LocalizacaoPage } from './localizacao/localizacao.page';
+  import { LocalizacaoPPage } from 'src/localizacaoP/localizacaoP.page';
   import { ReservaPage } from './reservas/reserva.page';
   import { reservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
@@ -12,6 +13,7 @@
   export const routes: Routes = [
     {path: '', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
+    {path: 'localizacaoP', component: LocalizacaoPPage },
     {path: 'reserva', component: ReservaPage },
     {path: 'reservaP', component: reservaPPage },
     {path: 'calendarioP', component: CalendarioPPage },
@@ -27,6 +29,7 @@
     {path: 'agendamento-home-profissional',loadComponent: () => import('./home/agendamento-home-profissional.page').then(m => m.AgendamentoHomePageProfissional)},
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
