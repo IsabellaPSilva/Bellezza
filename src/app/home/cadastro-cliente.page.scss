@@ -43,6 +43,7 @@
   --background: #d89cb4;
   border-radius: 8px;
   margin-bottom: 12px;
+  color: rgb(0, 0, 0);
 }
 
 /* Botão de cadastrar */
@@ -74,9 +75,17 @@
   margin-bottom: 8px;
 }
 
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 2px solid #d48aa7;
-  margin: 0 10px}
+
+.toast-erro-customizado {
+  --color: #000000;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.toast-sucesso-customizado {
+  --color: #000000;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+}

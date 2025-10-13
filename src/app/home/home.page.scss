@@ -70,3 +70,55 @@
   flex: 1;
   border-bottom: 2px solid #d48aa7;
   margin: 0 10px}
+
+  
+.custom-background {
+  --background: #f2efeb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh; /* ocupa a tela toda */
+  justify-content: flex-start; /* começa do topo */
+}
+
+/* Container do logo */
+.logo-container {
+  margin-top: 100px; /* espaço acima do logo */
+}
+
+/* Logo */
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+/* Título */
+.title {
+  margin-top: 250px; /* 🔥 empurra o “Cadastre-se” e os botões bem mais pra baixo */
+  font-size: 22px;
+  color: #333;
+}
+
+/* Divisores decorativos */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d48aa7;
+  width: 80%;
+  margin: 18px auto;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #d48aa7;
+  margin: 0 10px;
+}
+
+.star {
+  color: #d48aa7;
+  font-size: 18px;
+}
