@@ -31,10 +31,10 @@
   margin: 20px;
 
   .continuar-btn {
-    color:#333;
+    color:#f8f6f0;
     font-weight: bold;
     border-radius: 6px;
-    --background: #616a4d;
+    --background: #d69bb1;
   }
 
   .mensagem {
@@ -73,7 +73,7 @@ h2 {
 }
 
 p {
-  color: #7c6d76;
+  color: #b56d98;
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
@@ -128,8 +128,8 @@ input::placeholder {
   }
 }
 
-ion-button.continuar-btn {
-  --background: #d4a7c2 !important; // rosa
+.ion-button.continuar-btn {
+  --background: #d69bb1;// rosa
   --color: #000000 !important;       // texto preto forte
 
   &.button-disabled {

@@ -29,6 +29,7 @@
     {path: 'agendamento-home-profissional',loadComponent: () => import('./home/agendamento-home-profissional.page').then(m => m.AgendamentoHomePageProfissional)},
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)}
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
