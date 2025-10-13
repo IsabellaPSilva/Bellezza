@@ -23,18 +23,14 @@
     </div>
 
 
-    <div class="btn-container">
+<div class="btn-container">
       <ion-button
-        expand="block"
-        class="continuar-btn"
-        [disabled]="!endereco"
-        routerLink="/agendamento-home"
-      >
+expand="block" class="continuar-btn" [disabled]="!endereco" routerLink="/agendamento-home">
         CONTINUAR
       </ion-button>
-      <p class="mensagem" *ngIf="!endereco">
-        Por favor, insira o endereço para continuar
-      </p>
-    </div>
+  <p class="mensagem" *ngIf="!endereco">
+    Por favor, insira o endereço para continuar
+  </p>
   </div>
+</div>
 </ion-content>
