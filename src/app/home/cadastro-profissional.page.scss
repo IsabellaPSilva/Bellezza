@@ -1,0 +1,82 @@
+.custom-background {
+  --background: #f2efeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.logo-container {
+  margin-top: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.logo-text {
+  font-family: 'Georgia', serif;
+  font-size: 26px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.title {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Container do formulário */
+.form-container {
+  margin-top: 20px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Estilo dos campos */
+.input-item {
+  --background: #97a083;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Botão de cadastrar */
+.btn-cadastrar {
+  --background: #97a083;
+  --border-radius: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* Divisores decorativos */
+.divider {
+  height: 2px;
+  margin: 15px auto;
+  width: 80%;
+}
+
+.star {
+  color: #97a083;
+  font-size: 18px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #97a083; /* rosa */
+  margin-bottom: 8px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #97a083;
+  margin: 0 10px}

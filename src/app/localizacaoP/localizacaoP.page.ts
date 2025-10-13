@@ -3,16 +3,17 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-localizacaoP',
   templateUrl: './localizacaoP.page.html',
   styleUrls: ['./localizacaoP.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class LocalizacaoPPage { 
-  endereco: string = '';
+endereco: string = '';
   mapaUrl: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {

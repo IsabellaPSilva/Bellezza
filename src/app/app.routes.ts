@@ -27,7 +27,8 @@
     {path: 'perfil',loadComponent: () => import('./home/perfil.page').then(m => m.PerfilPage),},
     {path: 'agendamento-home',loadComponent: () => import('./home/agendamento-home.page').then(m => m.AgendamentoHomePage)},
     {path: 'agendamento-home-profissional',loadComponent: () => import('./home/agendamento-home-profissional.page').then(m => m.AgendamentoHomePageProfissional)},
-    {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)}
+    {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)},
+    {path: 'cadastro-profissional',loadComponent: () => import('./home/cadastro-profissional.page').then((m) => m.CadastroProfissionalPage),},
 ];
 
 @NgModule({
