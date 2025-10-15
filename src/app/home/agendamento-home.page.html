@@ -6,62 +6,53 @@
 
 <ion-content>
 
-    <!-- 🔍 Barra de busca -->
+  <!-- 🔍 Barra de busca -->
   <div class="search-bar">
-    <ion-searchbar placeholder="Buscar..."></ion-searchbar>
+    <ion-searchbar placeholder="Buscar..." (ionInput)="filtrar($event)"></ion-searchbar>
   </div>
 
+  <!-- 🧠 Categorias -->
   <div class="category-scroll">
-    <ion-button fill="solid" class="category">Unhas</ion-button>
-    <ion-button fill="solid" class="category">Cabelo</ion-button>
-    <ion-button fill="solid" class="category">Bronze</ion-button>
-    <ion-button fill="solid" class="category">Cílios</ion-button>
-    <ion-button fill="solid" class="category">Sobrancelhas</ion-button>
-    <ion-button fill="solid" class="category">Maquiagem</ion-button>
-    <ion-button fill="solid" class="category">Depilação</ion-button>
-    <ion-button fill="solid" class="category">Massagens</ion-button>
-    <ion-button fill="solid" class="category">Pele</ion-button>
+    <ion-button *ngFor="let cat of categorias"
+      (click)="abrirCategoria(cat)"
+      fill="solid"
+      class="category">
+      {{ cat }}
+    </ion-button>
   </div>
 
-  <!-- 💅🏼 Ícones redondos com scroll horizontal -->
+  <!-- 💅🏼 Ícones redondos -->
   <div class="circle-scroll">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
+    <div class="circle" *ngFor="let i of [1,2,3,4,5,6]"></div>
   </div>
 
-  <!-- 📦 Cards retangulares verticais -->
+  <!-- 📦 Cards -->
   <div class="card-list">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    <div class="card" *ngFor="let item of itensFiltrados">
+      {{ item }}
+    </div>
   </div>
-
-<!-- ⚙️ Rodapé fixo -->
-<ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="inicio" routerLink="/agendamento-home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Início</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="agendamentos" routerLink="/reserva">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <ion-label>Agendamentos</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="perfil" routerLink="/perfil">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Perfil</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
 
 </ion-content>
+
+<!-- ⚙️ Rodapé fixo funcional -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="tabs-footer" slot="bottom">
+      <ion-button routerLink="/agendamento-home">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Início</ion-label>
+      </ion-button>
+
+      <ion-button routerLink="/reserva">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>Agendamentos</ion-label>
+      </ion-button>
+
+      <ion-button routerLink="/perfil">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
