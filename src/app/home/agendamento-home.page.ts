@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-agendamento-home',
@@ -9,21 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./agendamento-home.page.scss'],
   standalone: true,
   imports: [
-    IonicModule,  // 👈 obrigatório!
-    CommonModule
+    IonicModule, 
+    CommonModule,
+    RouterLink   // ✅ use RouterLink no lugar de Router aqui!
   ]
 })
 export class AgendamentoHomePage {
 
-constructor(private router: Router) {}
+  constructor(private router: Router) {}
 
-abrirCategoria(nome: string) {
-  this.router.navigate(['/categoria'], { queryParams: { nome } });
-}
-  
+  abrirCategoria(nome: string) {
+    this.router.navigate(['/categoria']);
+  }
 
   irParaPerfil() {
-    this.router.navigate(['/perfil']); // 👈 rota da tela de perfil
+    this.router.navigate(['/perfil']);
   }
 
 }

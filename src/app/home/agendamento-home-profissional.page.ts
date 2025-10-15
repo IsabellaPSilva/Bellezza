@@ -18,7 +18,7 @@ export class AgendamentoHomePageProfissional {
   constructor(private router: Router) {}
 
   irParaPerfil() {
-    this.router.navigate(['/perfil']); // 👈 rota da tela de perfil
+    this.router.navigate(['/perfilP']); // 👈 rota da tela de perfil
   }
 
 }

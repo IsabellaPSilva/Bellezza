@@ -12,7 +12,7 @@ import { IonTabs } from '@ionic/angular/standalone';
   standalone: true,
   imports: [
      IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList,
-    IonRadioGroup, IonRadio, IonFooter, IonTabs, IonTabBar, IonTabButton, RouterModule
+    IonRadioGroup, IonRadio, IonTabs, IonTabBar, IonTabButton, RouterModule
   ]
 })
 export class PerfilPage {
