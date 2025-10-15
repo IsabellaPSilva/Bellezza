@@ -26,7 +26,7 @@ endereco: string = '';
   atualizarMapa() {
     if (!this.endereco) return;
 
-    const url = `https://www.google.com/maps/embed/v1/place?key=SUA_API_KEY&q=${encodeURIComponent(
+    const url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBqlUT4YYMTfG-HjI3pJEcVSZDVk0FT17M&q=${encodeURIComponent(
       this.endereco
     )}`;
     this.mapaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
