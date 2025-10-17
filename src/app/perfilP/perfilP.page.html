@@ -1,6 +1,5 @@
-
 <ion-content class="perfil-page">
-
+ 
   <!-- Foto -->
   <div class="foto-container">
     <ion-avatar class="foto">
@@ -8,55 +7,67 @@
     </ion-avatar>
     <p>Alterar foto</p>
   </div>
-
+ 
   <!-- Informações da conta -->
   <ion-list>
     <ion-item lines="none">
       <ion-label><b>Nome de usuário:</b><br>Isabella Pacheco Da Silva</ion-label>
       <ion-icon slot="end" name="create-outline"></ion-icon>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Nome da empresa:</b><br>Salão Mãe e Filhas</ion-label>
       <ion-icon slot="end" name="create-outline"></ion-icon>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Profissão:</b><br>Cabeleleiro e Manicure</ion-label>
       <ion-icon slot="end" name="brush-outline"></ion-icon>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Endereço da empresa:</b><br>Esquina</ion-label>
       <ion-icon slot="end" name="location-outline"></ion-icon>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Número de telefone:</b><br>+55 ** *****-7892</ion-label>
       <ion-icon slot="end" name="call-outline"></ion-icon>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Endereço de e-mail:</b><br>j*****************@gmail.com</ion-label>
       <ion-icon slot="end" name="mail-outline"></ion-icon>
     </ion-item>
+ 
+  <ion-item lines="none">
+      <ion-label><b>Descrição da empresa:</b><br>Salão de beleza Mãe & Filhas, é um salão família. voltada para o público feminino, com especialidade em cabelos afros. atendimento com hora marcada !!</ion-label>
+      <ion-icon slot="end"></ion-icon>
+    </ion-item>
   </ion-list>
-
+ 
   <ion-button expand="block" color="medium" (click)="salvar()">Salvar</ion-button>
-
+ 
   <!-- Métodos de entrada -->
   <ion-list>
+    <ion-item lines="none">
+  <ion-label><b>Redes Sociais:</b></ion-label>
+  <ion-icon name="logo-instagram"></ion-icon>
+  <ion-icon name="logo-facebook"></ion-icon>
+  <ion-icon name="logo-whatsapp"></ion-icon>
+</ion-item>
+   
     <ion-item lines="none">
       <ion-label><b>Chave de acesso:</b><br>1 chave(s) de acesso adicionada(s)</ion-label>
       <ion-button size="small" (click)="gerenciar()">Gerenciar</ion-button>
     </ion-item>
-
+ 
     <ion-item lines="none">
       <ion-label><b>Senha:</b><br>*******</ion-label>
       <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
     </ion-item>
   </ion-list>
-
+ 
   <!-- Pessoal -->
   <ion-list>
     <ion-label><b>Gênero (opcional)</b></ion-label>
@@ -71,28 +82,30 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
-
+ 
   <!-- Botões de ação -->
   <ion-button expand="block" class ="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
   <ion-button expand="block" class ="botao-excluir" (click)="excluir()">Excluir</ion-button>
 </ion-content>
-
+ 
 <!-- ⚙️ Rodapé fixo -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
     <ion-label>Início</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button>
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/perfil">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
-
-
+ 
+ 
+ 
+ 
