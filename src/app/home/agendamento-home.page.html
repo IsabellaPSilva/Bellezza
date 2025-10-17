@@ -6,21 +6,22 @@
 
 <ion-content>
 
-    <!-- 🔍 Barra de busca -->
+  <!-- 🔍 Barra de busca -->
   <div class="search-bar">
     <ion-searchbar placeholder="Buscar..."></ion-searchbar>
   </div>
 
+  <!-- 🧠 Categorias com scroll horizontal -->
   <div class="category-scroll">
-    <ion-button fill="solid" class="category">Unhas</ion-button>
-    <ion-button fill="solid" class="category">Cabelo</ion-button>
-    <ion-button fill="solid" class="category">Bronze</ion-button>
-    <ion-button fill="solid" class="category">Cílios</ion-button>
-    <ion-button fill="solid" class="category">Sobrancelhas</ion-button>
-    <ion-button fill="solid" class="category">Maquiagem</ion-button>
-    <ion-button fill="solid" class="category">Depilação</ion-button>
-    <ion-button fill="solid" class="category">Massagens</ion-button>
-    <ion-button fill="solid" class="category">Pele</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Unhas</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Cabelo</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Bronze</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Cílios</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Sobrancelhas</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Maquiagem</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Depilação</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Massagens</ion-button>
+    <ion-button routerLink="/categoria" fill="solid" class="category">Pele</ion-button>
   </div>
 
   <!-- 💅🏼 Ícones redondos com scroll horizontal -->
@@ -42,26 +43,22 @@
     <div class="card"></div>
   </div>
 
-<!-- ⚙️ Rodapé fixo -->
-<ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="inicio" routerLink="/agendamento-home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Início</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="agendamentos" routerLink="/reserva">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <ion-label>Agendamentos</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="perfil" routerLink="/perfil">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Perfil</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-
 </ion-content>
+
+<!-- ⚙️ Rodapé fixo -->
+<ion-tab-bar slot="bottom">
+  <ion-tab-button>
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Início</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button>
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button (click)="irParaPerfil()" routerLink="/perfil">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

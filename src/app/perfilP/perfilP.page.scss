@@ -1,0 +1,153 @@
+
+.perfil-page {
+  --background: #fafafa; // fundo claro
+  padding: 16px;
+
+  ion-list {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  ion-item {
+    --inner-padding-end: 12px;
+    --padding-start: 12px;
+    font-size: 14px;
+
+    ion-label {
+      font-size: 14px;
+      color: #333;
+    }
+
+    b {
+      color: #222;
+      font-weight: 600;
+    }
+
+    ion-icon {
+      color: #7d8c6a; // tom roxo escuro
+      font-size: 20px;
+    }
+
+    ion-button {
+      --background: #7d8c6a;; // botão roxo claro
+      --color: #fff;
+      font-size: 12px;
+      height: 28px;
+      border-radius: 8px;
+    }
+  }
+
+  .foto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+
+    .foto {
+      width: 90px;
+      height: 90px;
+      background: #7d8c6a;; // roxo claro
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+      ion-icon {
+        font-size: 50px;
+        color: #fff;
+      }
+    }
+
+    p {
+      margin-top: 8px;
+      font-weight: 600;
+      color: #434d37;
+    }
+  }
+
+.ion-button {
+    margin-top: 12px;
+    --border-radius: 10px;
+    font-weight: 600;
+
+    .btn-salvar {
+      --background: #7d8c6a;
+      --color: #fff;
+    }
+
+    .btn-sair {
+      --background: #7d8c6a;
+      --color: #333;
+    }
+
+    .btn-excluir {
+      --background: #7d8c6a;
+      --color: #333;
+    }
+  }
+
+.ion-radio-group {
+    .ion-item {
+      --background: transparent;
+    }
+
+    .ion-label {
+      font-size: 14px;
+    }
+
+    .ion-radio {
+      --color-checked: #3f4734; // roxo escuro quando selecionado
+    }
+  }
+}
+
+.botao-excluir {
+      --background: #7d8c6a;
+      color: #333;
+}
+
+.botao-sair {
+      --background: #7d8c6a;
+      color: #333;
+} 
+
+ion-tab-bar {
+  --background: #7d8c6a;
+  --color: white;
+  --color-selected: white;
+}
+
+.ion-footer {
+  .ion-tab-bar {
+    --background: #7d8c6a; /* Rosa combinando com o resto do app */
+  --color: #ffffff; /* Ícones e texto brancos */
+  --color-selected: #ffffff;
+  --ripple-color: #fff;
+  border-top: none;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+
+  }
+    ion-tab-button.tab-selected {
+    background: #7d8c6a; /* Rosa mais escuro */
+    border-radius: 12px 12px 0 0;
+  }
+
+  ion-tab-button {
+    flex-direction: column;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+      .ion-icon {
+        font-size: 20px;
+      }
+      .ion-label {
+      font-size: 11px;
+    }
+  }
+}
+
