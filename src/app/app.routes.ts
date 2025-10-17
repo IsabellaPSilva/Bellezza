@@ -6,7 +6,6 @@
   import { reservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
   import { CalendarioPage } from './calendario/calendario.page';
-  import { perfilPPage } from './perfilP/perfilP.page';
   import { NgModule } from '@angular/core';
   import { RouterModule } from '@angular/router';
 
@@ -18,7 +17,6 @@
     {path: 'reservaP', component: reservaPPage },
     {path: 'calendarioP', component: CalendarioPPage },
     {path: 'calendario', component: CalendarioPage },
-    {path: 'perfilP', component: perfilPPage },
     {path: 'home',loadComponent: () => import('./home/home.page').then((m) => m.HomePage),},
     {path: '',redirectTo: 'home',pathMatch: 'full',},
     {path: 'details',loadComponent: () => import('./pages/details/details.page').then((m) => m.DetailsPage),},
