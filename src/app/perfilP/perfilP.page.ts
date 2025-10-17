@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline, homeOutline, calendarOutline, personOutline } from 'ionicons/icons';
 import { IonTabs } from '@ionic/angular/standalone';
+import { logoInstagram, logoFacebook, logoWhatsapp} from 'ionicons/icons';
+
+addIcons({ logoInstagram, logoFacebook, logoWhatsapp});
 
 @Component({
   selector: 'app-PerfilP',
