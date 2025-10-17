@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList, IonRadioGroup, IonRadio, IonFooter, IonTabBar,IonTabButton, } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
@@ -36,3 +37,4 @@ export class PerfilPPage {
     console.log("Excluir conta");
   }
 }
+
