@@ -1,83 +1,96 @@
-<ion-content class="pagina">
-
-  <!-- Cabeçalho -->
-  <div class="header">
-    <ion-icon name="arrow-back-outline" class="voltar"></ion-icon>
-    <h2>Salão Mãe & Filhas</h2>
-  </div>
+<ion-content class="perfil-page">
 
   <!-- Foto -->
   <div class="foto-container">
-    <div class="foto-perfil">
-      <img src="assets/teste-bellezza-logo.jpeg" alt="Foto do perfil">
-      <ion-icon name="create-outline" class="editar-foto" *ngIf="editando"></ion-icon>
-    </div>
+    <ion-avatar class="foto">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-avatar>
+    <p>Alterar foto</p>
   </div>
 
-  <!-- Card -->
-  <ion-card class="card-infos">
-    <ion-card-content>
-      <h3><strong>Informações da conta</strong></h3>
+  <!-- Informações da conta -->
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label><b>Nome de usuário:</b><br>Isabella Pacheco Da Silva</ion-label>
+      <ion-icon slot="end" name="create-outline"></ion-icon>
+    </ion-item>
 
-      <ion-item lines="none">
-        <ion-label position="stacked">Nome de usuário</ion-label>
-        <ion-input [(ngModel)]="usuario.nome" [readonly]="!editando"></ion-input>
+    <ion-item lines="none">
+      <ion-label><b>Nome da empresa:</b><br>Salão Mãe e Filhas</ion-label>
+      <ion-icon slot="end" name="create-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Profissão:</b><br>Cabeleleiro e Manicure</ion-label>
+      <ion-icon slot="end" name="brush-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Endereço da empresa:</b><br>Esquina</ion-label>
+      <ion-icon slot="end" name="location-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Número de telefone:</b><br>+55 ** *****-7892</ion-label>
+      <ion-icon slot="end" name="call-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Endereço de e-mail:</b><br>j*****************@gmail.com</ion-label>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="medium" (click)="salvar()">Salvar</ion-button>
+
+  <!-- Métodos de entrada -->
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label><b>Chave de acesso:</b><br>1 chave(s) de acesso adicionada(s)</ion-label>
+      <ion-button size="small" (click)="gerenciar()">Gerenciar</ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label><b>Senha:</b><br>*******</ion-label>
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <!-- Pessoal -->
+  <ion-list>
+    <ion-label><b>Gênero (opcional)</b></ion-label>
+    <ion-radio-group>
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="feminino"></ion-radio>
       </ion-item>
-
-      <ion-item lines="none">
-        <ion-label position="stacked">Nome da empresa</ion-label>
-        <ion-input [(ngModel)]="usuario.empresa" [readonly]="!editando"></ion-input>
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="masculino"></ion-radio>
       </ion-item>
+    </ion-radio-group>
+  </ion-list>
 
-      <ion-item lines="none">
-        <ion-label position="stacked">Profissão</ion-label>
-        <ion-input [(ngModel)]="usuario.profissao" [readonly]="!editando"></ion-input>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label position="stacked">Endereço da empresa</ion-label>
-        <ion-input [(ngModel)]="usuario.endereco" [readonly]="!editando"></ion-input>
-      </ion-item>
-
-      <ion-item lines="none" class="descricao">
-        <ion-label position="stacked">Descrição</ion-label>
-        <ion-textarea auto-grow="true" [(ngModel)]="usuario.descricao" [readonly]="!editando"></ion-textarea>
-      </ion-item>
-
-      <h3>Redes sociais adicionais</h3>
-      <div class="redes">
-        <ion-icon name="logo-instagram"></ion-icon>
-        <ion-icon name="logo-facebook"></ion-icon>
-        <ion-icon name="logo-tiktok"></ion-icon>
-      </div>
-
-      <ion-item lines="none">
-        <ion-label position="stacked">Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="usuario.senha" [readonly]="!editando"></ion-input>
-      </ion-item>
-
-      <h3>Gênero (opcional)</h3>
-      <ion-radio-group [(ngModel)]="usuario.genero" [disabled]="!editando">
-        <ion-item lines="none">
-          <ion-label>Feminino</ion-label>
-          <ion-radio value="feminino"></ion-radio>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>Masculino</ion-label>
-          <ion-radio value="masculino"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-
-      <div class="botoes">
-        <ion-button color="primary" (click)="toggleEdicao()">
-          {{ editando ? 'Salvar' : 'Editar perfil' }}
-        </ion-button>
-
-        <ion-button color="medium" (click)="confirmarSaida()">Sair</ion-button>
-
-        <ion-button color="danger" (click)="confirmarExclusao()">Excluir</ion-button>
-      </div>
-
-    </ion-card-content>
-  </ion-card>
+  <!-- Botões de ação -->
+  <ion-button expand="block" class ="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
+  <ion-button expand="block" class ="botao-excluir" (click)="excluir()">Excluir</ion-button>
 </ion-content>
+
+<!-- ⚙️ Rodapé fixo -->
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="/agendamento-home">
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Início</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button>
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/perfil">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>
+

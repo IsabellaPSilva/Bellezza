@@ -6,10 +6,10 @@
   import { reservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
   import { CalendarioPage } from './calendario/calendario.page';
-  import { perfilPPage } from './perfilP/perfilP.page';
+  import { PerfilPPage } from './perfilP/perfilP.page';
   import { NgModule } from '@angular/core';
   import { RouterModule } from '@angular/router';
-
+ 
   export const routes: Routes = [
     {path: '', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
@@ -18,7 +18,7 @@
     {path: 'reservaP', component: reservaPPage },
     {path: 'calendarioP', component: CalendarioPPage },
     {path: 'calendario', component: CalendarioPage },
-    {path: 'perfilP', component: perfilPPage },
+    {path: 'perfilP',loadComponent: () => import('./perfilP/perfilP.page').then(m => m.PerfilPPage)},
     {path: 'home',loadComponent: () => import('./home/home.page').then((m) => m.HomePage),},
     {path: '',redirectTo: 'home',pathMatch: 'full',},
     {path: 'details',loadComponent: () => import('./pages/details/details.page').then((m) => m.DetailsPage),},
@@ -30,7 +30,7 @@
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)},
     {path: 'cadastro-profissional',loadComponent: () => import('./home/cadastro-profissional.page').then((m) => m.CadastroProfissionalPage),},
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

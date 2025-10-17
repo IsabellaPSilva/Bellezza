@@ -1,121 +1,151 @@
-.pagina {
-  --background: #f6f6f6;
-  font-family: Arial, sans-serif;
-}
+.perfil-page {
+  --background: #fafafa; // fundo claro
+  padding: 16px;
 
-/* Cabeçalho */
-.header {
-  display: flex;
-  align-items: center;
-  background-color: #1e1e1e;
-  color: white;
-  padding: 12px;
-  gap: 10px;
-
-  ion-icon {
-    font-size: 22px;
+  ion-list {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   }
 
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-  }
-}
-
-/* Foto */
-.foto-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.foto-perfil {
-  position: relative;
-  width: 120px;
-  height: 120px;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid #c38c5d;
-    object-fit: cover;
-  }
-
-  .editar-foto {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: white;
-    border-radius: 50%;
-    padding: 5px;
-    font-size: 18px;
-    color: #000;
-  }
-}
-
-/* Card */
-.card-infos {
-  margin: 20px;
-  border-radius: 16px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-}
-
-ion-item {
-  --background: transparent;
-  margin-bottom: 8px;
-  ion-label {
-    font-weight: bold;
+  ion-item {
+    --inner-padding-end: 12px;
+    --padding-start: 12px;
     font-size: 14px;
-    color: #333;
+
+    ion-label {
+      font-size: 14px;
+      color: #333;
+    }
+
+    b {
+      color: #222;
+      font-weight: 600;
+    }
+
+    ion-icon {
+      color: #7d8c6a; // tom roxo escuro
+      font-size: 20px;
+    }
+
+    ion-button {
+      --background: #7d8c6a;; // botão roxo claro
+      --color: #fff;
+      font-size: 12px;
+      height: 28px;
+      border-radius: 8px;
+    }
+  }
+
+  .foto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+
+    .foto {
+      width: 90px;
+      height: 90px;
+      background: #7d8c6a;; // roxo claro
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+      ion-icon {
+        font-size: 50px;
+        color: #fff;
+      }
+    }
+
+    p {
+      margin-top: 8px;
+      font-weight: 600;
+      color: #434d37;
+    }
+  }
+
+.ion-button {
+    margin-top: 12px;
+    --border-radius: 10px;
+    font-weight: 600;
+
+    .btn-salvar {
+      --background: #7d8c6a;
+      --color: #fff;
+    }
+
+    .btn-sair {
+      --background: #7d8c6a;
+      --color: #333;
+    }
+
+    .btn-excluir {
+      --background: #7d8c6a;
+      --color: #333;
+    }
+  }
+
+.ion-radio-group {
+    .ion-item {
+      --background: transparent;
+    }
+
+    .ion-label {
+      font-size: 14px;
+    }
+
+    .ion-radio {
+      --color-checked: #3f4734; // roxo escuro quando selecionado
+    }
   }
 }
 
-.descricao ion-textarea {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px;
+.botao-excluir {
+      --background: #7d8c6a;
+      color: #333;
 }
 
-/* Redes */
-.redes {
-  display: flex;
-  gap: 12px;
-  margin: 10px 0;
-  ion-icon {
-    font-size: 22px;
-    color: #000;
+.botao-sair {
+      --background: #7d8c6a;
+      color: #333;
+} 
+
+ion-tab-bar {
+  --background: #7d8c6a;
+  --color: white;
+  --color-selected: white;
+}
+
+.ion-footer {
+  .ion-tab-bar {
+    --background: #7d8c6a; /* Rosa combinando com o resto do app */
+  --color: #ffffff; /* Ícones e texto brancos */
+  --color-selected: #ffffff;
+  --ripple-color: #fff;
+  border-top: none;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+
   }
-}
-
-/* Botões */
-.botoes {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-
-  ion-button {
-    flex: 1;
-    margin: 0 5px;
-    border-radius: 8px;
+    ion-tab-button.tab-selected {
+    background: #7d8c6a; /* Rosa mais escuro */
+    border-radius: 12px 12px 0 0;
   }
 
-  ion-button[color="danger"] {
-    --background: #e57373;
+  ion-tab-button {
+    flex-direction: column;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+      .ion-icon {
+        font-size: 20px;
+      }
+      .ion-label {
+      font-size: 11px;
+    }
   }
-}
-
-ion-input[readonly],
-ion-textarea[readonly] {
-  opacity: 0.7;
-}
-
-ion-item ion-icon {
-  cursor: pointer;
-  color: #000;
-  font-size: 18px;
-}
-.salvar-topo {
-  margin-left: auto;
 }
