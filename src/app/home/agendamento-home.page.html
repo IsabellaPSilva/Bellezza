@@ -13,15 +13,15 @@
 
   <!-- 🧠 Categorias com scroll horizontal -->
   <div class="category-scroll">
-    <ion-button routerLink="/categoria" fill="solid" class="category">Unhas</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Cabelo</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Bronze</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Cílios</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Sobrancelhas</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Maquiagem</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Depilação</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Massagens</ion-button>
-    <ion-button routerLink="/categoria" fill="solid" class="category">Pele</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Unhas</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Cabelo</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Bronze</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Cílios</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Sobrancelhas</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Maquiagem</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Depilação</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Massagens</ion-button>
+    <ion-button (click)="irParaCategoria()" fill="solid" class="category">Pele</ion-button>
   </div>
 
   <!-- 💅🏼 Ícones redondos com scroll horizontal -->
@@ -52,7 +52,7 @@
     <ion-label>Início</ion-label>
   </ion-tab-button>
 
-  <ion-tab-button>
+  <ion-tab-button routerLink="/agendamento">
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>

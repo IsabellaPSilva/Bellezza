@@ -21,4 +21,8 @@ export class AgendamentoHomePage {
     this.router.navigate(['/perfil']); // 👈 rota da tela de perfil
   }
 
+  irParaCategoria() {
+    this.router.navigate(['/categoria']); // 👈 rota da tela de perfil
+  }
+
 }

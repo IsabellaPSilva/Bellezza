@@ -79,6 +79,16 @@
 
     ion-label {
       font-size: 14px;
+.icon-social {
+  width: 24px;
+  height: 24px;
+  margin: 0 8px;
+  filter: brightness(0) invert(1); /* deixa branco, se o fundo for escuro */
+}
+
+
+.botao-excluir {
+      --background: #7d8c6a;
       color: #333;
       background: #fff;
       padding: 8px 0;

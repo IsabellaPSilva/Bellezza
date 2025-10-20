@@ -1,11 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton,
-  IonList, IonItem, IonAvatar, IonRadioGroup, IonRadio,
-  AlertController, ActionSheetController
-} from '@ionic/angular/standalone';
+
+import { Component } from '@angular/core';
+import { IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList, IonRadioGroup, IonRadio, IonFooter, IonTabBar,IonTabButton, } from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline, homeOutline, calendarOutline, personOutline } from 'ionicons/icons';
+import { IonTabs } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-perfil-p',

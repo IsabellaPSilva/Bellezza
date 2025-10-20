@@ -29,6 +29,7 @@
     {path: 'agendamento-home-profissional',loadComponent: () => import('./home/agendamento-home-profissional.page').then(m => m.AgendamentoHomePageProfissional)},
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)},
     {path: 'cadastro-profissional',loadComponent: () => import('./home/cadastro-profissional.page').then((m) => m.CadastroProfissionalPage),},
+    {path: 'detalhes-salao', loadComponent: () => import('./home/detalhes-salao.page').then(m => m.DetalhesSalaoPage) },
 ];
  
 @NgModule({
