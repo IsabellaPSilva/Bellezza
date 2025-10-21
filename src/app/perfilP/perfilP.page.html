@@ -1,5 +1,6 @@
 <ion-content class="perfil-page">
-  <!-- Foto de perfil (AZUL - clicável) -->
+ 
+  <!-- FOTO -->
   <div class="foto-container" (click)="alterarFoto()">
     <ion-avatar class="foto">
       <img *ngIf="perfil.fotoUrl" [src]="perfil.fotoUrl" alt="Foto de perfil" />
@@ -7,163 +8,114 @@
     </ion-avatar>
     <p>Alterar foto</p>
   </div>
-
-  <!-- Informações da conta -->
+ 
   <ion-list>
+ 
     <!-- Nome de usuário -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Nome de usuário:</b><br>
         {{ perfil.nomeUsuario }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="create-outline"
-        (click)="editarCampo('nomeUsuario', perfil.nomeUsuario)">
-      </ion-icon>
     </ion-item>
-
+ 
     <!-- Nome da empresa -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Nome da empresa:</b><br>
         {{ perfil.nomeEmpresa }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="create-outline"
-        (click)="editarCampo('nomeEmpresa', perfil.nomeEmpresa)">
-      </ion-icon>
     </ion-item>
-
+ 
     <!-- Profissão -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Profissão:</b><br>
         {{ perfil.profissao }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="brush-outline"
-        (click)="editarCampo('profissao', perfil.profissao)">
-      </ion-icon>
     </ion-item>
-
-    <!-- Endereço da empresa -->
+ 
+    <!-- Endereço -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Endereço da empresa:</b><br>
         {{ perfil.endereco }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="location-outline"
-        (click)="editarCampo('endereco', perfil.endereco)">
-      </ion-icon>
     </ion-item>
-
-    <!-- Número de telefone -->
+ 
+    <!-- Telefone -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Número de telefone:</b><br>
         {{ perfil.telefone }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="call-outline"
-        (click)="editarCampo('telefone', perfil.telefone, 'tel')">
-      </ion-icon>
+      <ion-icon slot="end" name="call-outline" (click)="editarCampo('telefone', perfil.telefone, 'tel')"></ion-icon>
     </ion-item>
-
-    <!-- Endereço de e-mail -->
+ 
+    <!-- E-mail -->
     <ion-item lines="none">
-      <ion-label>
+      <ion-label class="trinta">
         <b>Endereço de e-mail:</b><br>
         {{ perfil.email }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="mail-outline"
-        (click)="editarCampo('email', perfil.email, 'email')">
-      </ion-icon>
+      <ion-icon slot="end" name="mail-outline" (click)="editarCampo('email', perfil.email, 'email')"></ion-icon>
     </ion-item>
-
-    <!-- Descrição da empresa -->
+ 
+    <!-- Redes sociais -->
     <ion-item lines="none">
-
-  <ion-label><b>Redes Sociais:</b></ion-label>
-  <ion-icon name="logo-instagram"></ion-icon>
-  <ion-icon name="logo-facebook"></ion-icon>
-  <ion-icon name="logo-whatsapp"></ion-icon>
-</ion-item>
-    
-    <ion-item lines="none">
-      <ion-label><b>Chave de acesso:</b><br>1 chave(s) de acesso adicionada(s)</ion-label>
-      <ion-button size="small" (click)="gerenciar()">Gerenciar</ion-button>
+      <ion-label><b>Redes Sociais:</b></ion-label>
+      <ion-icon class="social-icon" name="logo-instagram" (click)="abrirModalRedeSocial('instagram')"></ion-icon>
+      <ion-icon class="social-icon" name="logo-facebook" (click)="abrirModalRedeSocial('facebook')"></ion-icon>
+      <ion-icon class="social-icon" name="logo-whatsapp" (click)="abrirModalRedeSocial('whatsapp')"></ion-icon>
     </ion-item>
-
+ 
+    <!-- Descrição -->
     <ion-item lines="none">
-      <ion-label><b>Senha:</b><br>*******</ion-label>
-      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
-
-      <ion-label class="ion-text-wrap">
+      <ion-label class="trinta">
         <b>Descrição da empresa:</b><br>
         {{ perfil.descricao }}
       </ion-label>
-      <ion-icon 
-        slot="end" 
-        name="create-outline"
-        (click)="editarCampo('descricao', perfil.descricao, 'textarea')">
-      </ion-icon>
-
+      <ion-icon slot="end" name="create-outline" (click)="editarCampo('descricao', perfil.descricao, 'textarea')"></ion-icon>
     </ion-item>
+ 
   </ion-list>
-
-  <!-- Pessoal -->
+ 
+  <!-- Gênero -->
   <ion-list>
     <ion-label class="section-label"><b>Gênero (opcional)</b></ion-label>
     <ion-radio-group [(ngModel)]="perfil.genero">
       <ion-item>
-        <ion-label>Feminino</ion-label>
+        <ion-label class="trinta">Feminino</ion-label>
         <ion-radio slot="end" value="feminino"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Masculino</ion-label>
+        <ion-label class="trinta">Masculino</ion-label>
         <ion-radio slot="end" value="masculino"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
-
-  <!-- Botões de ação -->
-  <ion-button 
-    expand="block" 
-    class="botao-sair" 
-    (click)="sair()">
-    Sair
-  </ion-button>
-  
-  <ion-button 
-    expand="block" 
-    class="botao-excluir" 
-    (click)="excluir()">
-    Excluir
-  </ion-button>
+ 
+  <!-- Botões -->
+  <ion-button expand="block" class="botao-sair" (click)="sair()">Sair</ion-button>
+  <ion-button expand="block" class="botao-excluir" (click)="excluir()">Excluir</ion-button>
+ 
 </ion-content>
-
-<!-- Rodapé fixo -->
+ 
+<!-- Rodapé -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
     <ion-label>Início</ion-label>
   </ion-tab-button>
-  
+ 
   <ion-tab-button>
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-  
+ 
   <ion-tab-button routerLink="/perfil">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
+ 
