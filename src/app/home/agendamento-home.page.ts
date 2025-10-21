@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-agendamento-home',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     IonicModule,  // 👈 obrigatório!
-    CommonModule
+    CommonModule,
+    RouterLink
   ]
 })
 export class AgendamentoHomePage {

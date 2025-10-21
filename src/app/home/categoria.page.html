@@ -30,7 +30,7 @@
   </div>
 
   <!-- Lista de salões -->
-  <div *ngFor="let salao of saloes" class="card-salao">
+  <div *ngFor="let salao of saloes" class="card-salao" routerLink="/detalhes-salao">
     <div class="salao-topo">
       <div class="salao-foto-perfil"></div>
       <div class="salao-nome">{{ salao.nome }}</div>
@@ -59,7 +59,7 @@
       <ion-label>Início</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button routerLink="/agendamentos">
+    <ion-tab-button routerLink="/agendamento">
       <ion-icon name="calendar-outline"></ion-icon>
       <ion-label>Agendamentos</ion-label>
     </ion-tab-button>

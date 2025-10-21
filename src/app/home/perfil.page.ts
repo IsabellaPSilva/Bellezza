@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline, homeOutline, calendarOutline, personOutline } from 'ionicons/icons';
 import { IonTabs } from '@ionic/angular/standalone';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -12,7 +13,7 @@ import { IonTabs } from '@ionic/angular/standalone';
   standalone: true,
   imports: [
      IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList,
-    IonRadioGroup, IonRadio, IonTabs, IonTabBar, IonTabButton, RouterModule
+    IonRadioGroup, IonRadio, IonTabBar, IonTabButton, RouterModule, RouterLink
   ]
 })
 export class PerfilPage {

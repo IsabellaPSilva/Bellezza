@@ -1,71 +1,98 @@
-<ion-header>
-  <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Salão Mãe & Filhas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- reserva.page.html -->
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true">
+  <!-- Botão Voltar -->
+  <ion-button fill="clear" class="back-button" (click)="voltar()">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+  </ion-button>
 
-  <!-- Imagem e ícones -->
-  <div class="header">
-    <img src="assets/teste-bellezza-logo.jpeg" alt="Logo do Salão" class="logo">
-    <div class="icons">
-      <ion-icon name="share-outline"></ion-icon>
-      <ion-icon name="heart-outline"></ion-icon>
+  <!-- Header com Logo e Título -->
+  <div class="header-section">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="Logo Mãe & Filhas" class="logo">
+    </div>
+    
+    <div class="title-info">
+      <h1>Salão Mãe & Filhas</h1>
+      
+      <div class="action-buttons">
+        <button class="action-btn" (click)="compartilhar()">
+          <ion-icon name="share-outline"></ion-icon>
+          <span>compartilhar</span>
+        </button>
+        
+        <button class="action-btn" (click)="toggleFavorito()">
+          <ion-icon [name]="favoritado ? 'heart' : 'heart-outline'" 
+                    [class.favorited]="favoritado"></ion-icon>
+          <span>favoritar</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <ion-chip class="rpb" outline>
-    <ion-label>Recomendado pelo Bellezza</ion-label>
-  </ion-chip>
+  <!-- Badge Recomendado -->
+  <div class="badge-container">
+    <div class="badge-recomendado">
+      <ion-icon name="star"></ion-icon>
+      <span>Recomendado pelo <strong>Belleza</strong></span>
+    </div>
+  </div>
 
-  <!-- Combos -->
-  <h2>Combos</h2>
-  <ion-card class="lala" *ngFor="let combo of combos">
-    <ion-card-content>
-      <div class="service-info">
-        <span>{{combo.name}}</span>
-        <span>{{combo.price}}</span>
-        <span class="duration">{{combo.duration}}</span>
+  <!-- Seção Combos -->
+  <div class="services-section">
+    <h2 class="section-title">Combos</h2>
+    
+    <div class="services-list">
+      <div class="service-card" *ngFor="let combo of combos">
+        <div class="service-info">
+          <h3>{{ combo.nome }}</h3>
+          <div class="service-details">
+            <span class="price">{{ formatarPreco(combo.preco) }}</span>
+            <span class="time">{{ combo.tempo }}</span>
+          </div>
+        </div>
+        <button class="btn-reservar" (click)="reservar(combo)">
+          reservar
+        </button>
       </div>
-      <ion-button class="botao" (click)="reservar(combo)">reservar</ion-button>
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
 
-  <!-- Cabelo -->
-  <h2>Cabelo</h2>
-  <ion-card *ngFor="let item of cabelo">
-    <ion-card-content>
-      <div class="service-info">
-        <span>{{item.name}}</span>
-        <span>{{item.price}}</span>
-        <span class="duration">{{item.duration}}</span>
+  <!-- Seção Cabelo -->
+  <div class="services-section">
+    <h2 class="section-title">Cabelo</h2>
+    
+    <div class="services-list">
+      <div class="service-card" *ngFor="let servico of servicosCabelo">
+        <div class="service-info">
+          <h3>{{ servico.nome }}</h3>
+          <div class="service-details">
+            <span class="price">{{ formatarPreco(servico.preco) }}</span>
+            <span class="time">{{ servico.tempo }}</span>
+          </div>
+        </div>
+        <button class="btn-reservar" (click)="reservar(servico)">
+          reservar
+        </button>
       </div>
-      <ion-button class="botao" (click)="reservar(item)">reservar</ion-button>
-    </ion-card-content>
-  </ion-card>
-
+    </div>
+  </div>
 </ion-content>
 
-<!-- Menu inferior -->
-<ion-footer>
-  <ion-toolbar color="light">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Início</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="agendamentos">
-        <ion-icon name="calendar"></ion-icon>
-        <ion-label>Agendamentos</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="perfil">
-        <ion-icon name="person-circle"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-toolbar>
-</ion-footer>
+<!-- ⚙️ Rodapé fixo -->
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="/agendamento-home">
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Início</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/agendamento">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/perfil">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

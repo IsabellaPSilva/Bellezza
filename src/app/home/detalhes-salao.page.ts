@@ -4,6 +4,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonButton, IonIcon, IonTabBar, IonTabButton, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+import { RouterLink } from '@angular/router';
 import { arrowBack, logoInstagram, logoFacebook, homeOutline, calendarOutline, personOutline, star, starOutline } from 'ionicons/icons';
 
 @Component({
@@ -11,7 +12,7 @@ import { arrowBack, logoInstagram, logoFacebook, homeOutline, calendarOutline, p
   templateUrl: './detalhes-salao.page.html',
   styleUrls: ['./detalhes-salao.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonButton, IonIcon, IonTabBar, IonTabButton, IonLabel],
+  imports: [CommonModule, IonContent, IonButton, IonIcon, IonTabBar, IonTabButton, IonLabel, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DetalhesSalaoPage {

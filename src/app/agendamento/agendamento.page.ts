@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // <-- Importar o Router
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-agendamentos',
   templateUrl:'./agendamento.page.html',
   styleUrls: ['./agendamento.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, RouterLink]
 })
 export class AgendamentosPage {
 
