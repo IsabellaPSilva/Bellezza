@@ -1,0 +1,148 @@
+ion-content {
+  --background: #fff;
+  padding: 12px 16px;
+}
+ 
+/* Título e linha decorativa */
+ion-title {
+  text-align: center;
+  font-weight: 600;
+  color: #f8f5f5;
+}
+ 
+.decor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+ 
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #f1d5e4;
+  }
+ 
+  ion-icon {
+    color: #6a1b47;
+    background: #fff;
+  }
+}
+ 
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #d5a7b8;
+  border-radius: 25px;
+  padding: 6px 10px;
+  margin: 0 auto 18px auto;
+  width: 80%;
+  max-width: 350px;
+  box-sizing: border-box;
+ 
+  ion-icon {
+    background: #6a1b47;
+    color: #fff;
+    border-radius: 50%;
+    padding: 6px;
+    font-size: 18px;
+    margin-right: 8px;
+  }
+ 
+  ion-input {
+    flex: 1;
+    --placeholder-color: #6a1b47;
+    color: #6a1b47;
+    font-size: 15px;
+ 
+   
+    /* 🖤 Linha preta ao focar/digitar */
+    --highlight-color-valid: #aca9a9;
+ 
+  }
+}
+ 
+/* Cards de serviços */
+.service-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f4d7e3;
+  border-radius: 20px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #202020;
+ 
+  .left .name {
+    background: #fff;
+    color: #0a0909;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+ 
+  .right {
+    text-align: right;
+   
+  }
+    .price {
+      color: #000000;
+      font-weight: 600;
+    }
+ 
+    .time {
+      color: #000000;
+      font-size: 13px;
+    }
+  }
+  ion-checkbox.quadrado {
+    --size: 22px; /* tamanho do quadrado */
+    --border-radius: 15px; /* bordas arredondadas */
+    --border-color: #6a1b47; /* cor da borda quando desmarcado */
+    --checkbox-background: #f4d7e3; /* cor de fundo quando desmarcado */
+    --checkmark-color: #ffffff; /* cor do check (✓) */
+    --checkbox-background-checked: #6a1b47; /* fundo quando marcado */
+    --border-color-checked: #6a1b47; /* borda quando marcado */
+    --transition: 0.3s ease;
+  }
+ 
+/* Botões */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+ 
+ 
+ 
+  ion-button {
+    width: 48%;
+    font-weight: 600;
+    --border-radius: 10px;
+    --color: #0a090a;
+    --background: #e4a6bc;
+  }
+ 
+  .cancelar {
+    --background: #e4a6bc;
+  }
+}
+ 
+/* Rodapé */
+.footer {
+  --background: #d5a7b8;
+}
+ 
+ion-tab-bar {
+  --background: #d5a7b8;
+  --color: #000000;
+}
+ 
+ion-tab-button {
+  flex-direction: column;
+  color: #000000;
+ 
+ 
+}

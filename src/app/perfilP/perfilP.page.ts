@@ -21,8 +21,6 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-    IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton,
-    IonList, IonItem, IonAvatar, IonRadioGroup, IonRadio
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

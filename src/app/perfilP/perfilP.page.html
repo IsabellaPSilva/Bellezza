@@ -1,5 +1,5 @@
 <ion-content class="perfil-page">
- 
+
   <!-- FOTO -->
   <div class="foto-container" (click)="alterarFoto()">
     <ion-avatar class="foto">
@@ -8,78 +8,75 @@
     </ion-avatar>
     <p>Alterar foto</p>
   </div>
- 
-  <ion-list>
- 
-    <!-- Nome de usuário -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Nome de usuário:</b><br>
-        {{ perfil.nomeUsuario }}
-      </ion-label>
-    </ion-item>
- 
-    <!-- Nome da empresa -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Nome da empresa:</b><br>
-        {{ perfil.nomeEmpresa }}
-      </ion-label>
-    </ion-item>
- 
-    <!-- Profissão -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Profissão:</b><br>
-        {{ perfil.profissao }}
-      </ion-label>
-    </ion-item>
- 
-    <!-- Endereço -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Endereço da empresa:</b><br>
-        {{ perfil.endereco }}
-      </ion-label>
-    </ion-item>
- 
-    <!-- Telefone -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Número de telefone:</b><br>
-        {{ perfil.telefone }}
-      </ion-label>
-      <ion-icon slot="end" name="call-outline" (click)="editarCampo('telefone', perfil.telefone, 'tel')"></ion-icon>
-    </ion-item>
- 
-    <!-- E-mail -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Endereço de e-mail:</b><br>
-        {{ perfil.email }}
-      </ion-label>
-      <ion-icon slot="end" name="mail-outline" (click)="editarCampo('email', perfil.email, 'email')"></ion-icon>
-    </ion-item>
- 
-    <!-- Redes sociais -->
-    <ion-item lines="none">
-      <ion-label><b>Redes Sociais:</b></ion-label>
-      <ion-icon class="social-icon" name="logo-instagram" (click)="abrirModalRedeSocial('instagram')"></ion-icon>
-      <ion-icon class="social-icon" name="logo-facebook" (click)="abrirModalRedeSocial('facebook')"></ion-icon>
-      <ion-icon class="social-icon" name="logo-whatsapp" (click)="abrirModalRedeSocial('whatsapp')"></ion-icon>
-    </ion-item>
- 
-    <!-- Descrição -->
-    <ion-item lines="none">
-      <ion-label class="trinta">
-        <b>Descrição da empresa:</b><br>
-        {{ perfil.descricao }}
-      </ion-label>
-      <ion-icon slot="end" name="create-outline" (click)="editarCampo('descricao', perfil.descricao, 'textarea')"></ion-icon>
-    </ion-item>
- 
-  </ion-list>
- 
+
+  <!-- Nome de usuário -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Nome de usuário:</b><br>
+      {{ perfil.nomeUsuario }}
+    </ion-label>
+  </ion-item>
+
+  <!-- Nome da empresa -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Nome da empresa:</b><br>
+      {{ perfil.nomeEmpresa }}
+    </ion-label>
+  </ion-item>
+
+  <!-- Profissão -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Profissão:</b><br>
+      {{ perfil.profissao }}
+    </ion-label>
+  </ion-item>
+
+  <!-- Endereço -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Endereço da empresa:</b><br>
+      {{ perfil.endereco }}
+    </ion-label>
+  </ion-item>
+
+  <!-- Telefone -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Número de telefone:</b><br>
+      {{ perfil.telefone }}
+    </ion-label>
+    <ion-icon slot="end" name="call-outline" (click)="editarCampo('telefone', perfil.telefone, 'tel')"></ion-icon>
+  </ion-item>
+
+  <!-- E-mail -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Endereço de e-mail:</b><br>
+      {{ perfil.email }}
+    </ion-label>
+    <ion-icon slot="end" name="mail-outline" (click)="editarCampo('email', perfil.email, 'email')"></ion-icon>
+  </ion-item>
+
+  <!-- Redes sociais -->
+  <ion-item lines="none">
+    <ion-label><b>Redes Sociais:</b></ion-label>
+    <ion-icon class="social-icon" name="logo-instagram" (click)="abrirModalRedeSocial('instagram')"></ion-icon>
+    <ion-icon class="social-icon" name="logo-facebook" (click)="abrirModalRedeSocial('facebook')"></ion-icon>
+    <ion-icon class="social-icon" name="logo-whatsapp" (click)="abrirModalRedeSocial('whatsapp')"></ion-icon>
+  </ion-item>
+
+  <!-- Descrição -->
+  <ion-item lines="none">
+    <ion-label class="trinta">
+      <b>Descrição da empresa:</b><br>
+      {{ perfil.descricao }}
+    </ion-label>
+    <ion-icon slot="end" name="create-outline"
+      (click)="editarCampo('descricao', perfil.descricao, 'textarea')"></ion-icon>
+  </ion-item>
+
   <!-- Gênero -->
   <ion-list>
     <ion-label class="section-label"><b>Gênero (opcional)</b></ion-label>
@@ -94,28 +91,31 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
- 
+
   <!-- Botões -->
   <ion-button expand="block" class="botao-sair" (click)="sair()">Sair</ion-button>
   <ion-button expand="block" class="botao-excluir" (click)="excluir()">Excluir</ion-button>
- 
+
 </ion-content>
- 
+
+<!-- Botões -->
+<ion-button expand="block" class="botao-sair" (click)="sair()">Sair</ion-button>
+<ion-button expand="block" class="botao-excluir" (click)="excluir()">Excluir</ion-button>
+
 <!-- Rodapé -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
     <ion-label>Início</ion-label>
   </ion-tab-button>
- 
+
   <ion-tab-button>
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
- 
+
   <ion-tab-button routerLink="/perfil">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
- 
