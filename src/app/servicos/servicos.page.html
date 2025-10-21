@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar serviço</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <div class="decor">
+    <ion-icon name="sparkles-outline"></ion-icon>
+  </div>
+ 
+  <!-- Campo de busca -->
+  <div class="search-box">
+    <ion-icon name="search-outline"></ion-icon>
+    <ion-input
+      placeholder="Buscar serviço"
+      [(ngModel)]="query"
+      (ionInput)="applyFilter()"
+    ></ion-input>
+  </div>
+ 
+  <!-- Lista de serviços -->
+  <div *ngFor="let service of filtered" class="service-card">
+    <div class="left">
+      <div class="name">{{ service.name }}</div>
+    </div>
+ 
+    <div class="right">
+      <div class="price">R$: {{ service.price | number: '1.2-2' }}</div>
+      <div class="time">{{ service.time }}</div>
+    </div>
+ 
+    <ion-checkbox class="quadrado">
+     
+    </ion-checkbox>
+  </div>
+ 
+  <!-- Botões -->
+  <div class="buttons">
+    <ion-button class="cancelar" (click)="onCancelar()">Cancelar</ion-button>
+    <ion-button (click)="onConfirmar()">Confirmar</ion-button>
+  </div>
+</ion-content>
+ 
+<!-- Barra inferior -->
+<ion-footer>
+  <ion-toolbar class="footer">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button>
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Início</ion-label>
+      </ion-tab-button>
+ 
+      <ion-tab-button>
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>Agendamentos</ion-label>
+      </ion-tab-button>
+ 
+      <ion-tab-button>
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>
+ 

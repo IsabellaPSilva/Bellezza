@@ -1,11 +1,18 @@
-
-import { Component } from '@angular/core';
-import { IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList, IonRadioGroup, IonRadio, IonFooter, IonTabBar,IonTabButton, } from '@ionic/angular/standalone';
-import { RouterModule } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton,
+  IonList, IonItem, IonAvatar, IonRadioGroup, IonRadio,
+  AlertController, ActionSheetController
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline, homeOutline, calendarOutline, personOutline } from 'ionicons/icons';
-import { IonTabs } from '@ionic/angular/standalone';
-
+import {
+  createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline,
+  homeOutline, calendarOutline, personOutline,
+  logoInstagram, logoFacebook, logoWhatsapp
+} from 'ionicons/icons';
+ 
 @Component({
   selector: 'app-perfil-p',
   templateUrl: './perfilP.page.html',
@@ -33,37 +40,44 @@ export class PerfilPPage {
     genero: 'feminino',
     fotoUrl: ''
   };
-
+ 
   // Redes sociais
   redesSociais = {
     instagram: '',
     facebook: '',
     whatsapp: ''
   };
-
+ 
   // Controle dos modais
   modalAberto = {
     campo: false,
     redeSocial: false
   };
-
+ 
   campoEditando = {
     nome: '',
     valor: '',
     tipo: 'text'
   };
-
+ 
   redeSocialEditando = {
     nome: '',
     valor: '',
     placeholder: ''
   };
-
+ 
   constructor(
     private alertController: AlertController,
     private actionSheetController: ActionSheetController
-  ) {}
-
+  ) {
+    // Registrar ícones
+    addIcons({
+      createOutline, callOutline, mailOutline, keyOutline, lockClosedOutline,
+      homeOutline, calendarOutline, personOutline,
+      logoInstagram, logoFacebook, logoWhatsapp
+    });
+  }
+ 
   // ========== EDIÇÃO DE CAMPOS (AMARELO) ==========
   async editarCampo(campo: string, valorAtual: string, tipo: string = 'text') {
     const nomesAmigaveis: { [key: string]: string } = {
@@ -76,7 +90,7 @@ export class PerfilPPage {
       descricao: 'Descrição da empresa',
       senha: 'Senha'
     };
-
+ 
     // Definir limites de caracteres por campo
     const limites: { [key: string]: number } = {
       nomeUsuario: 50,
@@ -88,7 +102,7 @@ export class PerfilPPage {
       descricao: 300,
       senha: 30
     };
-
+ 
     const alert = await this.alertController.create({
       header: `Editar ${nomesAmigaveis[campo]}`,
       cssClass: 'custom-alert',
@@ -121,10 +135,10 @@ export class PerfilPPage {
         }
       ]
     });
-
+ 
     await alert.present();
   }
-
+ 
   // ========== REDES SOCIAIS (VERMELHO) ==========
   async abrirModalRedeSocial(rede: 'instagram' | 'facebook' | 'whatsapp') {
     const placeholders = {
@@ -132,13 +146,13 @@ export class PerfilPPage {
       facebook: 'https://facebook.com/seuperfil',
       whatsapp: 'https://wa.me/5541999999999'
     };
-
+ 
     const nomes = {
       instagram: 'Instagram',
       facebook: 'Facebook',
       whatsapp: 'WhatsApp'
     };
-
+ 
     const alert = await this.alertController.create({
       header: `Adicionar link do ${nomes[rede]}`,
       inputs: [
@@ -165,10 +179,10 @@ export class PerfilPPage {
         }
       ]
     });
-
+ 
     await alert.present();
   }
-
+ 
   // ========== FOTO DE PERFIL (AZUL) ==========
   async alterarFoto() {
     const actionSheet = await this.actionSheetController.create({
@@ -203,10 +217,10 @@ export class PerfilPPage {
         }
       ]
     });
-
+ 
     await actionSheet.present();
   }
-
+ 
   selecionarDaGaleria() {
     // Em produção, usar Capacitor Camera Plugin ou File Picker
     // Simulação: criar um input file temporário
@@ -226,19 +240,19 @@ export class PerfilPPage {
     };
     input.click();
   }
-
+ 
   tirarFoto() {
     // Em produção, usar Capacitor Camera Plugin
     this.mostrarToast('Funcionalidade de câmera em desenvolvimento');
     // Simulação com imagem de exemplo
     console.log('Abrindo câmera...');
   }
-
+ 
   removerFoto() {
     this.perfil.fotoUrl = '';
     this.mostrarToast('Foto removida');
   }
-
+ 
   // ========== AÇÕES PRINCIPAIS ==========
   async salvar() {
     const alert = await this.alertController.create({
@@ -249,7 +263,7 @@ export class PerfilPPage {
     await alert.present();
     console.log('Dados salvos:', this.perfil, this.redesSociais);
   }
-
+ 
   async gerenciar() {
     const alert = await this.alertController.create({
       header: 'Gerenciar Chaves de Acesso',
@@ -275,7 +289,7 @@ export class PerfilPPage {
     });
     await alert.present();
   }
-
+ 
   async sair() {
     const alert = await this.alertController.create({
       header: 'Confirmar saída',
@@ -296,7 +310,7 @@ export class PerfilPPage {
     });
     await alert.present();
   }
-
+ 
   async excluir() {
     const alert = await this.alertController.create({
       header: 'Excluir conta',
@@ -318,7 +332,7 @@ export class PerfilPPage {
     });
     await alert.present();
   }
-
+ 
   // ========== AUXILIARES ==========
   async mostrarToast(mensagem: string) {
     // Toast simplificado usando Alert
@@ -327,9 +341,9 @@ export class PerfilPPage {
       buttons: ['OK'],
       cssClass: 'toast-alert'
     });
-    
+   
     await alert.present();
-    
+   
     // Auto-dismiss após 2 segundos
     setTimeout(() => {
       alert.dismiss();

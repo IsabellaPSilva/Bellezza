@@ -6,6 +6,7 @@
   import { reservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
   import { CalendarioPage } from './calendario/calendario.page';
+  import { ServicosPage } from './servicos/servicos.page';
   import { PerfilPPage } from './perfilP/perfilP.page';
   import { NgModule } from '@angular/core';
   import { RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@
   export const routes: Routes = [
     {path: '', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
+    {path: 'servicos', component: ServicosPage },
     {path: 'localizacaoP', component: LocalizacaoPPage },
     {path: 'reserva', component: ReservaPage },
     {path: 'reservaP', component: reservaPPage },
