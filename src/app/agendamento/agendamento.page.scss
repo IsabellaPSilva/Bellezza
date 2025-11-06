@@ -1,26 +1,26 @@
 /* styles.css */
-
+ 
 body, ion-content {
   font-family: Arial, sans-serif;
   background-color: #f2efeb; /* ou a cor de fundo que aparece no seu Canva */
   margin: 0;
   padding: 16px;
 }
-
+ 
 .ion-card {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
+ 
 .card-agendamento, .card-finalizado {
   background-color: #d4a7c2; /* cor rosada similar ao Canva */
   box-shadow: none;
   width: 290px;      /* Largura fixa */
   height: 142px;  
   --background: white;
-
+ 
 }
-
+ 
 .linha-topo {
   display: flex;
   justify-content: space-between;
@@ -28,33 +28,33 @@ body, ion-content {
   margin-bottom: 10px;
   color: #000000;
 }
-
+ 
 .data {
   font-weight: bold;
   font-size: 13px;
   color: #000000;
 }
-
+ 
 .nome {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
   color: #000000;
 }
-
+ 
 .preco {
   margin: 4px 0 10px 0;
   font-size: 15px;
   color: #000000;
 }
-
+ 
 .acoes {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
   color: #000000;
 }
-
+ 
 ion-button.btn-confirmada,
 ion-button.btn-cancelar,
 ion-button.btn-reserve {
@@ -69,60 +69,67 @@ ion-button.btn-reserve {
   --color: rgb(0, 0, 0);
   --background: white; /* para deixar branco com borda */
 }
-
+ 
 ion-button.btn-confirmada {
   --border-color: rgb(255, 255, 255); /* ajustar conforme tom que o Canva usa */
 }
-
+ 
 ion-button.btn-cancelar {
   --border-color: rgb(255, 255, 255);
 }
-
+ 
 ion-button.btn-reserve {
   --border-color: rgb(255, 255, 255);
 }
-
+ 
 .hora {
   text-align: right;
   font-size: 14px;
   color: #000000;
 }
-
+ 
 .custom-background{
  --background: #f2efeb;
 }
-
+ 
 .list,.finalizados{
  background: #f2efeb;
  .finalizados {
-  border-top: 1px solid #ccc;   
+  border-top: 1px solid #ccc;  
   border-bottom: none;          
   margin-top: 10px;             /* espaço antes da linha */
 }
 }
-
+ 
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
+}
+ 
 .agendamento{
   color: #333;
   font-size: 17px;
   font-weight: bold;
   margin-bottom: 10px;
-
+ 
 }
-
+ 
 .header-container {
   text-align: center;
   margin: 15px 0 20px;
 }
-
+ 
 .divider {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #d48aa7; /* rosa */
   margin-bottom: 8px;
-  
+ 
 }
-
+ 
 .divider::before,
 .divider::after {
   content: '';
@@ -130,21 +137,57 @@ ion-button.btn-reserve {
   border-bottom: 2px solid #d48aa7;
   margin: 0 10px;
 }
-
+ 
 .star {
   color: #d48aa7;
   font-size: 18px;
 }
-
+ 
 .title-row {
   display: flex;
   gap: 35px; /* espaço entre logo e texto */
   color: #000;
-
-
+ 
+ 
 }
-
+ 
   .logo {
   width: 65px !important;
   height: auto !important;
 }
+ 
+ion-card {
+  background-color: #f3c2d0; /* rosa claro do seu tema */
+  border-radius: 12px;
+  color: #000;
+}
+ 
+ion-card-content {
+  background: transparent;
+}
+ 
+ion-list, ion-item-divider {
+  background: transparent !important;
+}
+ 
+.custom-background {
+  --background: #fffaf9 !important; /* fundo claro */
+}
+ 
+.header-container,
+ion-content,
+ion-list {
+  background-color: transparent !important;
+}
+ 
+.card-agendamento {
+  margin: 16px;
+}
+ 
+.linha-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+ 
