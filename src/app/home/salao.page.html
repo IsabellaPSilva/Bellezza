@@ -1,0 +1,512 @@
+<!-- HEADER - MODO VISUALIZAÇÃO -->
+<ion-header *ngIf="!isEditMode">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <!-- Redes Sociais -->
+      <ion-button
+        *ngIf="salonData.socialMedia.whatsapp"
+        (click)="openWhatsApp()"
+        class="social-button whatsapp">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="salonData.socialMedia.instagram"
+        (click)="openInstagram()"
+        class="social-button instagram">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="salonData.socialMedia.facebook"
+        (click)="openFacebook()"
+        class="social-button facebook">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+     
+      <!-- Botões originais -->
+      <ion-button (click)="shareContent()">
+        <ion-icon name="share-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="enableEditMode()">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<!-- HEADER - MODO EDIÇÃO -->
+<ion-header *ngIf="isEditMode">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelEdit()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Editar Salão</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveChanges()" [disabled]="!isFormValid">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <!-- ==================== MODO VISUALIZAÇÃO ==================== -->
+  <div *ngIf="!isEditMode">
+    <div class="salon-header">
+      <div class="salon-image" [style.background-image]="headerImage ? 'url(' + headerImage + ')' : 'none'"></div>
+      <div class="salon-logo" [style.background-image]="logoImage ? 'url(' + logoImage + ')' : 'none'">
+        <span *ngIf="!logoImage" class="logo-text">{{ salonInitials }}</span>
+      </div>
+    </div>
+ 
+    <div class="salon-info">
+      <h1 class="salon-title">{{ salonData.name }}</h1>
+     
+      <p class="salon-description">{{ salonData.description }}</p>
+ 
+      <!-- NOME DE USUÁRIO -->
+      <p class="salon-username" *ngIf="salonData.username">{{ salonData.username }}</p>
+ 
+      <!-- PROFISSÃO -->
+      <p class="salon-profession" *ngIf="salonData.profession">
+        <ion-icon name="briefcase-outline"></ion-icon>
+        {{ salonData.profession }}
+      </p>
+ 
+      <!-- ENDEREÇO -->
+      <p class="salon-address" *ngIf="salonData.address">
+        <ion-icon name="location-outline"></ion-icon>
+        {{ salonData.address }}
+      </p>
+ 
+      <div class="appointment-notice" *ngIf="salonData.appointmentNotice">
+        <p><strong>{{ salonData.appointmentNotice }}</strong></p>
+      </div>
+ 
+      <ul class="services-list">
+        <li *ngFor="let service of salonData.services">
+          <span class="service-name">{{ service.name }}</span>
+          <span class="service-price">R$ {{ service.price }}</span>
+        </li>
+      </ul>
+    </div>
+ 
+    <!-- GALERIA - MODO VISUALIZAÇÃO -->
+    <div class="gallery-section" *ngIf="salonData.galleryImages.length > 0">
+      <div class="gallery-horizontal-view">
+        <div class="gallery-view-container">
+          <div
+            *ngFor="let image of salonData.galleryImages"
+            class="gallery-view-item"
+            [style.background-image]="'url(' + image + ')'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== MODO EDIÇÃO ==================== -->
+  <form #salonForm="ngForm" *ngIf="isEditMode">
+    <!-- Seção de Imagens -->
+    <div class="edit-section">
+      <h2 class="section-title">Imagens da Empresa</h2>
+     
+      <!-- Imagem de Fundo -->
+      <div class="image-upload-container">
+        <label class="upload-label">Imagem de Fundo</label>
+        <div class="image-preview header-preview" [style.background-image]="headerImage ? 'url(' + headerImage + ')' : 'none'">
+          <input
+            type="file"
+            #headerImageInput
+            accept="image/*"
+            (change)="onHeaderImageSelected($event)"
+            hidden>
+          <ion-button
+            fill="clear"
+            class="change-image-btn"
+            (click)="headerImageInput.click()">
+            <ion-icon name="camera" slot="start"></ion-icon>
+            {{ headerImage ? 'Alterar Imagem' : 'Adicionar Imagem' }}
+          </ion-button>
+        </div>
+      </div>
+ 
+      <!-- Logo -->
+      <div class="image-upload-container">
+        <label class="upload-label">Logo da Empresa</label>
+        <div class="image-preview logo-preview" [style.background-image]="logoImage ? 'url(' + logoImage + ')' : 'none'">
+          <input
+            type="file"
+            #logoImageInput
+            accept="image/*"
+            (change)="onLogoImageSelected($event)"
+            hidden>
+          <div class="logo-placeholder" *ngIf="!logoImage">
+            <span>{{ salonInitials }}</span>
+          </div>
+          <ion-button
+            fill="clear"
+            class="change-image-btn"
+            (click)="logoImageInput.click()">
+            <ion-icon name="camera" slot="start"></ion-icon>
+            {{ logoImage ? 'Alterar Logo' : 'Adicionar Logo' }}
+          </ion-button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Informações Básicas -->
+    <div class="edit-section">
+      <h2 class="section-title">Informações Básicas</h2>
+     
+      <ion-item>
+        <ion-label position="stacked">Nome da Empresa</ion-label>
+        <ion-input
+          [(ngModel)]="salonData.name"
+          name="salonName"
+          placeholder="Digite o nome do salão"
+          required
+          maxlength="50">
+        </ion-input>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label position="stacked">Descrição</ion-label>
+        <ion-textarea
+          [(ngModel)]="salonData.description"
+          name="salonDescription"
+          placeholder="Descreva seu salão"
+          rows="4"
+          maxlength="300"
+          required>
+        </ion-textarea>
+        <ion-note slot="helper">{{ (salonData.description && salonData.description.length) || 0 }}/300</ion-note>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label position="stacked">Nome de Usuário</ion-label>
+        <ion-input
+          [(ngModel)]="salonData.username"
+          name="salonUsername"
+          placeholder="Ex: Isabella"
+          maxlength="50">
+        </ion-input>
+        <ion-note slot="helper">Nome que aparecerá no perfil</ion-note>
+      </ion-item>
+ 
+      <!-- PROFISSÃO -->
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          Profissão
+        </ion-label>
+        <ion-input
+          [(ngModel)]="salonData.profession"
+          name="salonProfession"
+          placeholder="Ex: Cabeleireira Profissional"
+          maxlength="100">
+        </ion-input>
+        <ion-note slot="helper">Sua profissão ou especialidade</ion-note>
+      </ion-item>
+ 
+      <!-- ENDEREÇO -->
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="location-outline"></ion-icon>
+          Endereço
+        </ion-label>
+        <ion-textarea
+          [(ngModel)]="salonData.address"
+          name="salonAddress"
+          placeholder="Ex: Rua das Flores, 123 - Centro, São José dos Pinhais - PR"
+          rows="3"
+          maxlength="200">
+        </ion-textarea>
+        <ion-note slot="helper">Endereço completo do estabelecimento</ion-note>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label position="stacked">Aviso de Atendimento</ion-label>
+        <ion-input
+          [(ngModel)]="salonData.appointmentNotice"
+          name="appointmentNotice"
+          placeholder="Ex: Atendimento com hora marcada!!"
+          maxlength="100">
+        </ion-input>
+      </ion-item>
+    </div>
+ 
+    <!-- SEÇÃO DE ALTERAÇÃO DE SENHA -->
+    <div class="edit-section">
+      <div class="section-header">
+        <h2 class="section-title">Segurança</h2>
+        <ion-button
+          size="small"
+          fill="outline"
+          (click)="togglePasswordSection()">
+          <ion-icon [name]="showPasswordSection ? 'chevron-up' : 'chevron-down'" slot="start"></ion-icon>
+          {{ showPasswordSection ? 'Ocultar' : 'Alterar Senha' }}
+        </ion-button>
+      </div>
+ 
+      <div *ngIf="showPasswordSection" class="password-section">
+        <ion-item>
+          <ion-label position="stacked">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            Senha Atual
+          </ion-label>
+          <ion-input
+            [(ngModel)]="passwordChange.currentPassword"
+            name="currentPassword"
+            type="password"
+            placeholder="Digite sua senha atual"
+            maxlength="50"
+            autocomplete="current-password">
+          </ion-input>
+          <ion-note slot="helper">Obrigatório para alterar a senha</ion-note>
+        </ion-item>
+ 
+        <ion-item>
+          <ion-label position="stacked">
+            <ion-icon name="lock-open-outline"></ion-icon>
+            Nova Senha
+          </ion-label>
+          <ion-input
+            [(ngModel)]="passwordChange.newPassword"
+            name="newPassword"
+            type="password"
+            placeholder="Digite a nova senha"
+            maxlength="50"
+            autocomplete="new-password">
+          </ion-input>
+          <ion-note slot="helper">Mínimo de 6 caracteres</ion-note>
+        </ion-item>
+ 
+        <ion-item>
+          <ion-label position="stacked">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            Confirmar Nova Senha
+          </ion-label>
+          <ion-input
+            [(ngModel)]="passwordChange.confirmPassword"
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirme a nova senha"
+            maxlength="50"
+            autocomplete="new-password">
+          </ion-input>
+          <ion-note slot="helper">Digite a mesma senha novamente</ion-note>
+        </ion-item>
+ 
+        <div class="password-actions">
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="changePassword()"
+            [disabled]="!passwordChange.currentPassword || !passwordChange.newPassword || !passwordChange.confirmPassword">
+            <ion-icon name="key-outline" slot="start"></ion-icon>
+            Alterar Senha
+          </ion-button>
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="medium"
+            (click)="togglePasswordSection()">
+            Cancelar
+          </ion-button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Redes Sociais -->
+    <div class="edit-section">
+      <h2 class="section-title">Redes Sociais</h2>
+     
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="logo-whatsapp" class="social-icon whatsapp"></ion-icon>
+          WhatsApp
+        </ion-label>
+        <ion-input
+          [(ngModel)]="salonData.socialMedia.whatsapp"
+          name="whatsapp"
+          type="tel"
+          placeholder="Ex: 5541999999999"
+          maxlength="20">
+        </ion-input>
+        <ion-note slot="helper">Formato: código do país + DDD + número (sem espaços)</ion-note>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="logo-instagram" class="social-icon instagram"></ion-icon>
+          Instagram
+        </ion-label>
+        <ion-input
+          [(ngModel)]="salonData.socialMedia.instagram"
+          name="instagram"
+          placeholder="Ex: @seuusuario ou seuusuario"
+          maxlength="50">
+        </ion-input>
+        <ion-note slot="helper">Digite apenas o nome de usuário</ion-note>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="logo-facebook" class="social-icon facebook"></ion-icon>
+          Facebook
+        </ion-label>
+        <ion-input
+          [(ngModel)]="salonData.socialMedia.facebook"
+          name="facebook"
+          type="url"
+          placeholder="https://facebook.com/suapagina"
+          maxlength="100">
+        </ion-input>
+        <ion-note slot="helper">Cole o link completo da sua página</ion-note>
+      </ion-item>
+    </div>
+ 
+    <!-- Serviços -->
+    <div class="edit-section">
+      <div class="section-header">
+        <h2 class="section-title">Serviços</h2>
+        <ion-button size="small" (click)="addService()">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Adicionar
+        </ion-button>
+      </div>
+ 
+      <div class="services-edit-list">
+        <div *ngFor="let service of salonData.services; let i = index" class="service-item">
+          <div class="service-inputs">
+            <ion-item>
+              <ion-label position="stacked">Nome do Serviço</ion-label>
+              <ion-input
+                [(ngModel)]="service.name"
+                [name]="'serviceName' + i"
+                placeholder="Ex: Maquiagem"
+                required>
+              </ion-input>
+            </ion-item>
+ 
+            <ion-item class="price-item">
+              <ion-label position="stacked">Preço (R$)</ion-label>
+              <ion-input
+                [(ngModel)]="service.price"
+                [name]="'servicePrice' + i"
+                type="text"
+                placeholder="Ex: 120 ou 800/1500"
+                required>
+              </ion-input>
+            </ion-item>
+          </div>
+ 
+          <ion-button
+            fill="clear"
+            color="danger"
+            class="remove-service-btn"
+            (click)="removeService(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+ 
+        <div class="empty-services" *ngIf="salonData.services.length === 0">
+          <ion-icon name="cut-outline"></ion-icon>
+          <p>Nenhum serviço cadastrado</p>
+          <ion-button size="small" (click)="addService()">
+            <ion-icon name="add" slot="start"></ion-icon>
+            Adicionar Serviço
+          </ion-button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- GALERIA DE FOTOS - MODO EDIÇÃO -->
+    <div class="edit-section">
+      <div class="section-header">
+        <h2 class="section-title">Galeria de Fotos</h2>
+        <ion-button
+          size="small"
+          (click)="addGalleryImage()"
+          [disabled]="salonData.galleryImages.length >= 10">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Adicionar
+        </ion-button>
+      </div>
+ 
+      <!-- Scroll Horizontal de Fotos -->
+      <div class="gallery-horizontal-scroll" *ngIf="salonData.galleryImages.length > 0">
+        <div class="gallery-scroll-container">
+          <div
+            *ngFor="let image of salonData.galleryImages; let i = index"
+            class="gallery-scroll-item">
+            <div
+              class="gallery-scroll-preview"
+              [style.background-image]="'url(' + image + ')'">
+             
+              <!-- Botão Alterar Foto -->
+              <input
+                type="file"
+                [id]="'galleryImage' + i"
+                accept="image/*"
+                (change)="onGalleryImageSelected($event, i)"
+                hidden>
+              <ion-button
+                fill="clear"
+                class="edit-gallery-scroll-btn"
+                (click)="openGalleryImagePicker(i)">
+                <ion-icon name="camera"></ion-icon>
+              </ion-button>
+ 
+              <!-- Botão Remover -->
+              <ion-button
+                fill="clear"
+                class="remove-gallery-scroll-btn"
+                (click)="removeGalleryImage(i)">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Mensagem quando não há fotos -->
+      <div class="empty-gallery" *ngIf="salonData.galleryImages.length === 0">
+        <ion-icon name="images"></ion-icon>
+        <p>Nenhuma foto na galeria</p>
+        <ion-button size="small" (click)="addGalleryImage()">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Adicionar Foto
+        </ion-button>
+      </div>
+ 
+      <ion-note class="gallery-note">
+        {{ salonData.galleryImages.length }}/10 fotos • Máximo 5MB por foto
+      </ion-note>
+    </div>
+ 
+  </form>
+</ion-content>
+
+<!-- Rodapé -->
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="/agendamentos">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/salao">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/reservaP">
+    <ion-icon name="storefront-outline"></ion-icon>
+    <ion-label>Salão</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

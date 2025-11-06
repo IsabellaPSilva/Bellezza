@@ -237,40 +237,13 @@
   }
 }
  
-// ========== TAB BAR ==========
+/* ⚙️ Rodapé */
 ion-tab-bar {
-  --background: #e8e8e4;
-  --color: #666;
-  --color-selected: #434d37;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  height: 60px;
- 
-  ion-tab-button {
-    --color: #666;
-    --color-selected: #434d37;
-    --ripple-color: rgba(125, 140, 106, 0.2);
-    font-weight: 500;
- 
-    ion-icon {
-      font-size: 24px;
-      margin-bottom: 4px;
-    }
- 
-    ion-label {
-      font-size: 11px;
-      text-transform: capitalize;
-    }
- 
-    &.tab-selected {
-      ion-icon,
-      ion-label {
-        color: #434d37;
-        font-weight: 600;
-      }
-    }
-  }
+  --background: #7d8c6a;
+  --color: white;
+  --color-selected: white;
 }
- 
+
 // ========== GLOBAL OVERRIDES ==========
 ion-content {
   --background: #ffffff !important;

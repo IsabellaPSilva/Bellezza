@@ -5,6 +5,10 @@
     <img src="assets/teste-bellezza-logo.jpeg" alt="Logo do Salão">
   </div>
 
+    <ion-button fill="clear" class="back-button" routerLink="/reserva">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+
   <!-- Calendário -->
   <ion-card class="card-calendario">
     <ion-card-content>
@@ -47,21 +51,22 @@
     Reservar
   </ion-button>
 
-  <!-- Footer -->
-  <ion-footer>
-    <ion-toolbar class="footer">
-      <ion-buttons slot="start">
-        <ion-button>
-          <ion-icon slot="icon-only" name="home"></ion-icon>
-        </ion-button>
-        <ion-button>
-          <ion-icon slot="icon-only" name="calendar"></ion-icon>
-        </ion-button>
-        <ion-button>
-          <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
-
 </ion-content>
+
+<!-- ⚙️ Rodapé fixo -->
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="/agendamento-home">
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Início</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/agendamento">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/perfil">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

@@ -3,7 +3,7 @@
   import { LocalizacaoPage } from './localizacao/localizacao.page';
   import { LocalizacaoPPage } from './localizacaoP/localizacaoP.page';
   import { ReservaPage } from './reservas/reserva.page';
-  import { reservaPPage } from './reservaP/reservaP.page';
+  import { ReservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
   import { CalendarioPage } from './calendario/calendario.page';
   import { ServicosPage } from './servicos/servicos.page';
@@ -12,15 +12,16 @@
   import { RouterModule } from '@angular/router';
  
   export const routes: Routes = [
-    {path: '', component: AgendamentosPage },
+    {path: 'agendamentos', component: AgendamentosPage },
     {path: 'localizacao', component: LocalizacaoPage },
     {path: 'servicos', component: ServicosPage },
     {path: 'localizacaoP', component: LocalizacaoPPage },
     {path: 'reserva', component: ReservaPage },
-    {path: 'reservaP', component: reservaPPage },
+    {path: 'reservaP', component: ReservaPPage },
     {path: 'calendarioP', component: CalendarioPPage },
     {path: 'calendario', component: CalendarioPage },
     {path: 'perfilP',loadComponent: () => import('./perfilP/perfilP.page').then(m => m.PerfilPPage)},
+    {path: 'login',loadComponent: () => import('./login/login.page').then(m => m.LoginPage)},
     {path: 'home',loadComponent: () => import('./home/home.page').then((m) => m.HomePage),},
     {path: '',redirectTo: 'home',pathMatch: 'full',},
     {path: 'details',loadComponent: () => import('./pages/details/details.page').then((m) => m.DetailsPage),},
@@ -32,7 +33,8 @@
     {path: 'categoria',loadComponent: () => import('./home/categoria.page').then(m => m.CategoriaPage)},
     {path: 'agendamento',loadComponent: () => import('./agendamento/agendamento.page').then(m => m.AgendamentosPage)},
     {path: 'cadastro-profissional',loadComponent: () => import('./home/cadastro-profissional.page').then((m) => m.CadastroProfissionalPage),},
-    {path: 'detalhes-salao', loadComponent: () => import('./home/detalhes-salao.page').then(m => m.DetalhesSalaoPage) },
+    {path: 'detalhes-salao', loadComponent: () => import('./home/detalhes-salao.page').then(m => m.DetalhesSalaoPage)},
+    {path: 'salao',loadComponent: () => import('./home/salao.page').then(m => m.SalaoPage)},
 ];
  
 @NgModule({

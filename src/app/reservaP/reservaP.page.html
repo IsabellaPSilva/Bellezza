@@ -1,87 +1,83 @@
-<ion-content class="pagina">
+<!-- reservaP.page.html - VERSÃO PROFISSIONAL -->
 
-  <!-- Cabeçalho -->
-  <div class="header">
-    <img src="assets/teste-bellezza-logo.jpeg" alt="Logo" class="logo" />
-    <div class="texto-header">
-      <h2>Salão Mãe & Filhas</h2>
-      <div class="acoes">
-        <div class="acao">
+<ion-content [fullscreen]="true">
+  <!-- Header com Logo e Título -->
+  <div class="header-section">
+    <div class="logo-container">
+      <img src="assets/SalãoMãeeFilhas.jpeg" alt="Logo Mãe & Filhas" class="logo">
+    </div>
+    
+    <div class="title-info">
+      <h1>Salão Mãe & Filhas</h1>
+      
+      <div class="action-buttons">
+        <button class="action-btn" (click)="compartilhar()">
           <ion-icon name="share-outline"></ion-icon>
           <span>compartilhar</span>
-        </div>
-        <div class="acao">
-          <ion-icon name="heart-outline"></ion-icon>
-          <span>favoritar</span>
-        </div>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Recomendação -->
-  <div class="recomendado">
-    <ion-icon name="thumbs-up-outline"></ion-icon>
-    <span>Recomendado pelo</span>
-    <span class="marca">Bellezza</span>
+  <!-- Categorias Dinâmicas com Edição -->
+  <div class="services-section" *ngFor="let categoria of categorias">
+    <!-- Header da Categoria com Botão + -->
+    <div class="section-header">
+      <button class="btn-add-categoria" (click)="adicionarCategoria()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </button>
+      <h2 class="section-title">{{ categoria.nome }}</h2>
+    </div>
+    
+    <div class="services-list">
+      <!-- Serviços Existentes -->
+      <div class="service-card-edit" *ngFor="let servico of categoria.servicos">
+        <button class="btn-icon" (click)="editarServico(servico)">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <span class="btn-label">editar<br>serviço</span>
+        </button>
+        
+        <button class="btn-icon" (click)="editarPreco(servico)">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <span class="btn-label">editar<br>preço</span>
+        </button>
+        
+        <button class="btn-reservar">
+          reservar
+        </button>
+      </div>
+      
+      <!-- Botão para Adicionar Novo Serviço -->
+      <button class="btn-add-servico" (click)="adicionarServico(categoria)">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <span>Adicionar serviço</span>
+      </button>
+    </div>
   </div>
 
-  <!-- Primeiro grupo -->
-  <div class="grupo">
-    <div class="escrever">
+  <!-- Botão Adicionar Primeira Categoria -->
+  <div class="empty-state" *ngIf="categorias.length === 0">
+    <button class="btn-primary" (click)="adicionarCategoria()">
       <ion-icon name="add-circle-outline"></ion-icon>
-      <span>Escrever</span>
-    </div>
-
-    <div class="caixa">
-      <div class="linha">
-        <button fill="solid" class="btn">editar serviço</button>
-        <button fill="solid" class="btn">editar preço</button>
-        <button fill="solid" class="reservar">reservar</button>
-      </div>
-      <div class="linha">
-        <button class="btn">editar serviço</button>
-        <button class="btn">editar preço</button>
-        <button class="reservar">reservar</button>
-      </div>
-    </div>
+      <span>Adicionar Categoria</span>
+    </button>
   </div>
-
-  <!-- Segundo grupo -->
-  <div class="grupo">
-    <div class="escrever">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      <span>Escrever</span>
-    </div>
-
-    <div class="caixa">
-      <div class="linha" *ngFor="let i of [1,2,3,4]">
-        <button class="btn">editar serviço</button>
-        <button class="btn">editar preço</button>
-        <button class="reservar">reservar</button>
-      </div>
-    </div>
-  </div>
-
 </ion-content>
 
 <!-- Rodapé -->
-<ion-footer>
-  <div class="footer">
-    <div class="item" routerLink="/agendamento-home-profissional">
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Início</span>
-    </div>
-    <div class="item">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <span>Agendamentos</span>
-    </div>
-    <div class="item">
-      <ion-icon name="person-outline"></ion-icon>
-      <span>Perfil</span>
-    </div>
-    <div class="item">
-      <ion-icon name="storefront-outline"></ion-icon>
-      <span>Salão</span>
-    </div>
-  </div>
-</ion-footer>
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="/agendamentos">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/salao">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button routerLink="/reservaP">
+    <ion-icon name="storefront-outline"></ion-icon>
+    <ion-label>Salão</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

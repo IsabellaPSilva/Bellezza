@@ -1,5 +1,5 @@
 .fundo {
-  --background: #f9f6f5; // mais claro e suave
+  --background: #f2efeb; // mais claro e suave
   font-family: Arial, sans-serif;
 }
 
@@ -13,6 +13,14 @@
 .logo img {
   width: 70px;
   height: auto;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  --color: #333;
 }
 
 /* Calendário */
@@ -75,6 +83,13 @@ ion-datetime.calendario {
   --color: #fff;
   border-radius: 12px;
   font-weight: bold;
+}
+
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
 }
 
 /* Footer */

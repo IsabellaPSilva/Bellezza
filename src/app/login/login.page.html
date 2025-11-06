@@ -1,0 +1,166 @@
+<ion-content class="ion-padding custom-background">
+ 
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="assets/teste-bellezza-logo.jpeg" alt="Logo Bellezza" class="logo" />
+    <h2 class="title">Login</h2>
+  </div>
+ 
+  <!-- Formulário -->
+  <form class="form-container">
+ 
+    <ion-item class="input-item">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        maxlength="40"
+        placeholder="Digite seu email"
+        (ionInput)="limitLength($event, 'email', 40)">
+      </ion-input>
+    </ion-item>
+ 
+    <ion-item class="input-item">
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input
+        type="password"
+        [(ngModel)]="senha"
+        name="senha"
+        maxlength="20"
+        placeholder="Digite sua senha"
+        (ionInput)="limitLength($event, 'senha', 20)">
+      </ion-input>
+    </ion-item>
+ 
+    <!-- Link Esqueci minha senha -->
+    <div class="forgot-password-container">
+      <a class="forgot-password-link" (click)="abrirRecuperarSenha()">Esqueci minha senha</a>
+    </div>
+ 
+    <div style="margin-top: 16px; text-align:center;">
+      <ion-button class="btn-cadastrar" (click)="cadastrar()">
+        ENTRAR
+      </ion-button>
+    </div>
+  </form>
+ 
+</ion-content>
+ 
+<!-- Modal Recuperar Senha -->
+<ion-modal [isOpen]="mostrarRecuperarSenha" (didDismiss)="fecharRecuperarSenha()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Recuperar Senha</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="fecharRecuperarSenha()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+ 
+    <ion-content class="ion-padding modal-background">
+      <div class="modal-container">
+        <div class="logo-container-modal">
+          <img src="assets/teste-bellezza-logo.jpeg" alt="Logo Bellezza" class="logo-modal" />
+          <p class="subtitle">Digite seu email para receber o código de recuperação</p>
+        </div>
+ 
+        <form class="form-container-modal">
+          <ion-item class="input-item">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input
+              type="email"
+              [(ngModel)]="emailRecuperar"
+              name="emailRecuperar"
+              maxlength="40"
+              placeholder="Digite seu email"
+              (ionInput)="limitLength($event, 'emailRecuperar', 40)">
+            </ion-input>
+          </ion-item>
+ 
+          <div style="margin-top: 20px; text-align:center;">
+            <ion-button class="btn-modal" (click)="enviarCodigo()">
+              ENVIAR CÓDIGO
+            </ion-button>
+          </div>
+ 
+          <div class="link-container">
+            <a class="link" (click)="irParaAlterarSenha()">Já tenho um código</a>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+ 
+<!-- Modal Alterar Senha -->
+<ion-modal [isOpen]="mostrarAlterarSenha" (didDismiss)="fecharAlterarSenha()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Alterar Senha</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="fecharAlterarSenha()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+ 
+    <ion-content class="ion-padding modal-background">
+      <div class="modal-container">
+        <div class="logo-container-modal">
+          <img src="assets/teste-bellezza-logo.jpeg" alt="Logo Bellezza" class="logo-modal" />
+          <p class="subtitle">Digite o código e sua nova senha</p>
+        </div>
+ 
+        <form class="form-container-modal">
+          <ion-item class="input-item">
+            <ion-label position="stacked">Código de Verificação</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="codigo"
+              name="codigo"
+              maxlength="6"
+              placeholder="Digite o código recebido"
+              (ionInput)="limitLength($event, 'codigo', 6)">
+            </ion-input>
+          </ion-item>
+ 
+          <ion-item class="input-item">
+            <ion-label position="stacked">Nova Senha</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="novaSenha"
+              name="novaSenha"
+              maxlength="20"
+              placeholder="Digite sua nova senha"
+              (ionInput)="limitLength($event, 'novaSenha', 20)">
+            </ion-input>
+          </ion-item>
+ 
+          <ion-item class="input-item">
+            <ion-label position="stacked">Confirmar Nova Senha</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="confirmarSenha"
+              name="confirmarSenha"
+              maxlength="20"
+              placeholder="Confirme sua nova senha"
+              (ionInput)="limitLength($event, 'confirmarSenha', 20)">
+            </ion-input>
+          </ion-item>
+ 
+          <div style="margin-top: 20px; text-align:center;">
+            <ion-button class="btn-modal" (click)="alterarSenha()">
+              SALVAR NOVA SENHA
+            </ion-button>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

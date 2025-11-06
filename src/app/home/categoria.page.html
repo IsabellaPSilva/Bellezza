@@ -6,38 +6,99 @@
 
 <ion-content>
 
-    <!-- 🔍 Barra de busca -->
+  <!-- 🔍 Barra de busca FUNCIONAL -->
   <div class="search-bar">
-    <ion-searchbar placeholder="Buscar..."></ion-searchbar>
+    <ion-searchbar 
+      placeholder="Buscar..."
+      [(ngModel)]="termoBusca"
+      (ionInput)="buscar($event)">
+    </ion-searchbar>
   </div>
 
   <div class="category-scroll">
-    <ion-button fill="solid" class="category">Unhas</ion-button>
-    <ion-button fill="solid" class="category">Cabelo</ion-button>
-    <ion-button fill="solid" class="category">Bronze</ion-button>
-    <ion-button fill="solid" class="category">Cílios</ion-button>
-    <ion-button fill="solid" class="category">Sobrancelhas</ion-button>
-    <ion-button fill="solid" class="category">Maquiagem</ion-button>
-    <ion-button fill="solid" class="category">Depilação</ion-button>
-    <ion-button fill="solid" class="category">Massagens</ion-button>
-    <ion-button fill="solid" class="category">Pele</ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Unhas'"
+      (click)="selecionarCategoria('Unhas')">
+      Unhas
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Cabelo'"
+      (click)="selecionarCategoria('Cabelo')">
+      Cabelo
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Bronze'"
+      (click)="selecionarCategoria('Bronze')">
+      Bronze
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Cílios'"
+      (click)="selecionarCategoria('Cílios')">
+      Cílios
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Sobrancelhas'"
+      (click)="selecionarCategoria('Sobrancelhas')">
+      Sobrancelhas
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Maquiagem'"
+      (click)="selecionarCategoria('Maquiagem')">
+      Maquiagem
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Depilação'"
+      (click)="selecionarCategoria('Depilação')">
+      Depilação
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Massagens'"
+      (click)="selecionarCategoria('Massagens')">
+      Massagens
+    </ion-button>
+    <ion-button 
+      fill="solid" 
+      class="category"
+      [class.active]="categoriaSelecionada === 'Pele'"
+      (click)="selecionarCategoria('Pele')">
+      Pele
+    </ion-button>
   </div>
 
-
-  <!-- Filtro de ordenação -->
+  <!-- Filtro de ordenação CLICÁVEL -->
   <div class="ordenar-container">
-    <span>Ordenar por: <strong>recomendação ▼</strong></span>
+    <span>Ordenar por: <strong (click)="mudarOrdenacao()">{{ getNomeOrdenacao() }} ▼</strong></span>
   </div>
 
-  <!-- Lista de salões -->
+  <!-- Lista de salões COM IMAGENS ÚNICAS -->
   <div *ngFor="let salao of saloes" class="card-salao" routerLink="/detalhes-salao">
     <div class="salao-topo">
-      <div class="salao-foto-perfil"></div>
+      <div class="salao-foto-perfil">
+        <img [src]="salao.logo" [alt]="salao.nome">
+      </div>
       <div class="salao-nome">{{ salao.nome }}</div>
     </div>
 
-    <!-- Espaço da imagem principal -->
-    <div class="salao-imagem"></div>
+    <!-- Espaço da imagem principal COM IMAGEM ÚNICA -->
+    <div class="salao-imagem">
+      <img [src]="salao.imagemDestaque" [alt]="salao.nome">
+    </div>
 
     <!-- Avaliações -->
     <div class="salao-info">
@@ -47,6 +108,12 @@
       </div>
       <ion-icon name="location-outline"></ion-icon>
     </div>
+  </div>
+
+  <!-- Mensagem quando não há resultados -->
+  <div class="empty-state" *ngIf="saloes.length === 0">
+    <p>Nenhum salão encontrado</p>
+    <small>Tente buscar por outro termo ou categoria</small>
   </div>
 
 </ion-content>
@@ -70,4 +137,3 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-footer>
-

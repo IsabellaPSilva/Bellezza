@@ -55,27 +55,6 @@
   color: #333;
 }
 
-/* Divisores decorativos */
-.divider {
-  height: 2px;
-  margin: 15px auto;
-  width: 80%;
-}
-
-.star {
-  color: #d48aa7;
-  font-size: 18px;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d48aa7; /* rosa */
-  margin-bottom: 8px;
-}
-
-
 .toast-erro-customizado {
   --color: #000000;
   font-weight: bold;

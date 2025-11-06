@@ -1,9 +1,12 @@
+<!-- perfil.page.html - COMPLETO E ATUALIZADO -->
+
 <ion-content class="perfil-page">
 
   <!-- Foto -->
-  <div class="foto-container">
+  <div class="foto-container" (click)="alterarFoto()">
     <ion-avatar class="foto">
-      <ion-icon name="person-outline"></ion-icon>
+      <img *ngIf="fotoUrl" [src]="fotoUrl" alt="Foto de perfil">
+      <ion-icon *ngIf="!fotoUrl" name="person-outline"></ion-icon>
     </ion-avatar>
     <p>Alterar foto</p>
   </div>
@@ -11,18 +14,18 @@
   <!-- Informações da conta -->
   <ion-list>
     <ion-item lines="none">
-      <ion-label><b>Nome de usuário:</b><br>Isabella Pacheco Da Silva</ion-label>
-      <ion-icon slot="end" name="create-outline"></ion-icon>
+      <ion-label><b>Nome de usuário:</b><br>{{ nomeUsuario }}</ion-label>
+      <ion-icon slot="end" name="create-outline" (click)="editarNome()"></ion-icon>
     </ion-item>
 
     <ion-item lines="none">
-      <ion-label><b>Número de telefone:</b><br>+55 ** *****-7892</ion-label>
-      <ion-icon slot="end" name="call-outline"></ion-icon>
+      <ion-label><b>Número de telefone:</b><br>{{ telefone }}</ion-label>
+      <ion-icon slot="end" name="call-outline" (click)="editarTelefone()"></ion-icon>
     </ion-item>
 
     <ion-item lines="none">
-      <ion-label><b>Endereço de e-mail:</b><br>j*****************@gmail.com</ion-label>
-      <ion-icon slot="end" name="mail-outline"></ion-icon>
+      <ion-label><b>Endereço de e-mail:</b><br>{{ email }}</ion-label>
+      <ion-icon slot="end" name="mail-outline" (click)="editarEmail()"></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -30,14 +33,10 @@
 
   <!-- Métodos de entrada -->
   <ion-list>
-    <ion-item lines="none">
-      <ion-label><b>Chave de acesso:</b><br>1 chave(s) de acesso adicionada(s)</ion-label>
-      <ion-button size="small" (click)="gerenciar()">Gerenciar</ion-button>
-    </ion-item>
 
     <ion-item lines="none">
-      <ion-label><b>Senha:</b><br>*******</ion-label>
-      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+      <ion-label><b>Senha:</b><br>{{ senhaExibida }}</ion-label>
+      <ion-icon slot="end" name="lock-closed-outline" (click)="editarSenha()"></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -57,8 +56,8 @@
   </ion-list>
 
   <!-- Botões de ação -->
-  <ion-button expand="block" class ="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
-  <ion-button expand="block" class ="botao-excluir" (click)="excluir()">Excluir</ion-button>
+  <ion-button expand="block" class="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
+  <ion-button expand="block" class="botao-excluir" (click)="excluir()">Excluir</ion-button>
 </ion-content>
 
 <!-- ⚙️ Rodapé fixo -->
@@ -78,4 +77,3 @@
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
-

@@ -17,9 +17,9 @@ import { arrowBack, logoInstagram, logoFacebook, homeOutline, calendarOutline, p
 })
 export class DetalhesSalaoPage {
   images = [
-    'assets/images/nail1.jpg',
-    'assets/images/salon.jpg',
-    'assets/images/hair1.jpg'
+    'assets/SalaoMaeeFilhas1.png',
+    'assets/SalaoMaeeFilhas2.png',
+    'assets/SalaoMaeeFilhas3.png'
   ];
 
   avaliacoes = [

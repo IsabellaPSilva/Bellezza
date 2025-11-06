@@ -34,17 +34,14 @@
       <ion-card-content>
         <div class="linha-topo">
           <strong>Serviço: Manicure</strong>
-          <span class="data">15 JUN</span>
+          <span class="data">15 JUL</span>
         </div>
 
         <p class="nome">Juliana Dias</p>
         <p class="preco">R$ 00,0</p>
 
         <div class="acoes">
-          <ion-button class="btn-confirmada" fill="outline" size="small" (click)="irParaReserva()">Confirmar
-        </ion-button>
-
-          <ion-button class="btn-cancelar" >Cancelar</ion-button>
+          <ion-button class="btn-cancelar" (click)="confirmarCancelamento()">Cancelar</ion-button>
         </div>
 
         <p class="hora">h 14:00</p>
@@ -117,22 +114,20 @@
 
   </ion-content>
 
-<!-- ⚙️ Rodapé fixo -->
-<ion-footer>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button routerLink="/home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Início</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button routerLink="/agendamento">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <ion-label>Agendamentos</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button routerLink="/perfil">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Perfil</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-footer>
+ <!-- ⚙️ Rodapé fixo -->
+ <ion-tab-bar slot="bottom">
+   <ion-tab-button>
+     <ion-icon name="home-outline"></ion-icon>
+     <ion-label>Início</ion-label>
+   </ion-tab-button>
+ 
+   <ion-tab-button routerLink="/agendamento">
+     <ion-icon name="calendar-outline"></ion-icon>
+     <ion-label>Agendamentos</ion-label>
+   </ion-tab-button>
+ 
+   <ion-tab-button routerLink="/perfil">
+     <ion-icon name="person-outline"></ion-icon>
+     <ion-label>Perfil</ion-label>
+   </ion-tab-button>
+ </ion-tab-bar>

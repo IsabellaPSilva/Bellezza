@@ -39,11 +39,6 @@ export class AgendamentosPage {
 
     await alert.present();
   }
-
-  // Função para navegar para a página de reserva
-  irParaReserva() {
-    this.router.navigate(['/reserva']); // <-- Caminho da rota
-  }
   irParaHome() {
   this.router.navigate(['/home']);
 }
