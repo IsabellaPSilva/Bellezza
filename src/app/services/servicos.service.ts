@@ -1,8 +1,8 @@
 // servicos.service.ts - COM PERSISTÊNCIA NO LOCALSTORAGE
-
+ 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
+ 
 export interface Servico {
   id: number;
   nome: string;
@@ -10,19 +10,19 @@ export interface Servico {
   tempo: string;
   categoria: string;
 }
-
+ 
 export interface Categoria {
   id: number;
   nome: string;
   servicos: Servico[];
 }
-
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicosService {
   private readonly STORAGE_KEY = 'salao_categorias';
-  
+ 
   // Dados padrão inicial
   private dadosPadrao: Categoria[] = [
     {
@@ -45,20 +45,20 @@ export class ServicosService {
       ]
     }
   ];
-
+ 
   private categorias$: BehaviorSubject<Categoria[]>;
-
+ 
   constructor() {
     // Carregar dados salvos ou usar dados padrão
     const dadosSalvos = this.carregarDoLocalStorage();
     this.categorias$ = new BehaviorSubject<Categoria[]>(dadosSalvos || this.dadosPadrao);
-    
+   
     // Salvar automaticamente quando houver mudanças
     this.categorias$.subscribe(categorias => {
       this.salvarNoLocalStorage(categorias);
     });
   }
-
+ 
   // CARREGAR do localStorage
   private carregarDoLocalStorage(): Categoria[] | null {
     try {
@@ -71,7 +71,7 @@ export class ServicosService {
     }
     return null;
   }
-
+ 
   // SALVAR no localStorage
   private salvarNoLocalStorage(categorias: Categoria[]): void {
     try {
@@ -80,17 +80,17 @@ export class ServicosService {
       console.error('Erro ao salvar dados:', error);
     }
   }
-
+ 
   // Obter categorias (Observable para atualizações automáticas)
   getCategorias() {
     return this.categorias$.asObservable();
   }
-
+ 
   // Obter valor atual
   getCategoriasValue() {
     return this.categorias$.value;
   }
-
+ 
   // ADICIONAR nova categoria
   adicionarCategoria(nome: string) {
     const categorias = this.categorias$.value;
@@ -101,12 +101,12 @@ export class ServicosService {
     };
     this.categorias$.next([...categorias, novaCategoria]);
   }
-
+ 
   // ADICIONAR novo serviço
   adicionarServico(categoriaId: number, servico: Partial<Servico>) {
     const categorias = [...this.categorias$.value];
     const categoria = categorias.find(c => c.id === categoriaId);
-    
+   
     if (categoria) {
       const novoServico: Servico = {
         id: Date.now(),
@@ -119,11 +119,11 @@ export class ServicosService {
       this.categorias$.next(categorias);
     }
   }
-
+ 
   // ATUALIZAR serviço
   atualizarServico(servicoId: number, dados: Partial<Servico>) {
     const categorias = [...this.categorias$.value];
-    
+   
     for (let categoria of categorias) {
       const servico = categoria.servicos.find(s => s.id === servicoId);
       if (servico) {
@@ -136,11 +136,11 @@ export class ServicosService {
     }
     return false;
   }
-
+ 
   // REMOVER serviço
   removerServico(servicoId: number) {
     const categorias = [...this.categorias$.value];
-    
+   
     for (let categoria of categorias) {
       const index = categoria.servicos.findIndex(s => s.id === servicoId);
       if (index !== -1) {
@@ -151,13 +151,13 @@ export class ServicosService {
     }
     return false;
   }
-
+ 
   // REMOVER categoria
   removerCategoria(categoriaId: number) {
     const categorias = this.categorias$.value.filter(c => c.id !== categoriaId);
     this.categorias$.next(categorias);
   }
-
+ 
   // RESETAR para dados padrão (útil para testes)
   resetarDados() {
     this.categorias$.next(this.dadosPadrao);
