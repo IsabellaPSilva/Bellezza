@@ -3,7 +3,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
- 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,22 +12,23 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LoginPage {
-  // Variáveis do Login
+  // ===== Variáveis do Login =====
   email: string = '';
   senha: string = '';
- 
-  // Variáveis do Modal Recuperar Senha
+
+  // ===== Variáveis do Modal Recuperar Senha =====
   mostrarRecuperarSenha: boolean = false;
   emailRecuperar: string = '';
- 
-  // Variáveis do Modal Alterar Senha
+
+  // ===== Variáveis do Modal Alterar Senha =====
   mostrarAlterarSenha: boolean = false;
   codigo: string = '';
   novaSenha: string = '';
   confirmarSenha: string = '';
- 
+
   constructor(private toastCtrl: ToastController, private router: Router) {}
- 
+
+  // Limitar tamanho dos campos
   limitLength(event: any, field: string, max = 55) {
     const input = event.target as HTMLInputElement;
     let val = input.value || '';
@@ -37,22 +38,9 @@ export class LoginPage {
       (this as any)[field] = val;
     }
   }
- 
-  // ====== FUNÇÕES DO LOGIN ======
- 
-  isFormValid(): boolean {
-    if (!this.email || this.email.trim().length === 0) return false;
-    if (!this.senha || this.senha.trim().length === 0) return false;
- 
-    const basicEmail = /\S+@\S+\.\S+/;
-    if (!basicEmail.test(this.email)) return false;
- 
-    if (this.email.length > 55 || this.senha.length > 55) return false;
- 
-    return true;
-  }
- 
-  async cadastrar() {
+
+  // ===== FUNÇÕES DO LOGIN =====
+  async entrar() {
     if (!this.isFormValid()) {
       const toast = await this.toastCtrl.create({
         message: 'Preencha corretamente o email e a senha.',
@@ -63,7 +51,32 @@ export class LoginPage {
       await toast.present();
       return;
     }
- 
+
+    const clientesSalvos = JSON.parse(localStorage.getItem('clientes') || '[]');
+    const cliente = clientesSalvos.find((c: any) => c.email === this.email);
+
+    if (!cliente) {
+      const toast = await this.toastCtrl.create({
+        message: 'E-mail não encontrado. Verifique ou cadastre-se primeiro.',
+        duration: 2000,
+        position: 'bottom',
+        cssClass: 'toast-erro-customizado'
+      });
+      await toast.present();
+      return;
+    }
+
+    if (cliente.senha !== this.senha) {
+      const toast = await this.toastCtrl.create({
+        message: 'Senha incorreta. Tente novamente.',
+        duration: 2000,
+        position: 'bottom',
+        cssClass: 'toast-erro-customizado'
+      });
+      await toast.present();
+      return;
+    }
+
     const toast = await this.toastCtrl.create({
       message: 'Login realizado com sucesso!',
       duration: 1500,
@@ -71,142 +84,88 @@ export class LoginPage {
       cssClass: 'toast-sucesso-customizado'
     });
     await toast.present();
- 
+
     setTimeout(() => {
       this.router.navigate(['/agendamento-home']);
     }, 1000);
- 
+
     this.email = '';
     this.senha = '';
   }
- 
-  // ====== FUNÇÕES DO MODAL RECUPERAR SENHA ======
- 
+
+  // ===== MÉTODOS DE MODAIS =====
   abrirRecuperarSenha() {
     this.mostrarRecuperarSenha = true;
-    this.emailRecuperar = '';
   }
- 
+
   fecharRecuperarSenha() {
     this.mostrarRecuperarSenha = false;
     this.emailRecuperar = '';
   }
- 
-  isEmailValid(email: string): boolean {
-    if (!email || email.trim().length === 0) return false;
-    const basicEmail = /\S+@\S+\.\S+/;
-    return basicEmail.test(email);
-  }
- 
-  async enviarCodigo() {
-    if (!this.isEmailValid(this.emailRecuperar)) {
-      const toast = await this.toastCtrl.create({
-        message: 'Por favor, digite um email válido.',
+
+  enviarCodigo() {
+    if (!this.emailRecuperar) {
+      this.toastCtrl.create({
+        message: 'Digite um email para receber o código.',
         duration: 2000,
         position: 'bottom',
         cssClass: 'toast-erro-customizado'
-      });
-      await toast.present();
+      }).then(toast => toast.present());
       return;
     }
- 
-    // Simulação de envio de código
-    const toast = await this.toastCtrl.create({
-      message: 'Código enviado para seu email!',
-      duration: 2000,
-      position: 'bottom',
-      cssClass: 'toast-sucesso-customizado'
-    });
-    await toast.present();
- 
-    setTimeout(() => {
-      this.fecharRecuperarSenha();
-      this.abrirAlterarSenha();
-    }, 1500);
+    console.log('Código enviado para:', this.emailRecuperar);
+    this.irParaAlterarSenha();
   }
- 
+
   irParaAlterarSenha() {
-    this.fecharRecuperarSenha();
-    this.abrirAlterarSenha();
-  }
- 
-  // ====== FUNÇÕES DO MODAL ALTERAR SENHA ======
- 
-  abrirAlterarSenha() {
+    this.mostrarRecuperarSenha = false;
     this.mostrarAlterarSenha = true;
-    this.codigo = '';
-    this.novaSenha = '';
-    this.confirmarSenha = '';
   }
- 
+
   fecharAlterarSenha() {
     this.mostrarAlterarSenha = false;
     this.codigo = '';
     this.novaSenha = '';
     this.confirmarSenha = '';
   }
- 
-  async alterarSenha() {
-    if (!this.codigo || this.codigo.trim().length === 0) {
-      const toast = await this.toastCtrl.create({
-        message: 'Por favor, digite o código de verificação.',
+
+  alterarSenha() {
+    if (!this.codigo || !this.novaSenha || !this.confirmarSenha) {
+      this.toastCtrl.create({
+        message: 'Preencha todos os campos para alterar a senha.',
         duration: 2000,
         position: 'bottom',
         cssClass: 'toast-erro-customizado'
-      });
-      await toast.present();
+      }).then(toast => toast.present());
       return;
     }
- 
-    if (!this.novaSenha || this.novaSenha.trim().length === 0) {
-      const toast = await this.toastCtrl.create({
-        message: 'Por favor, digite sua nova senha.',
-        duration: 2000,
-        position: 'bottom',
-        cssClass: 'toast-erro-customizado'
-      });
-      await toast.present();
-      return;
-    }
- 
-    if (this.novaSenha.length < 6) {
-      const toast = await this.toastCtrl.create({
-        message: 'A senha deve ter no mínimo 6 caracteres.',
-        duration: 2000,
-        position: 'bottom',
-        cssClass: 'toast-erro-customizado'
-      });
-      await toast.present();
-      return;
-    }
- 
     if (this.novaSenha !== this.confirmarSenha) {
-      const toast = await this.toastCtrl.create({
-        message: 'As senhas não coincidem.',
+      this.toastCtrl.create({
+        message: 'As senhas não conferem.',
         duration: 2000,
         position: 'bottom',
         cssClass: 'toast-erro-customizado'
-      });
-      await toast.present();
+      }).then(toast => toast.present());
       return;
     }
- 
-    // Simulação de alteração de senha bem-sucedida
-    const toast = await this.toastCtrl.create({
-      message: 'Senha alterada com sucesso!',
-      duration: 2000,
-      position: 'bottom',
-      cssClass: 'toast-sucesso-customizado'
-    });
-    await toast.present();
- 
-    setTimeout(() => {
-      this.fecharAlterarSenha();
-    }, 1500);
- 
-    this.codigo = '';
-    this.novaSenha = '';
-    this.confirmarSenha = '';
+    console.log('Senha alterada para:', this.novaSenha);
+    this.fecharAlterarSenha();
+  }
+
+  cadastrar() {
+    this.router.navigate(['/cadastro']);
+  }
+
+  // ===== VALIDAÇÃO DO FORMULÁRIO =====
+  isFormValid(): boolean {
+    if (!this.email || this.email.trim().length === 0) return false;
+    if (!this.senha || this.senha.trim().length === 0) return false;
+
+    const basicEmail = /\S+@\S+\.\S+/;
+    if (!basicEmail.test(this.email)) return false;
+
+    if (this.email.length > 55 || this.senha.length > 55) return false;
+
+    return true;
   }
 }
- 
