@@ -14,6 +14,185 @@ $instagram-color: #E4405F;
 $facebook-color: #1877F2;
  
 // ============================================
+// CORREÇÃO PARA TEXTO TRANSPARENTE NOS INPUTS E BOTÕES
+// ============================================
+ 
+// Força cor preta em TODOS os ion-input e ion-textarea
+ion-item {
+  // Força cor no próprio componente Ionic
+  ion-input,
+  ion-textarea {
+    --color: #000000 !important;
+    --placeholder-color: #999999 !important;
+    --placeholder-opacity: 0.6 !important;
+   
+    // Força cor no input/textarea NATIVO dentro do componente
+    input,
+    textarea {
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+      opacity: 1 !important;
+    }
+  }
+ 
+  // Classe nativa do Ionic
+  .native-input,
+  .native-textarea {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    opacity: 1 !important;
+  }
+}
+ 
+// Força em inputs HTML padrão também
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+}
+ 
+// Correção específica para iOS (Safari)
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  appearance: none !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+ 
+// Quando o input está com foco
+ion-input:focus-within input,
+ion-textarea:focus-within textarea {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+ 
+// Placeholder visível mas diferenciado
+::placeholder {
+  color: #999999 !important;
+  opacity: 0.6 !important;
+  -webkit-text-fill-color: #999999 !important;
+}
+ 
+::-webkit-input-placeholder {
+  color: #999999 !important;
+  opacity: 0.6 !important;
+  -webkit-text-fill-color: #999999 !important;
+}
+ 
+::-moz-placeholder {
+  color: #999999 !important;
+  opacity: 0.6 !important;
+}
+ 
+:-ms-input-placeholder {
+  color: #999999 !important;
+  opacity: 0.6 !important;
+}
+ 
+// Correção para autocomplete (que causa transparência)
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+ 
+// Força cor nos labels também
+ion-label {
+  color: #333333 !important;
+}
+ 
+// ============================================
+// CORREÇÃO PARA BOTÕES DO HEADER (SALVAR/CANCELAR)
+// ============================================
+ 
+// Força cor preta em TODOS os botões do header
+ion-header {
+  ion-toolbar {
+    ion-button {
+      --color: #333333 !important;
+     
+      ion-icon {
+        color: #333333 !important;
+        -webkit-text-fill-color: #333333 !important;
+      }
+     
+      // Texto dentro do botão
+      color: #333333 !important;
+      -webkit-text-fill-color: #333333 !important;
+    }
+   
+    // Título do header também
+    ion-title {
+      color: #333333 !important;
+      -webkit-text-fill-color: #333333 !important;
+    }
+  }
+}
+ 
+// Força cor em qualquer ion-button (geral)
+ion-button {
+  --color: #333333 !important;
+  color: #333333 !important;
+  -webkit-text-fill-color: #333333 !important;
+ 
+  ion-icon {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+  }
+ 
+  // Para botões com cores específicas
+  &[color="primary"] {
+    --color: white !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+   
+    ion-icon {
+      color: white !important;
+      -webkit-text-fill-color: white !important;
+    }
+  }
+ 
+  &[color="danger"] {
+    --color: white !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+   
+    ion-icon {
+      color: white !important;
+      -webkit-text-fill-color: white !important;
+    }
+  }
+ 
+  &[color="medium"] {
+    --color: #666666 !important;
+    color: #666666 !important;
+    -webkit-text-fill-color: #666666 !important;
+  }
+}
+ 
+// Botões de upload de imagem
+.change-image-btn {
+  --color: white !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+ 
+  ion-icon {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+  }
+}
+ 
+// ============================================
 // HEADER
 // ============================================
 ion-header {
@@ -25,12 +204,29 @@ ion-header {
     z-index: 10;
     width: 100%;
  
+    .header-buttons-vertical {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+ 
+    .action-buttons-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+     
+      ion-button {
+        margin: 0;
+      }
+    }
+ 
     ion-button {
-      --color: white;
+      --color: #333;
      
       ion-icon {
         font-size: 24px;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        color: #333;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
       }
  
       &[disabled] {
@@ -103,8 +299,8 @@ ion-content {
 // ============================================
 .salon-header {
   position: relative;
-  height: 300px;
-  margin-bottom: 80px;
+  height: 220px;
+  margin-bottom: 60px;
  
   .salon-image {
     width: 100%;
@@ -129,11 +325,11 @@ ion-content {
  
   .salon-logo {
     position: absolute;
-    bottom: -75px;
+    bottom: -60px;
     left: 50%;
     transform: translateX(-50%);
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: $primary-color;
     background-size: cover;
@@ -147,7 +343,7 @@ ion-content {
     animation: fadeInScale 0.5s ease-out;
  
     .logo-text {
-      font-size: 36px;
+      font-size: 30px;
       font-weight: bold;
       color: white;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
@@ -741,7 +937,14 @@ ion-item {
     text-transform: none;
   }
 }
- 
+
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #7d8c6a;
+  --color: white;
+  --color-selected: white;
+}
+
 .gallery-note {
   display: block;
   text-align: center;
@@ -962,14 +1165,7 @@ ion-item {
     transform: translateX(-50%) scale(1);
   }
 }
-
-/* ⚙️ Rodapé */
-ion-tab-bar {
-  --background: #7d8c6a;
-  --color: white;
-  --color-selected: white;
-}
-
+ 
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -980,3 +1176,4 @@ ion-tab-bar {
     transform: translateX(0);
   }
 }
+ 

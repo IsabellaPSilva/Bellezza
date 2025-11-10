@@ -4,7 +4,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" class="header-buttons-vertical">
       <!-- Redes Sociais -->
       <ion-button
         *ngIf="salonData.socialMedia.whatsapp"
@@ -25,13 +25,15 @@
         <ion-icon name="logo-facebook"></ion-icon>
       </ion-button>
      
-      <!-- Botões originais -->
-      <ion-button (click)="shareContent()">
-        <ion-icon name="share-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="enableEditMode()">
-        <ion-icon name="pencil-outline"></ion-icon>
-      </ion-button>
+      <!-- Botões originais - Vertical -->
+      <div class="action-buttons-group">
+        <ion-button (click)="shareContent()">
+          <ion-icon name="share-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="enableEditMode()">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-button>
+      </div>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -44,7 +46,6 @@
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Editar Salão</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="saveChanges()" [disabled]="!isFormValid">
         <ion-icon name="checkmark-outline"></ion-icon>

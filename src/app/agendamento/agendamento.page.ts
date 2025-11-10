@@ -62,4 +62,8 @@ export class AgendamentosPage implements OnInit {
   irParaHome() {
     this.router.navigate(['/home']);
   }
+
+  irParaPerfil() {
+    this.router.navigate(['/perfil']);
+  }
 }
