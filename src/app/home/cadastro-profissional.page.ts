@@ -12,8 +12,10 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class CadastroProfissionalPage {
+
   nome: string = '';
   empresa: string = '';
+  email: string = '';     // ✅ ADICIONADO
   senha: string = '';
   telefone: string = '';
   cep: string = '';
@@ -56,20 +58,30 @@ export class CadastroProfissionalPage {
     }
   }
 
+  // ✅ VALIDAÇÃO DE EMAIL
+  validarEmail(email: string): boolean {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
   isFormValid(): boolean {
-    if (!this.nome || this.nome.trim().length === 0) return false;
-    if (!this.empresa || this.empresa.trim().length === 0) return false;
-    if (!this.senha || this.senha.trim().length === 0) return false;
-    if (!this.telefone || this.telefone.trim().length === 0) return false;
-    if (!this.cep || this.cep.trim().length === 0) return false;
+
+    if (!this.nome || !this.empresa || !this.email || !this.senha || !this.telefone || !this.cep) {
+      return false;
+    }
+
+    if (!this.validarEmail(this.email)) {
+      return false;
+    }
 
     if (this.nome.length > 55 || this.empresa.length > 55 || this.senha.length > 55) return false;
+    if (this.email.length > 60) return false;
     if (this.telefone.length > 15 || this.cep.length > 9) return false;
 
     return true;
   }
 
   async cadastrar() {
+
     if (!this.isFormValid()) {
       const toast = await this.toastCtrl.create({
         message: 'Preencha corretamente todos os campos.',
@@ -81,7 +93,7 @@ export class CadastroProfissionalPage {
       return;
     }
 
-    // Navega para a página de localização do profissional
+    // ✅ Navega para localização
     await this.router.navigate(['/localizacaoP']);
 
     const toast = await this.toastCtrl.create({
@@ -92,9 +104,10 @@ export class CadastroProfissionalPage {
     });
     await toast.present();
 
-    // Limpa os campos
+    // ✅ Limpar campos
     this.nome = '';
     this.empresa = '';
+    this.email = '';
     this.senha = '';
     this.telefone = '';
     this.cep = '';
