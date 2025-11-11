@@ -20,6 +20,7 @@ export class CadastroProfissionalPage {
 
   constructor(private toastCtrl: ToastController, private router: Router) {}
 
+  // Impede números nos campos nome/empresa
   onNoNumbers(event: any, field: string) {
     const input = event.target as HTMLInputElement;
     const clean = input.value.replace(/\d/g, '');
@@ -34,6 +35,7 @@ export class CadastroProfissionalPage {
     }
   }
 
+  // Limita o tamanho do campo
   limitLength(event: any, field: string, max = 55) {
     const input = event.target as HTMLInputElement;
     let val = input.value || '';
@@ -44,6 +46,7 @@ export class CadastroProfissionalPage {
     }
   }
 
+  // Permite apenas números (telefone e CEP)
   numericOnly(event: any, field: string, max = 15) {
     const input = event.target as HTMLInputElement;
     let val = input.value || '';
@@ -56,6 +59,7 @@ export class CadastroProfissionalPage {
     }
   }
 
+  // Validação do formulário
   isFormValid(): boolean {
     if (!this.nome || this.nome.trim().length === 0) return false;
     if (!this.empresa || this.empresa.trim().length === 0) return false;
@@ -69,6 +73,7 @@ export class CadastroProfissionalPage {
     return true;
   }
 
+  // Cadastro e sincronização com o perfil
   async cadastrar() {
     if (!this.isFormValid()) {
       const toast = await this.toastCtrl.create({
@@ -81,9 +86,41 @@ export class CadastroProfissionalPage {
       return;
     }
 
-    // Navega para a página de localização do profissional
-    await this.router.navigate(['/localizacaoP']);
+    // 🧩 1. Buscar cadastros anteriores
+    const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
 
+    // 🧩 2. Criar novo profissional
+    const novoProfissional = {
+      nome: this.nome,
+      empresa: this.empresa,
+      senha: this.senha,
+      telefone: this.telefone,
+      cep: this.cep
+    };
+
+    // 🧩 3. Salvar na lista geral
+    profissionaisSalvos.push(novoProfissional);
+    localStorage.setItem('profissionais', JSON.stringify(profissionaisSalvos));
+
+    // 🧠 4. Salvar também no perfil ativo (perfil_profissional)
+    const perfilAtivo = {
+      nomeUsuario: novoProfissional.nome,
+      nomeEmpresa: novoProfissional.empresa,
+      profissao: '', // pode ser editado depois
+      endereco: novoProfissional.cep,
+      telefone: novoProfissional.telefone,
+      email: '', // opcional no cadastro
+      descricao: '',
+      senha: novoProfissional.senha,
+      genero: 'feminino',
+      fotoUrl: ''
+    };
+    localStorage.setItem('perfil_profissional', JSON.stringify(perfilAtivo));
+
+    // ✅ 5. Navegar para a tela de perfil do profissional
+    await this.router.navigate(['/perfilP']);
+
+    // ✅ 6. Mostrar confirmação
     const toast = await this.toastCtrl.create({
       message: 'Cadastro realizado com sucesso!',
       duration: 2000,
@@ -92,7 +129,7 @@ export class CadastroProfissionalPage {
     });
     await toast.present();
 
-    // Limpa os campos
+    // ✅ 7. Limpar campos
     this.nome = '';
     this.empresa = '';
     this.senha = '';
