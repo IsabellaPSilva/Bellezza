@@ -52,6 +52,25 @@ export class ReservaPage implements OnInit {
     });
   }
  
+  // REMOVER SERVIÇO
+  async removerServico(servicoId: number) {
+    const alert = await this.alertController.create({
+      header: 'Remover Serviço',
+      message: 'Tem certeza que deseja excluir este serviço?',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Remover',
+          handler: () => {
+            this.servicosService.removerServico(servicoId);
+            this.mostrarToast('Serviço removido!');
+          }
+        }
+      ]
+    });
+  await alert.present();
+}
+
   async compartilhar() {
     if (navigator.share) {
       try {
@@ -129,6 +148,7 @@ export class ReservaPage implements OnInit {
       style: 'currency',
       currency: 'BRL'
     });
+    
   }
 }
  

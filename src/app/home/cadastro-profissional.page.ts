@@ -3,7 +3,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-cadastro-profissional',
   templateUrl: './cadastro-profissional.page.html',
@@ -12,14 +12,16 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class CadastroProfissionalPage {
+ 
   nome: string = '';
   empresa: string = '';
+  email: string = '';     // ✅ ADICIONADO
   senha: string = '';
   telefone: string = '';
   cep: string = '';
-
+ 
   constructor(private toastCtrl: ToastController, private router: Router) {}
-
+ 
   // Impede números nos campos nome/empresa
   onNoNumbers(event: any, field: string) {
     const input = event.target as HTMLInputElement;
@@ -34,7 +36,7 @@ export class CadastroProfissionalPage {
       (this as any)[field] = truncated;
     }
   }
-
+ 
   // Limita o tamanho do campo
   limitLength(event: any, field: string, max = 55) {
     const input = event.target as HTMLInputElement;
@@ -45,7 +47,7 @@ export class CadastroProfissionalPage {
       (this as any)[field] = val;
     }
   }
-
+ 
   // Permite apenas números (telefone e CEP)
   numericOnly(event: any, field: string, max = 15) {
     const input = event.target as HTMLInputElement;
@@ -58,23 +60,33 @@ export class CadastroProfissionalPage {
       (this as any)[field] = result;
     }
   }
-
+ 
+  // ✅ VALIDAÇÃO DE EMAIL
+  validarEmail(email: string): boolean {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+ 
   // Validação do formulário
   isFormValid(): boolean {
-    if (!this.nome || this.nome.trim().length === 0) return false;
-    if (!this.empresa || this.empresa.trim().length === 0) return false;
-    if (!this.senha || this.senha.trim().length === 0) return false;
-    if (!this.telefone || this.telefone.trim().length === 0) return false;
-    if (!this.cep || this.cep.trim().length === 0) return false;
-
+ 
+    if (!this.nome || !this.empresa || !this.email || !this.senha || !this.telefone || !this.cep) {
+      return false;
+    }
+ 
+    if (!this.validarEmail(this.email)) {
+      return false;
+    }
+ 
     if (this.nome.length > 55 || this.empresa.length > 55 || this.senha.length > 55) return false;
+    if (this.email.length > 60) return false;
     if (this.telefone.length > 15 || this.cep.length > 9) return false;
-
+ 
     return true;
   }
-
+ 
   // Cadastro e sincronização com o perfil
   async cadastrar() {
+ 
     if (!this.isFormValid()) {
       const toast = await this.toastCtrl.create({
         message: 'Preencha corretamente todos os campos.',
@@ -85,10 +97,12 @@ export class CadastroProfissionalPage {
       await toast.present();
       return;
     }
-
+ 
+    // ✅ Navega para localização
+    await this.router.navigate(['/localizacaoP']);
     // 🧩 1. Buscar cadastros anteriores
     const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
-
+ 
     // 🧩 2. Criar novo profissional
     const novoProfissional = {
       nome: this.nome,
@@ -97,11 +111,11 @@ export class CadastroProfissionalPage {
       telefone: this.telefone,
       cep: this.cep
     };
-
+ 
     // 🧩 3. Salvar na lista geral
     profissionaisSalvos.push(novoProfissional);
     localStorage.setItem('profissionais', JSON.stringify(profissionaisSalvos));
-
+ 
     // 🧠 4. Salvar também no perfil ativo (perfil_profissional)
     const perfilAtivo = {
       nomeUsuario: novoProfissional.nome,
@@ -116,10 +130,10 @@ export class CadastroProfissionalPage {
       fotoUrl: ''
     };
     localStorage.setItem('perfil_profissional', JSON.stringify(perfilAtivo));
-
+ 
     // ✅ 5. Navegar para a tela de perfil do profissional
     await this.router.navigate(['/perfilP']);
-
+ 
     // ✅ 6. Mostrar confirmação
     const toast = await this.toastCtrl.create({
       message: 'Cadastro realizado com sucesso!',
@@ -128,12 +142,16 @@ export class CadastroProfissionalPage {
       cssClass: 'toast-sucesso-customizado'
     });
     await toast.present();
-
+ 
+    // ✅ Limpar campos
     // ✅ 7. Limpar campos
     this.nome = '';
     this.empresa = '';
+    this.email = '';
     this.senha = '';
     this.telefone = '';
     this.cep = '';
   }
 }
+ 
+ 
