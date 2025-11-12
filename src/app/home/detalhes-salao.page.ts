@@ -1,11 +1,25 @@
-// detalhes-salao.page.ts
-
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonButton, IonIcon, IonTabBar, IonTabButton, IonLabel } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonButton,
+  IonIcon,
+  IonTabBar,
+  IonTabButton,
+  IonLabel
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
-import { arrowBack, logoInstagram, logoFacebook, homeOutline, calendarOutline, personOutline, star, starOutline } from 'ionicons/icons';
+import {
+  arrowBack,
+  logoInstagram,
+  logoFacebook,
+  homeOutline,
+  calendarOutline,
+  personOutline,
+  star,
+  starOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-salao-detalhes',
@@ -30,31 +44,44 @@ export class DetalhesSalaoPage {
     { estrelas: 1, quantidade: 1 }
   ];
 
+  // 🌟 Avaliação do usuário
+  selectedRating = 0;
+
   constructor() {
-    addIcons({ 
-      arrowBack, 
-      logoInstagram, 
-      logoFacebook, 
+    addIcons({
+      arrowBack,
+      logoInstagram,
+      logoFacebook,
       homeOutline,
       calendarOutline,
       personOutline,
       star,
       starOutline
     });
+
+    // Carrega a avaliação salva no celular (se existir)
+    const savedRating = localStorage.getItem('userRating');
+    if (savedRating) {
+      this.selectedRating = Number(savedRating);
+    }
   }
 
   voltar() {
     console.log('Voltar');
-    // Implementar navegação: this.navCtrl.back();
   }
 
   abrirServicos() {
     console.log('Abrir serviços');
-    // Implementar navegação para serviços
   }
 
   getProgressWidth(quantidade: number): string {
     const total = this.avaliacoes.reduce((acc, curr) => acc + curr.quantidade, 0);
     return `${(quantidade / total) * 100}%`;
+  }
+
+  // ⭐ Clicar nas estrelas
+  setRating(star: number) {
+    this.selectedRating = star;
+    localStorage.setItem('userRating', String(star));
   }
 }

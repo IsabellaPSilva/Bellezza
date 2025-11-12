@@ -1,12 +1,12 @@
 <ion-content class="ion-padding custom-background">
-
+ 
   <div class="logo-container">
     <img src="assets/teste-bellezza-logo.jpeg" alt="Logo Bellezza" class="logo" />
     <h2 class="title">Cadastro do Profissional</h2>
   </div>
-
+ 
   <form class="form-container">
-
+ 
     <!-- Nome -->
     <ion-item class="input-item">
       <ion-label position="stacked">Nome Completo</ion-label>
@@ -20,7 +20,7 @@
         (ionInput)="onNoNumbers($event, 'nome')">
       </ion-input>
     </ion-item>
-
+ 
     <!-- Nome da Empresa -->
     <ion-item class="input-item">
       <ion-label position="stacked">Nome da Empresa</ion-label>
@@ -33,7 +33,7 @@
         (ionInput)="limitLength($event, 'empresa', 45)">
       </ion-input>
     </ion-item>
-
+ 
     <!-- E-mail -->
     <ion-item class="input-item">
       <ion-label position="stacked">E-mail</ion-label>
@@ -47,7 +47,7 @@
         (ionInput)="limitLength($event, 'email', 60)">
       </ion-input>
     </ion-item>
-
+ 
     <!-- Senha -->
     <ion-item class="input-item">
       <ion-label position="stacked">Senha</ion-label>
@@ -60,7 +60,7 @@
         (ionInput)="limitLength($event, 'senha', 15)">
       </ion-input>
     </ion-item>
-
+ 
     <!-- Telefone -->
     <ion-item class="input-item">
       <ion-label position="stacked">Telefone</ion-label>
@@ -74,7 +74,7 @@
         (ionInput)="numericOnly($event, 'telefone', 14)">
       </ion-input>
     </ion-item>
-
+ 
     <!-- CEP -->
     <ion-item class="input-item">
       <ion-label position="stacked">CEP</ion-label>
@@ -88,13 +88,15 @@
         (ionInput)="numericOnly($event, 'cep', 8)">
       </ion-input>
     </ion-item>
-
+ 
     <!-- Botão -->
     <div style="margin-top: 16px; text-align:center;">
       <ion-button class="btn-cadastrar" (click)="cadastrar()">
         CADASTRAR
       </ion-button>
     </div>
-
+ 
   </form>
 </ion-content>
+ 
+ 
