@@ -1,11 +1,11 @@
 // ============================================
 // VARIÁVEIS
 // ============================================
-$primary-color: #c49bc1;
+$primary-color: #7d8c6a;
 $bg-color: #f5f5f5;
 $text-color: #333;
 $text-light: #666;
-$footer-active: #8b7d8a;
+$footer-active: #6b7a5e;
 $border-color: #e0e0e0;
  
 // Cores das Redes Sociais
@@ -291,7 +291,7 @@ ion-header {
 }
  
 ion-content {
-  --background: #{$bg-color};
+  --background: #ffffff;
 }
  
 // ============================================
@@ -305,7 +305,7 @@ ion-content {
   .salon-image {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #8b7d8a 0%, #c49bc1 100%);
+    background: linear-gradient(135deg, #6b7a5e 0%, #7d8c6a 100%);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -331,8 +331,9 @@ ion-content {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: $primary-color;
-    background-size: cover;
+    background: #ffffff;
+    background-size: 80%;
+    background-repeat: no-repeat;
     background-position: center;
     border: 5px solid white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -345,8 +346,8 @@ ion-content {
     .logo-text {
       font-size: 30px;
       font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      color: #7d8c6a;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
   }
 }
@@ -423,7 +424,7 @@ ion-content {
     text-align: center;
     margin-bottom: 20px;
     padding: 10px;
-    background: #e8d9e7;
+    background: #d9e6d3;
     border-radius: 8px;
  
     p {
@@ -513,13 +514,13 @@ ion-content {
         border-radius: 10px;
        
         &:hover {
-          background: darken($primary-color, 10%);
+          background: #6b7a5e;
         }
       }
  
       .gallery-view-item {
-        flex: 0 0 120px;
-        height: 120px;
+        flex: 0 0 200px;
+        height: 300px;
         border-radius: 10px;
         background-size: cover;
         background-position: center;
@@ -831,7 +832,7 @@ ion-item {
       border-radius: 10px;
      
       &:hover {
-        background: darken($primary-color, 10%);
+        background: #6b7a5e;
       }
     }
    
@@ -937,14 +938,7 @@ ion-item {
     text-transform: none;
   }
 }
-
-/* ⚙️ Rodapé */
-ion-tab-bar {
-  --background: #7d8c6a;
-  --color: white;
-  --color-selected: white;
-}
-
+ 
 .gallery-note {
   display: block;
   text-align: center;
@@ -1177,3 +1171,57 @@ ion-tab-bar {
   }
 }
  
+// ============================================
+// RODAPÉ
+// ============================================
+ 
+/* ===== RODAPÉ VERDE ===== */
+ion-tab-bar {
+  background-color: #7d8c6a !important;
+  border-top: none !important;
+  height: 60px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+ 
+/* ===== BOTÕES DO RODAPÉ ===== */
+ion-tab-button {
+  --background: transparent;
+  --color: #ffffff !important;
+  --color-selected: #2d5a3d !important;
+  color: #ffffff !important;
+  font-weight: 500;
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+ 
+  ion-icon {
+    font-size: 22px;
+    color: #ffffff !important;
+  }
+ 
+  ion-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff !important;
+  }
+ 
+  /* Quando o botão estiver selecionado */
+  &.tab-selected {
+    --background: rgba(252, 250, 250, 0.95);
+    background-color: rgba(252, 250, 250, 0.95) !important;
+    color: #2d5a3d !important;
+    --color-selected: #2d5a3d !important;
+    border-radius: 12px 12px 0 0;
+   
+    ion-icon {
+      color: #2d5a3d !important;
+    }
+   
+    ion-label {
+      color: #2d5a3d !important;
+    }
+  }
+ 
+  &:active {
+    transform: scale(0.96);
+  }
+}

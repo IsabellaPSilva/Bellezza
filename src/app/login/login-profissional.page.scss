@@ -1,0 +1,206 @@
+/* ====== Fundo principal ====== */
+.custom-background {
+  --background: #f2efeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+/* ====== Logo ====== */
+.logo-container {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.title {
+  margin-top: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ====== Formulário ====== */
+.form-container {
+  --background: #7d8c6a;
+  margin-top: 50px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ====== Campos de entrada ====== */
+.input-item {
+  --background: #7d8c6a;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #000;
+  --padding-start: 12px;
+}
+
+.input-item ion-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.input-item ion-input {
+  color: #000;
+}
+
+/* ====== Campo CEP ====== */
+.input-item ion-input[name="cep"] {
+  letter-spacing: 1px;
+}
+
+/* ====== Link: Esqueci minha senha ====== */
+.forgot-password-container {
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+
+.forgot-password-link {
+  color: #7d8c6a;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+  color: #5f6b50;
+}
+
+/* ====== Botão de login ====== */
+.btn-cadastrar {
+  --background: #7d8c6a;
+  --border-radius: 12px;
+  font-weight: bold;
+  color: #fff;
+  width: 60%;
+  margin: 30px auto 0 auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-cadastrar:hover {
+  transform: scale(1.03);
+}
+
+/* ====== Toasts personalizados ====== */
+.toast-erro-customizado,
+.toast-sucesso-customizado {
+  --color: #000;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+}
+
+/* ====== Modais ====== */
+.modal-background {
+  --background: #f2efeb;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.logo-container-modal {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-modal {
+  width: 100px;
+  height: auto;
+  margin: 0 auto 20px auto;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  padding: 0 20px;
+  margin-top: 10px;
+}
+
+.form-container-modal {
+  width: 100%;
+  max-width: 400px;
+}
+
+.btn-modal {
+  --background: #7d8c6a;
+  --border-radius: 12px;
+  font-weight: bold;
+  color: #fff;
+  width: 80%;
+  margin: 20px auto 0 auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.link {
+  color: #7d8c6a;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: #5f6b50;
+}
+
+/* ====== Header dos modais ====== */
+ion-modal {
+  --background: #f2efeb;
+}
+
+ion-toolbar {
+  --background: #7d8c6a;
+  --color: #fff;
+}
+
+ion-title {
+  font-weight: bold;
+}
+
+/* ====== Responsividade ====== */
+@media (max-width: 480px) {
+  .logo {
+    width: 100px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .btn-cadastrar {
+    width: 80%;
+  }
+
+  .form-container {
+    width: 90%;
+  }
+
+  .btn-modal {
+    width: 90%;
+  }
+}

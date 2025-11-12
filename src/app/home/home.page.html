@@ -5,22 +5,48 @@
     <img src="assets/teste-bellezza-logo.jpeg" alt="Logo Bellezza" class="logo" />
   </div>
 
-  <!-- Título -->
   <h2 class="title">Cadastre-se</h2>
 
-  <!-- Botões -->
   <div class="button-group">
     <ion-button expand="block" class="btn-cliente" routerLink="/cadastro-cliente">
       CLIENTE
     </ion-button>
+
     <ion-button expand="block" class="btn-profissional" routerLink="/cadastro-profissional">
       PROFISSIONAL
     </ion-button>
   </div>
 
-  <!-- Link Esqueci minha senha -->
-    <div class="forgot-password-container">
-      <a class="forgot-password-link" routerLink="/login">Já tenho uma conta</a>
-    </div>
+  <!-- ✅ BOTÃO QUE ABRE O MINI CARD -->
+  <div class="forgot-password-container">
+    <a class="forgot-password-link" (click)="mostrarEscolha = true">
+      Já tenho uma conta
+    </a>
+  </div>
+
+  <!-- MINI CARD -->
+<div *ngIf="mostrarEscolha" class="mini-card">
+
+  <!-- Botão X -->
+  <button class="btn-fechar" (click)="mostrarEscolha = false">✕</button>
+
+  <div class="card-title">Entrar como</div>
+
+  <ion-button
+    expand="block"
+    class="option-btn cliente"
+    routerLink="/login">
+    Cliente
+  </ion-button>
+
+  <ion-button
+    expand="block"
+    class="option-btn profissional"
+    routerLink="/login-profissional">
+    Profissional
+  </ion-button>
+
+</div>
+
 
 </ion-content>

@@ -20,6 +20,7 @@
     {path: 'calendarioP', component: CalendarioPPage },
     {path: 'calendario', component: CalendarioPage },
     {path: 'login',loadComponent: () => import('./login/login.page').then(m => m.LoginPage)},
+    {path: 'login-profissional',loadComponent: () => import('./login/login-profissional.page').then(m => m.LoginProfissionalPage)},
     {path: 'home',loadComponent: () => import('./home/home.page').then((m) => m.HomePage),},
     {path: '',redirectTo: 'home',pathMatch: 'full',},
     {path: 'details',loadComponent: () => import('./pages/details/details.page').then((m) => m.DetailsPage),},

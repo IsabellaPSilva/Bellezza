@@ -490,24 +490,24 @@
         {{ salonData.galleryImages.length }}/10 fotos • Máximo 5MB por foto
       </ion-note>
     </div>
- 
+   
   </form>
 </ion-content>
-
+ 
 <!-- Rodapé -->
- <ion-tab-bar slot="bottom">
-  <ion-tab-button routerLink="/calendarioP">
+<ion-tab-bar slot="bottom" class="custom-footer">
+  <ion-tab-button routerLink="/calendarioP" routerDirection="root">
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-
-  <ion-tab-button routerLink="/salao">
+ 
+  <ion-tab-button routerLink="/salao" routerDirection="root">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
-
-  <ion-tab-button routerLink="/reservaP">
+ 
+  <ion-tab-button routerLink="/reservaP" routerDirection="root">
     <ion-icon name="storefront-outline"></ion-icon>
     <ion-label>Salão</ion-label>
   </ion-tab-button>
-  </ion-tab-bar>
+</ion-tab-bar>

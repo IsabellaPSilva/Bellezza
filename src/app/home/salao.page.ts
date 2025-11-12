@@ -1,7 +1,7 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
   IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
@@ -55,7 +55,7 @@ interface PasswordChange {
     FormsModule,
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
     IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-    IonInput, IonTextarea, IonNote, IonLoading, RouterLink
+    IonInput, IonTextarea, IonNote, IonLoading
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

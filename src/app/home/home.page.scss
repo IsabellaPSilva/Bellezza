@@ -6,6 +6,75 @@
   text-align: center;
 }
 
+/* Fundo levemente escurecido */
+.mini-card {
+  position: fixed;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 22px 18px 28px;
+  border-radius: 14px;
+  width: 80%;
+  max-width: 330px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.18);
+  z-index: 999;
+  animation: fadeIn 0.15s ease-in;
+}
+
+/* Botão fechar */
+.btn-fechar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+  color: #444;
+}
+
+/* Título */
+.card-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #333;
+}
+
+/* Botões */
+.option-btn {
+  border-radius: 10px;
+  margin-bottom: 12px;
+  height: 44px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Cores iguais às opções de cadastro */
+.option-btn.cliente {
+  --background: #D598AE;
+  color: #fff;
+}
+
+.option-btn.profissional {
+  --background: #7C8C6F;
+  color: #fff;
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 .logo-container {
   margin-top: 40px;
 }
