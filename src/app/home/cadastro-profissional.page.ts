@@ -61,13 +61,12 @@ export class CadastroProfissionalPage {
     }
   }
 
-<<<<<<<<< Temporary merge branch 1
   // ✅ VALIDAÇÃO DE EMAIL
   validarEmail(email: string): boolean {
     return /\S+@\S+\.\S+/.test(email);
   }
 
-=========
+
   // Validação do formulário
   isFormValid(): boolean {
  
@@ -100,12 +99,10 @@ export class CadastroProfissionalPage {
       return;
     }
 
-<<<<<<<<< Temporary merge branch 1
     // ✅ Navega para localização
     await this.router.navigate(['/localizacaoP']);
     // 🧩 1. Buscar cadastros anteriores
     const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
->>>>>>>>> Temporary merge branch 2
 
     // 🧩 2. Criar novo profissional
     const novoProfissional = {
@@ -147,7 +144,6 @@ export class CadastroProfissionalPage {
     });
     await toast.present();
 
-<<<<<<<<< Temporary merge branch 1
     // ✅ Limpar campos
     // ✅ 7. Limpar campos
     this.nome = '';

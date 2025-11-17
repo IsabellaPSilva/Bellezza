@@ -77,13 +77,14 @@ ion-datetime.calendario {
   font-weight: bold;
 }
  
-/* Footer */
-.footer {
-  --background: #d6a8c4;
-  display: flex;
-  justify-content: space-around;
+
+/* ⚙️ Rodapé */
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
 }
- 
+
 .disponiveis{
     color: #000000;
     text-align: center;
