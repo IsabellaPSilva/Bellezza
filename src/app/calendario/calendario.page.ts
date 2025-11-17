@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.page.html',
@@ -53,28 +53,38 @@ export class CalendarioPage {
       return;
     }
  
+    // Formatar a data para o padrão brasileiro
+    const dataFormatada = this.formatarDataParaExibicao(this.selectedDate);
+ 
     // Cria o objeto da reserva
     const novaReserva = {
+      id: new Date().getTime(), // ID único baseado no timestamp
       servico: 'Combo: Aplique + Unha',
       preco: 'R$ 830,00',
       data: this.selectedDate,
-      horario: this.selectedHorario
+      dataExibicao: dataFormatada,
+      horario: this.selectedHorario,
+      cliente: 'Maria Silva', // Nome fixo para teste
+      status: 'pendente'
     };
  
     // Salva no localStorage
-    const reservas = JSON.parse(localStorage.getItem('reservas') || '[]');
+    const reservas = JSON.parse(localStorage.getItem('reservasP') || '[]');
     reservas.push(novaReserva);
-    localStorage.setItem('reservas', JSON.stringify(reservas));
+    localStorage.setItem('reservasP', JSON.stringify(reservas));
+ 
+    console.log('Reserva salva:', novaReserva);
+    console.log('Todas as reservas:', reservas);
  
     // Mostra alerta de sucesso
     const alert = await this.alertCtrl.create({
       header: 'Reserva concluída',
-      message: `Você reservou para ${this.selectedDate} às ${this.selectedHorario}.`,
+      message: `Você reservou para ${dataFormatada} às ${this.selectedHorario}.`,
       buttons: [
         {
           text: 'OK',
           handler: () => {
-            this.router.navigate(['/agendamento']); // Redireciona para agendamento
+            this.router.navigate(['/agendamento']);
           }
         }
       ]
@@ -82,4 +92,12 @@ export class CalendarioPage {
  
     await alert.present();
   }
-}
+ 
+  private formatarDataParaExibicao(data: string): string {
+    const date = new Date(data);
+    const dia = date.getDate().toString().padStart(2, '0');
+    const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+    const ano = date.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+}  

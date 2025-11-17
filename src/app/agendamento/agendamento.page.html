@@ -1,119 +1,121 @@
 <ion-content class="custom-background">
-
+ 
   <div class="header-container">
     <div class="divider">
       <span class="star">✦</span>
     </div>
   </div>
-
+ 
   <div class="title-row">
     <img src="assets/teste-bellezza-logo.jpeg" alt="Logo" class="logo" />
     <div>
       <p class="agendamento">Agendamento</p>
     </div>
   </div>
-
+ 
   <h1>    </h1>
   <h1>    </h1>
   <h1>    </h1>
-
-  <!-- Agendamento Atual -->
-  <ion-card class="card-agendamento">
-    <ion-card-content>
-      <div class="linha-topo">
-        <strong>Serviço: Manicure</strong>
-        <span class="data">15 JUL</span>
-      </div>
-
-      <p class="nome">Juliana Dias</p>
-      <p class="preco">R$ 00,0</p>
-
-      <div class="acoes">
-        <ion-button class="btn-cancelar" (click)="confirmarCancelamento(1)">Cancelar</ion-button>
-      </div>
-
-      <p class="hora">h 14:00</p>
-    </ion-card-content>
-  </ion-card>
-
+ 
+  <!-- Agendamentos Atuais (Dinâmicos) -->
+  <div *ngFor="let reserva of reservas; let i = index">
+    <ion-card class="card-agendamento">
+      <ion-card-content>
+        <div class="linha-topo">
+          <strong>Serviço: {{ reserva.servico }}</strong>
+          <span class="data">{{ formatarDataResumo(reserva.data) }}</span>
+        </div>
+ 
+        <p class="nome">{{ reserva.cliente }}</p>
+        <p class="preco">{{ reserva.preco }}</p>
+ 
+        <div class="acoes">
+          <ion-button class="btn-cancelar" (click)="confirmarCancelamento(i)">Cancelar</ion-button>
+        </div>
+ 
+        <p class="hora">h {{ reserva.horario }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+ 
   <!-- Reservas Finalizadas -->
   <ion-list class="list">
     <ion-item-divider class="finalizados">
       <ion-label>Reservas Finalizadas</ion-label>
     </ion-item-divider>
-
+ 
     <ion-card class="card-finalizado">
       <ion-card-content>
         <div class="linha-topo">
           <strong>Serviço: Cabelo</strong>
           <span class="data">25 JUL</span>
         </div>
-
+ 
         <p class="nome">Carol Azevedo</p>
         <p class="preco">R$ 40,0</p>
-
+ 
         <div class="acoes">
           <ion-button class="btn-reserve" fill="outline" size="small" (click)="irParaHome()">Reserve Novamente</ion-button>
         </div>
-
+ 
         <p class="hora">h 10:00</p>
       </ion-card-content>
     </ion-card>
-
+ 
     <ion-card class="card-finalizado">
       <ion-card-content>
         <div class="linha-topo">
           <strong>Serviço: Cílios</strong>
           <span class="data">14 ABR</span>
         </div>
-
+ 
         <p class="nome">Lara Souza</p>
         <p class="preco">R$ 35,0</p>
-
+ 
         <div class="acoes">
           <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
         </div>
-
+ 
         <p class="hora">h 15:00</p>
       </ion-card-content>
     </ion-card>
-
+ 
     <ion-card class="card-finalizado">
       <ion-card-content>
         <div class="linha-topo">
           <strong>Serviço: Sobrancelha</strong>
           <span class="data">6 MAR</span>
         </div>
-
+ 
         <p class="nome">Amanda Rocha</p>
         <p class="preco">R$ 50,0</p>
-
+ 
         <div class="acoes">
           <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
         </div>
-
+ 
         <p class="hora">h 14:00</p>
       </ion-card-content>
     </ion-card>
   </ion-list>
-
+ 
   <!-- Espaço extra para não sobrepor o rodapé -->
   <div style="height: 80px;"></div>
-
+ 
 </ion-content>
-
+ 
 <!-- ⚙️ Rodapé fixo -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
     <ion-label>Início</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/agendamento">
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/perfil">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>

@@ -53,9 +53,8 @@ interface PasswordChange {
   imports: [
     CommonModule,
     FormsModule,
-    IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
-    IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-    IonInput, IonTextarea, IonNote, IonLoading
+    IonHeader, IonBackButton, IonButton, IonIcon,IonContent, IonFooter,IonItem,
+    IonInput, IonTextarea, IonNote
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

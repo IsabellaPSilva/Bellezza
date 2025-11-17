@@ -189,6 +189,22 @@ ion-content {
   }
 }
  
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+ 
+  .empty-message {
+    p {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+    }
+  }
+}
+ 
 /* ⚙️ Rodapé */
 ion-tab-bar {
   --background: #d69bb1;

@@ -15,7 +15,7 @@ export class CadastroProfissionalPage {
  
   nome: string = '';
   empresa: string = '';
-  email: string = '';     // ✅ ADICIONADO
+  email: string = '';     
   senha: string = '';
   telefone: string = '';
   cep: string = '';
@@ -60,14 +60,13 @@ export class CadastroProfissionalPage {
       (this as any)[field] = result;
     }
   }
-
-<<<<<<<<< Temporary merge branch 1
+ 
   // ✅ VALIDAÇÃO DE EMAIL
   validarEmail(email: string): boolean {
     return /\S+@\S+\.\S+/.test(email);
   }
-
-=========
+ 
+ 
   // Validação do formulário
   isFormValid(): boolean {
  
@@ -99,14 +98,12 @@ export class CadastroProfissionalPage {
       await toast.present();
       return;
     }
-
-<<<<<<<<< Temporary merge branch 1
+ 
     // ✅ Navega para localização
     await this.router.navigate(['/localizacaoP']);
     // 🧩 1. Buscar cadastros anteriores
     const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
->>>>>>>>> Temporary merge branch 2
-
+ 
     // 🧩 2. Criar novo profissional
     const novoProfissional = {
       nome: this.nome,
@@ -146,8 +143,7 @@ export class CadastroProfissionalPage {
       cssClass: 'toast-sucesso-customizado'
     });
     await toast.present();
-
-<<<<<<<<< Temporary merge branch 1
+ 
     // ✅ Limpar campos
     // ✅ 7. Limpar campos
     this.nome = '';
@@ -158,5 +154,6 @@ export class CadastroProfissionalPage {
     this.cep = '';
   }
 }
+ 
  
  
