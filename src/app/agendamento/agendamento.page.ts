@@ -58,12 +58,38 @@ export class AgendamentosPage implements OnInit {
   irParaReserva() {
     this.router.navigate(['/reserva']);
   }
-
+ 
   irParaHome() {
     this.router.navigate(['/home']);
   }
-
+ 
   irParaPerfil() {
     this.router.navigate(['/perfil']);
+  }
+ 
+  // Adicione esta função na classe AgendamentosPage
+  formatarDataResumo(data: string): string {
+    try {
+      const date = new Date(data);
+      if (isNaN(date.getTime())) {
+        // Se a data já estiver no formato "DD/MM/AAAA", retorna apenas o dia e mês
+        if (data.includes('/')) {
+          const partes = data.split('/');
+          if (partes.length === 3) {
+            const dia = partes[0];
+            const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+            const mes = meses[parseInt(partes[1]) - 1];
+            return `${dia} ${mes}`;
+          }
+        }
+        return 'Data inválida';
+      }
+      const dia = date.getDate();
+      const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+      const mes = meses[date.getMonth()];
+      return `${dia} ${mes}`;
+    } catch (error) {
+      return 'Data inválida';
+    }
   }
 }

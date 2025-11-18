@@ -1,17 +1,20 @@
+<!-- reserva.page.html -->
+ 
 <ion-content [fullscreen]="true">
   <!-- Botão Voltar -->
   <ion-button fill="clear" class="back-button" routerLink="/detalhes-salao">
     <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
   </ion-button>
-
+ 
   <!-- Header com Logo e Título -->
   <div class="header-section">
     <div class="logo-container">
-      <img src="assets/SalãoMãeeFilhas.jpeg" alt="Logo Mãe & Filhas" class="logo">
+      <img  src="assets/SalãoMãeeFilhas.jpeg" alt="Logo Mãe & Filhas" class="logo">
     </div>
-
+   
     <div class="title-info">
       <h1>Salão Mãe & Filhas</h1>
+     
       <div class="action-buttons">
         <button class="action-btn" (click)="compartilhar()">
           <ion-icon name="share-outline"></ion-icon>
@@ -20,10 +23,11 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Seção Combos -->
-  <div class="services-section">
+  <div class="services-section" *ngIf="combos.length > 0">
     <h2 class="section-title">Combos</h2>
+   
     <div class="services-list">
       <div class="service-card" *ngFor="let combo of combos">
         <div class="service-info">
@@ -33,25 +37,17 @@
             <span class="time">{{ combo.tempo }}</span>
           </div>
         </div>
-
-        <div class="service-actions">
-          <button class="btn-reservar" routerLink="/calendario">
-            reservar
-          </button>
-          <!-- 🗑️ Ícone de lixeira -->
-          <ion-icon
-            name="trash-outline"
-            class="delete-icon"
-            (click)="removerServico(combo.id)"
-          ></ion-icon>
-        </div>
+        <button class="btn-reservar" routerLink="/calendario">
+          reservar
+        </button>
       </div>
     </div>
   </div>
-
+ 
   <!-- Seção Cabelo -->
-  <div class="services-section">
+  <div class="services-section" *ngIf="servicosCabelo.length > 0">
     <h2 class="section-title">Cabelo</h2>
+   
     <div class="services-list">
       <div class="service-card" *ngFor="let servico of servicosCabelo">
         <div class="service-info">
@@ -61,35 +57,33 @@
             <span class="time">{{ servico.tempo }}</span>
           </div>
         </div>
-
-        <div class="service-actions">
-          <button class="btn-reservar" (click)="reservar(servico)">
-            reservar
-          </button>
-          <!-- 🗑️ Ícone de lixeira -->
-          <ion-icon
-            name="trash-outline"
-            class="delete-icon"
-            (click)="removerServico(servico.id)"
-          ></ion-icon>
-        </div>
+        <button class="btn-reservar" (click)="reservar(servico)">
+          reservar
+        </button>
       </div>
     </div>
   </div>
+ 
+  <!-- Mensagem quando não há serviços -->
+  <div class="empty-state" *ngIf="combos.length === 0 && servicosCabelo.length === 0">
+    <div class="empty-message">
+      <p>Nenhum serviço disponível no momento.</p>
+    </div>
+  </div>
 </ion-content>
-
+ 
 <!-- ⚙️ Rodapé fixo -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
     <ion-label>Início</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/agendamento">
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/perfil">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>

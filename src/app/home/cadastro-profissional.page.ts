@@ -15,7 +15,7 @@ export class CadastroProfissionalPage {
  
   nome: string = '';
   empresa: string = '';
-  email: string = '';     // ✅ ADICIONADO
+  email: string = '';     
   senha: string = '';
   telefone: string = '';
   cep: string = '';
@@ -65,7 +65,6 @@ export class CadastroProfissionalPage {
   validarEmail(email: string): boolean {
     return /\S+@\S+\.\S+/.test(email);
   }
-
 
   // Validação do formulário
   isFormValid(): boolean {
@@ -154,5 +153,6 @@ export class CadastroProfissionalPage {
     this.cep = '';
   }
 }
+ 
  
  

@@ -57,7 +57,10 @@ interface PasswordChange {
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
     IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
     IonInput, IonTextarea, IonNote, IonLoading, IonTabBar,
-    IonTabButton
+    IonTabButton,
+    IonHeader, IonBackButton, IonButton, IonIcon,IonContent, IonFooter,IonItem,
+    IonInput, IonTextarea, IonNote
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

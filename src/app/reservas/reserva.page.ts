@@ -1,4 +1,3 @@
- 
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton, AlertController } from '@ionic/angular/standalone';
@@ -8,9 +7,19 @@ import {
   arrowBack, shareOutline,
   homeOutline, calendarOutline, personOutline
 } from 'ionicons/icons';
-import { ServicosService, Categoria, Servico } from '../services/servicos.service';
  
+export interface Servico {
+  id: string;
+  nome: string;
+  preco: number;
+  tempo: string;
+}
  
+export interface Categoria {
+  id: string;
+  nome: string;
+  servicos: Servico[];
+}
  
 @Component({
   selector: 'app-reserva',
@@ -26,7 +35,6 @@ export class ReservaPage implements OnInit {
   servicosCabelo: Servico[] = [];
  
   constructor(
-    private servicosService: ServicosService,
     private alertController: AlertController
   ) {
     addIcons({
@@ -39,38 +47,51 @@ export class ReservaPage implements OnInit {
   }
  
   ngOnInit() {
-    // Buscar categorias e serviços do serviço compartilhado
-    this.servicosService.getCategorias().subscribe((categorias: Categoria[]) => {
-      this.categorias = categorias;
-     
-      // Separar combos e cabelo
-      const categoriaCombos = categorias.find(c => c.nome === 'Combos');
-      const categoriaCabelo = categorias.find(c => c.nome === 'Cabelo');
-     
-      this.combos = categoriaCombos ? categoriaCombos.servicos : [];
-      this.servicosCabelo = categoriaCabelo ? categoriaCabelo.servicos : [];
-    });
+    this.carregarServicos();
   }
  
-  // REMOVER SERVIÇO
-  async removerServico(servicoId: number) {
-    const alert = await this.alertController.create({
-      header: 'Remover Serviço',
-      message: 'Tem certeza que deseja excluir este serviço?',
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Remover',
-          handler: () => {
-            this.servicosService.removerServico(servicoId);
-            this.mostrarToast('Serviço removido!');
-          }
-        }
-      ]
-    });
-  await alert.present();
-}
-
+  // CARREGAR SERVIÇOS DO LOCAL STORAGE
+  private carregarServicos() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const dados = localStorage.getItem('categorias-servicos');
+      this.categorias = dados ? JSON.parse(dados) : this.getCategoriasIniciais();
+    } else {
+      this.categorias = this.getCategoriasIniciais();
+    }
+    this.atualizarServicos();
+  }
+ 
+  // ATUALIZAR LISTAS DE SERVIÇOS
+  private atualizarServicos() {
+    const categoriaCombos = this.categorias.find(c => c.nome === 'Combos');
+    const categoriaCabelo = this.categorias.find(c => c.nome === 'Cabelo');
+   
+    this.combos = categoriaCombos ? categoriaCombos.servicos : [];
+    this.servicosCabelo = categoriaCabelo ? categoriaCabelo.servicos : [];
+  }
+ 
+  // CATEGORIAS INICIAIS (MESMAS DO reservaP)
+  private getCategoriasIniciais(): Categoria[] {
+    return [
+      {
+        id: '1',
+        nome: 'Combos',
+        servicos: [
+          { id: '1', nome: 'Combo Completo', preco: 120, tempo: '2h' },
+          { id: '2', nome: 'Combo Básico', preco: 80, tempo: '1h' }
+        ]
+      },
+      {
+        id: '2',
+        nome: 'Cabelo',
+        servicos: [
+          { id: '3', nome: 'Corte', preco: 40, tempo: '30min' },
+          { id: '4', nome: 'Coloração', preco: 60, tempo: '1h' }
+        ]
+      }
+    ];
+  }
+ 
   async compartilhar() {
     if (navigator.share) {
       try {
@@ -125,7 +146,6 @@ export class ReservaPage implements OnInit {
           text: 'Reservar',
           handler: () => {
             this.mostrarToast('Reserva realizada com sucesso!');
-            // Aqui você pode navegar para o calendário ou outra tela
           }
         }
       ]
@@ -148,7 +168,10 @@ export class ReservaPage implements OnInit {
       style: 'currency',
       currency: 'BRL'
     });
-    
+  }
+ 
+  // ATUALIZAR OS SERVIÇOS QUANDO A PÁGINA FOR ABERTA NOVAMENTE
+  ionViewWillEnter() {
+    this.carregarServicos();
   }
 }
- 

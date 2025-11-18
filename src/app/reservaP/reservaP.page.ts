@@ -1,16 +1,28 @@
 // reservaP.page.ts - VERSÃO PROFISSIONAL (Tela 1)
-
+ 
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonIcon, IonLabel, IonTabBar, IonTabButton, AlertController } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { 
+import {
   shareOutline, addCircleOutline,
-  calendarOutline, personOutline, storefrontOutline 
+  calendarOutline, personOutline, storefrontOutline
 } from 'ionicons/icons';
-import { ServicosService, Categoria, Servico } from '../services/servicos.service';
-
+ 
+export interface Servico {
+  id: string;
+  nome: string;
+  preco: number;
+  tempo: string;
+}
+ 
+export interface Categoria {
+  id: string;
+  nome: string;
+  servicos: Servico[];
+}
+ 
 @Component({
   selector: 'app-reserva-p',
   templateUrl: './reservaP.page.html',
@@ -21,26 +33,62 @@ import { ServicosService, Categoria, Servico } from '../services/servicos.servic
 })
 export class ReservaPPage implements OnInit {
   categorias: Categoria[] = [];
-
+ 
   constructor(
-    private alertController: AlertController,
-    private servicosService: ServicosService
+    private alertController: AlertController
   ) {
-    addIcons({ 
+    addIcons({
       shareOutline,
       addCircleOutline,
-      calendarOutline, 
+      calendarOutline,
       personOutline,
       storefrontOutline
     });
   }
-
+ 
   ngOnInit() {
-    this.servicosService.getCategorias().subscribe((categorias: Categoria[]) => {
-      this.categorias = categorias;
-    });
+    this.carregarCategorias();
   }
-
+ 
+  // CARREGAR CATEGORIAS DO LOCAL STORAGE
+  private carregarCategorias() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const dados = localStorage.getItem('categorias-servicos');
+      this.categorias = dados ? JSON.parse(dados) : this.getCategoriasIniciais();
+    } else {
+      this.categorias = this.getCategoriasIniciais();
+    }
+  }
+ 
+  // SALVAR CATEGORIAS NO LOCAL STORAGE
+  private salvarCategorias() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('categorias-servicos', JSON.stringify(this.categorias));
+    }
+  }
+ 
+  // CATEGORIAS INICIAIS
+  private getCategoriasIniciais(): Categoria[] {
+    return [
+      {
+        id: '1',
+        nome: 'Combos',
+        servicos: [
+          { id: '1', nome: 'Combo Completo', preco: 120, tempo: '2h' },
+          { id: '2', nome: 'Combo Básico', preco: 80, tempo: '1h' }
+        ]
+      },
+      {
+        id: '2',
+        nome: 'Cabelo',
+        servicos: [
+          { id: '3', nome: 'Corte', preco: 40, tempo: '30min' },
+          { id: '4', nome: 'Coloração', preco: 60, tempo: '1h' }
+        ]
+      }
+    ];
+  }
+ 
   async compartilhar() {
     if (navigator.share) {
       try {
@@ -58,7 +106,7 @@ export class ReservaPPage implements OnInit {
       this.copiarLink();
     }
   }
-
+ 
   async copiarLink() {
     const link = window.location.href;
     if (navigator.clipboard) {
@@ -75,7 +123,7 @@ export class ReservaPPage implements OnInit {
       }
     }
   }
-
+ 
   // ADICIONAR NOVA CATEGORIA
   async adicionarCategoria() {
     const alert = await this.alertController.create({
@@ -93,7 +141,7 @@ export class ReservaPPage implements OnInit {
           text: 'Adicionar',
           handler: (data) => {
             if (data.nome?.trim()) {
-              this.servicosService.adicionarCategoria(data.nome.trim());
+              this.adicionarCategoriaLocal(data.nome.trim());
               this.mostrarToast('Categoria adicionada!');
               return true;
             }
@@ -104,7 +152,17 @@ export class ReservaPPage implements OnInit {
     });
     await alert.present();
   }
-
+ 
+  private adicionarCategoriaLocal(nome: string) {
+    const novaCategoria: Categoria = {
+      id: Date.now().toString(),
+      nome: nome,
+      servicos: []
+    };
+    this.categorias.push(novaCategoria);
+    this.salvarCategorias();
+  }
+ 
   // ADICIONAR NOVO SERVIÇO
   async adicionarServico(categoria: Categoria) {
     const alert = await this.alertController.create({
@@ -132,7 +190,7 @@ export class ReservaPPage implements OnInit {
           text: 'Adicionar',
           handler: (data) => {
             if (data.nome?.trim()) {
-              this.servicosService.adicionarServico(categoria.id, {
+              this.adicionarServicoLocal(categoria.id, {
                 nome: data.nome.trim(),
                 preco: parseFloat(data.preco) || 0,
                 tempo: data.tempo || '0min'
@@ -147,7 +205,24 @@ export class ReservaPPage implements OnInit {
     });
     await alert.present();
   }
-
+ 
+  private adicionarServicoLocal(categoriaId: string, servico: Omit<Servico, 'id'>) {
+    this.categorias = this.categorias.map(categoria => {
+      if (categoria.id === categoriaId) {
+        const novoServico: Servico = {
+          ...servico,
+          id: Date.now().toString()
+        };
+        return {
+          ...categoria,
+          servicos: [...categoria.servicos, novoServico]
+        };
+      }
+      return categoria;
+    });
+    this.salvarCategorias();
+  }
+ 
   // EDITAR NOME DO SERVIÇO
   async editarServico(servico: Servico) {
     const alert = await this.alertController.create({
@@ -166,7 +241,7 @@ export class ReservaPPage implements OnInit {
           text: 'Salvar',
           handler: (data) => {
             if (data.nome?.trim()) {
-              this.servicosService.atualizarServico(servico.id, { nome: data.nome.trim() });
+              this.atualizarServicoLocal(servico.id, { nome: data.nome.trim() });
               this.mostrarToast('Serviço atualizado!');
               return true;
             }
@@ -177,7 +252,7 @@ export class ReservaPPage implements OnInit {
     });
     await alert.present();
   }
-
+ 
   // EDITAR PREÇO DO SERVIÇO
   async editarPreco(servico: Servico) {
     const alert = await this.alertController.create({
@@ -202,7 +277,7 @@ export class ReservaPPage implements OnInit {
           text: 'Salvar',
           handler: (data) => {
             if (data.preco) {
-              this.servicosService.atualizarServico(servico.id, {
+              this.atualizarServicoLocal(servico.id, {
                 preco: parseFloat(data.preco),
                 tempo: data.tempo || servico.tempo
               });
@@ -216,7 +291,45 @@ export class ReservaPPage implements OnInit {
     });
     await alert.present();
   }
-
+ 
+  private atualizarServicoLocal(servicoId: string, atualizacoes: Partial<Servico>) {
+    this.categorias = this.categorias.map(categoria => ({
+      ...categoria,
+      servicos: categoria.servicos.map(servico =>
+        servico.id === servicoId ? { ...servico, ...atualizacoes } : servico
+      )
+    }));
+    this.salvarCategorias();
+  }
+ 
+  // EXCLUIR SERVIÇO
+  async excluirServico(servico: Servico) {
+    const alert = await this.alertController.create({
+      header: 'Excluir Serviço',
+      message: `Tem certeza que deseja excluir "${servico.nome}"?`,
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Excluir',
+          role: 'destructive',
+          handler: () => {
+            this.excluirServicoLocal(servico.id);
+            this.mostrarToast('Serviço excluído!');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+ 
+  private excluirServicoLocal(servicoId: string) {
+    this.categorias = this.categorias.map(categoria => ({
+      ...categoria,
+      servicos: categoria.servicos.filter(servico => servico.id !== servicoId)
+    }));
+    this.salvarCategorias();
+  }
+ 
   async mostrarToast(mensagem: string) {
     const alert = await this.alertController.create({
       message: mensagem,
@@ -226,12 +339,12 @@ export class ReservaPPage implements OnInit {
     await alert.present();
     setTimeout(() => alert.dismiss(), 2000);
   }
-
+ 
   formatarPreco(preco: number): string {
     if (preco === 0) return 'R$ 0,00';
-    return preco.toLocaleString('pt-BR', { 
-      style: 'currency', 
-      currency: 'BRL' 
+    return preco.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
     });
   }
 }
