@@ -1,0 +1,36 @@
+<!-- selecao-categoria.page.html -->
+
+<ion-content [fullscreen]="true">
+
+
+  <!-- Título -->
+  <div class="header-title">
+    <h1>Selecione a área da estética que você Trabalha!</h1>
+  </div>
+
+  <!-- Grid de Categorias -->
+  <div class="categorias-grid">
+    <div 
+      *ngFor="let categoria of categorias" 
+      class="categoria-card"
+      [class.selecionada]="categoria.selecionada"
+      (click)="toggleCategoria(categoria)">
+      
+      <!-- Ícone -->
+      <div class="icon-container">
+        <ion-icon [name]="categoria.icone"></ion-icon>
+      </div>
+      
+      <!-- Nome -->
+      <p class="categoria-nome">{{ categoria.nome }}</p>
+    </div>
+  </div>
+
+  <!-- Botão Começar -->
+  <div class="botao-container">
+    <ion-button expand="block" class="btn-comecar" (click)="comecar()">
+      COMEÇAR
+    </ion-button>
+  </div>
+
+</ion-content>

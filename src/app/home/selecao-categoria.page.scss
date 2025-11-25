@@ -1,0 +1,150 @@
+// selecao-categoria.page.scss
+
+ion-content {
+  --background: #faf9f7;
+}
+
+.cima {
+  --background: #f2efeb;
+}
+
+.decoracao-topo {
+  margin-top: 20px;
+}
+
+.decoracao-baixo {
+  margin-bottom: 20px;
+}
+
+// Título
+.header-title {
+  text-align: center;
+  margin: 20px 0 30px 0;
+  
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #4a4a4a;
+    line-height: 1.3;
+    margin: 0;
+  }
+}
+
+// Grid de Categorias
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.categoria-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 20px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 120px;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  &.selecionada {
+    background: #9aaa8a;
+    border-color: #9aaa8a;
+    
+    .icon-container {
+      background: white;
+      
+      ion-icon {
+        color: #9aaa8a;
+      }
+    }
+    
+    .categoria-nome {
+      color: white;
+    }
+  }
+}
+
+.icon-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  
+  ion-icon {
+    font-size: 32px;
+    color: #6b6b6b;
+  }
+}
+
+.categoria-nome {
+  text-align: center;
+  font-size: 12px;
+  color: #4a4a4a;
+  margin: 0;
+  line-height: 1.3;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+// Botão
+.botao-container {
+  padding: 0 40px;
+  margin-bottom: 20px;
+}
+
+.btn-comecar {
+  --background: #9aaa8a;
+  --background-hover: #8a9a7a;
+  --background-activated: #7a8a6a;
+  --color: white;
+  --border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  height: 50px;
+  letter-spacing: 1px;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Responsividade
+@media (max-width: 375px) {
+  .categorias-grid {
+    gap: 10px;
+    padding: 0 15px;
+  }
+  
+  .categoria-card {
+    padding: 15px 8px;
+    min-height: 110px;
+  }
+  
+  .icon-container {
+    width: 50px;
+    height: 50px;
+    
+    ion-icon {
+      font-size: 28px;
+    }
+  }
+  
+  .categoria-nome {
+    font-size: 11px;
+  }
+}

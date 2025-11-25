@@ -34,6 +34,7 @@
     {path: 'cadastro-profissional',loadComponent: () => import('./home/cadastro-profissional.page').then((m) => m.CadastroProfissionalPage),},
     {path: 'detalhes-salao', loadComponent: () => import('./home/detalhes-salao.page').then(m => m.DetalhesSalaoPage)},
     {path: 'salao',loadComponent: () => import('./home/salao.page').then(m => m.SalaoPage)},
+    {path: 'selecao-categoria',loadComponent: () => import('./home/selecao-categoria.page').then((m) => m.SelecaoCategoriaPage),},
 ];
  
 @NgModule({
