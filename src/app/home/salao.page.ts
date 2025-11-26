@@ -1,12 +1,12 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
-  IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-  IonInput, IonTextarea, IonNote, IonLoading, AlertController, ToastController, LoadingController, IonTabBar } from '@ionic/angular/standalone';
+  IonHeader, IonBackButton, IonButton, IonIcon,
+  IonContent, IonFooter,IonItem,
+  IonInput, IonTextarea, IonNote, AlertController, ToastController, LoadingController,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   shareOutline, pencilOutline, closeOutline, checkmarkOutline,
@@ -53,10 +53,9 @@ interface PasswordChange {
   imports: [
     CommonModule,
     FormsModule,
-    IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
-    IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-    IonInput, IonTextarea, IonNote, IonLoading, IonTabBar,
-    RouterModule
+    IonHeader, IonBackButton, IonButton, IonIcon,IonContent, IonFooter,IonItem,
+    IonInput, IonTextarea, IonNote
+ 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -85,20 +84,16 @@ export class SalaoPage implements OnInit {
  
   // Dados do Salão
   salonData: SalonData = {
-    name: 'Salão Mãe & Filhas',
-    description: 'Salão de beleza Mãe & Filhas, é um salão família. voltada para o público feminino, com especialidade em cabelos afros.',
-    username: 'Isabella',
-    profession: 'Cabeleireira Profissional',
-    address: 'Rua das Flores, 123 - Centro, São José dos Pinhais - PR',
+    name: '',
+    description: 'Descrição do seu salão. Conte um pouco sobre seus serviços e especialidades.',
+    username: '',
+    profession: '',
+    address: '',
     appointmentNotice: 'Atendimento com hora marcada !!',
     services: [
-      { name: 'Maquiagem', price: '120' },
-      { name: 'Sobrancelha', price: '80' },
-      { name: 'Finalização', price: '150' },
-      { name: 'Manicure', price: '35' },
-      { name: 'Aplique humano', price: '800/1500' },
-      { name: 'Cabelo orgânico', price: '350/500' },  
-      { name: 'Unha em gel', price: '80/150' }
+      { name: 'Corte de Cabelo', price: '50' },
+      { name: 'Coloração', price: '120' },
+      { name: 'Manicure', price: '35' }
     ],
     galleryImages: [],
     socialMedia: {
@@ -149,12 +144,72 @@ export class SalaoPage implements OnInit {
   }
  
   loadSalonData() {
-    console.log('Dados do salão carregados');
+    // 🚨 CARREGAR DADOS DO CADASTRO DO PROFISSIONAL
+    const profissionalLogado = JSON.parse(localStorage.getItem('profissionalLogado') || '{}');
+    const perfilProfissional = JSON.parse(localStorage.getItem('perfil_profissional') || '{}');
+ 
+    console.log('Profissional logado:', profissionalLogado);
+    console.log('Perfil profissional:', perfilProfissional);
+ 
+    // Preencher dados do cadastro
+    if (profissionalLogado.nome) {
+      this.salonData.username = profissionalLogado.nome;
+    }
+   
+    if (profissionalLogado.empresa) {
+      this.salonData.name = profissionalLogado.empresa;
+    }
+ 
+    if (profissionalLogado.telefone) {
+      this.salonData.socialMedia.whatsapp = profissionalLogado.telefone;
+    }
+ 
+    if (profissionalLogado.cep) {
+      this.salonData.address = `CEP: ${profissionalLogado.cep}`;
+    }
+ 
+    // Preencher dados do perfil profissional
+    if (perfilProfissional.nomeUsuario) {
+      this.salonData.username = perfilProfissional.nomeUsuario;
+    }
+   
+    if (perfilProfissional.nomeEmpresa) {
+      this.salonData.name = perfilProfissional.nomeEmpresa;
+    }
+ 
+    if (perfilProfissional.profissao) {
+      this.salonData.profession = perfilProfissional.profissao;
+    }
+ 
+    if (perfilProfissional.endereco) {
+      this.salonData.address = perfilProfissional.endereco;
+    }
+ 
+    if (perfilProfissional.descricao) {
+      this.salonData.description = perfilProfissional.descricao;
+    }
+ 
+    // 🚨 CARREGAR SERVIÇOS DO LOCALSTORAGE
+    if (perfilProfissional.servicos && perfilProfissional.servicos.length > 0) {
+      this.salonData.services = perfilProfissional.servicos;
+    }
+ 
+    // Se não tiver nome da empresa, usar o nome do usuário
+    if (!this.salonData.name && this.salonData.username) {
+      this.salonData.name = `Salão ${this.salonData.username}`;
+    }
+ 
+    // Se não tiver descrição, criar uma padrão baseada nos dados
+    if (!this.salonData.description || this.salonData.description === 'Descrição do seu salão. Conte um pouco sobre seus serviços e especialidades.') {
+      this.salonData.description = `Salão ${this.salonData.username || 'do Profissional'}. Especializado em serviços de beleza e bem-estar.`;
+    }
+ 
+    console.log('Dados do salão carregados:', this.salonData);
   }
  
   get salonInitials(): string {
     if (!this.salonData.name) {
-      return 'M&F';
+      return 'SP'; // Salão Profissional
     }
  
     return this.salonData.name
@@ -303,6 +358,53 @@ export class SalaoPage implements OnInit {
       this.salonData.services.splice(index, 1);
       await this.showToast('Serviço removido', 'medium');
     }
+  }
+ 
+  // ============================================
+  // REMOVER SERVIÇO NO MODO VISUALIZAÇÃO
+  // ============================================
+  async removeServiceView(index: number) {
+    const serviceName = this.salonData.services[index].name || 'este serviço';
+    const alert = await this.alertController.create({
+      header: 'Remover serviço',
+      message: `Deseja remover "${serviceName}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'alert-cancel'
+        },
+        {
+          text: 'Remover',
+          role: 'destructive',
+          cssClass: 'alert-remove'
+        }
+      ]
+    });
+ 
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    if (role === 'destructive') {
+      this.salonData.services.splice(index, 1);
+     
+      // 🚨 ATUALIZAR NO LOCALSTORAGE TAMBÉM
+      this.atualizarServicosNoLocalStorage();
+     
+      await this.showToast('Serviço removido', 'medium');
+    }
+  }
+ 
+  // 🚨 ATUALIZAR SERVIÇOS NO LOCALSTORAGE
+  private atualizarServicosNoLocalStorage() {
+    const perfilAtual = JSON.parse(localStorage.getItem('perfil_profissional') || '{}');
+   
+    // Atualizar serviços no perfil
+    perfilAtual.servicos = this.salonData.services;
+   
+    // Salvar no localStorage
+    localStorage.setItem('perfil_profissional', JSON.stringify(perfilAtual));
+ 
+    console.log('Serviços atualizados no localStorage:', perfilAtual.servicos);
   }
  
   // ============================================
@@ -459,6 +561,9 @@ export class SalaoPage implements OnInit {
       this.originalHeaderImage = this.headerImage;
       this.originalLogoImage = this.logoImage;
  
+      // 🚨 SALVAR ALTERAÇÕES NO PERFIL DO PROFISSIONAL
+      this.salvarNoPerfilProfissional();
+ 
       this.isEditMode = false;
       await this.showToast('Alterações salvas com sucesso!', 'success');
       console.log('Salvamento concluído!');
@@ -473,6 +578,24 @@ export class SalaoPage implements OnInit {
       }
       this.isLoading = false;
     }
+  }
+ 
+  // 🚨 MÉTODO PARA SALVAR NO PERFIL DO PROFISSIONAL
+  private salvarNoPerfilProfissional() {
+    const perfilAtual = JSON.parse(localStorage.getItem('perfil_profissional') || '{}');
+   
+    // Atualizar dados do perfil com as alterações
+    perfilAtual.nomeUsuario = this.salonData.username;
+    perfilAtual.nomeEmpresa = this.salonData.name;
+    perfilAtual.profissao = this.salonData.profession;
+    perfilAtual.endereco = this.salonData.address;
+    perfilAtual.descricao = this.salonData.description;
+    perfilAtual.servicos = this.salonData.services; // 🚨 SALVAR SERVIÇOS TAMBÉM
+ 
+    // Salvar no localStorage
+    localStorage.setItem('perfil_profissional', JSON.stringify(perfilAtual));
+ 
+    console.log('Perfil profissional atualizado:', perfilAtual);
   }
  
   // ============================================
@@ -495,8 +618,19 @@ export class SalaoPage implements OnInit {
   }
  
   validatePassword(): boolean {
+    // 🚨 VERIFICAR SE A SENHA ATUAL ESTÁ CORRETA
+    const profissionalLogado = JSON.parse(localStorage.getItem('profissionalLogado') || '{}');
+    const perfilProfissional = JSON.parse(localStorage.getItem('perfil_profissional') || '{}');
+ 
     if (!this.passwordChange.currentPassword) {
       this.showToast('Digite a senha atual', 'warning');
+      return false;
+    }
+ 
+    // 🚨 VALIDAR SE A SENHA ATUAL CONFERE COM O CADASTRO
+    if (this.passwordChange.currentPassword !== profissionalLogado.senha &&
+        this.passwordChange.currentPassword !== perfilProfissional.senha) {
+      this.showToast('Senha atual incorreta', 'warning');
       return false;
     }
  
@@ -562,15 +696,15 @@ export class SalaoPage implements OnInit {
       // Simulando requisição - substitua pela sua chamada real de API
       await new Promise((resolve) => setTimeout(resolve, 1500));
  
-      // Aqui você faria a validação da senha atual e alteração no backend
-      // Exemplo: await this.authService.changePassword(this.passwordChange);
+      // 🚨 ATUALIZAR SENHA NO LOCALSTORAGE
+      this.atualizarSenhaNoCadastro();
  
       this.resetPasswordFields();
       await this.showToast('Senha alterada com sucesso!', 'success');
       console.log('Senha alterada com sucesso!');
     } catch (error) {
       console.error('Erro ao alterar senha:', error);
-      await this.showToast('Erro ao alterar senha. Verifique a senha atual.', 'danger');
+      await this.showToast('Erro ao alterar senha. Tente novamente.', 'danger');
     } finally {
       try {
         await loading.dismiss();
@@ -578,6 +712,33 @@ export class SalaoPage implements OnInit {
         // se já foi dismiss, ignora
       }
     }
+  }
+ 
+  // 🚨 MÉTODO PARA ATUALIZAR SENHA NO CADASTRO
+  private atualizarSenhaNoCadastro() {
+    const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
+    const profissionalLogado = JSON.parse(localStorage.getItem('profissionalLogado') || '{}');
+    const perfilProfissional = JSON.parse(localStorage.getItem('perfil_profissional') || '{}');
+ 
+    // Encontrar e atualizar a senha na lista de profissionais
+    const index = profissionaisSalvos.findIndex((prof: any) =>
+      prof.email === profissionalLogado.email && prof.cep === profissionalLogado.cep
+    );
+ 
+    if (index !== -1) {
+      profissionaisSalvos[index].senha = this.passwordChange.newPassword;
+      localStorage.setItem('profissionais', JSON.stringify(profissionaisSalvos));
+    }
+ 
+    // Atualizar também no profissional logado
+    profissionalLogado.senha = this.passwordChange.newPassword;
+    localStorage.setItem('profissionalLogado', JSON.stringify(profissionalLogado));
+ 
+    // Atualizar no perfil profissional
+    perfilProfissional.senha = this.passwordChange.newPassword;
+    localStorage.setItem('perfil_profissional', JSON.stringify(perfilProfissional));
+ 
+    console.log('Senha atualizada em todos os locais');
   }
  
   // ============================================

@@ -88,12 +88,48 @@
         <p><strong>{{ salonData.appointmentNotice }}</strong></p>
       </div>
  
-      <ul class="services-list">
-        <li *ngFor="let service of salonData.services">
-          <span class="service-name">{{ service.name }}</span>
-          <span class="service-price">R$ {{ service.price }}</span>
-        </li>
-      </ul>
+      <!-- SERVIÇOS NO MODO VISUALIZAÇÃO COM BOTÃO DE LIXO -->
+      <div class="services-section">
+        <div class="services-header">
+          <h3 class="services-title">Serviços</h3>
+          <ion-button
+            size="small"
+            fill="clear"
+            color="primary"
+            (click)="enableEditMode()"
+            class="edit-services-btn">
+            <ion-icon name="pencil-outline" slot="start"></ion-icon>
+            Editar
+          </ion-button>
+        </div>
+       
+        <ul class="services-list">
+          <li *ngFor="let service of salonData.services; let i = index" class="service-list-item">
+            <div class="service-content">
+              <span class="service-name">{{ service.name }}</span>
+              <span class="service-price">R$ {{ service.price }}</span>
+            </div>
+            <!-- BOTÃO DE LIXO NA VISUALIZAÇÃO -->
+            <ion-button
+              fill="clear"
+              color="danger"
+              size="small"
+              class="remove-service-view-btn"
+              (click)="removeServiceView(i)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </li>
+        </ul>
+ 
+        <div class="no-services" *ngIf="salonData.services.length === 0">
+          <ion-icon name="cut-outline"></ion-icon>
+          <p>Nenhum serviço cadastrado</p>
+          <ion-button size="small" (click)="enableEditMode()">
+            <ion-icon name="add" slot="start"></ion-icon>
+            Adicionar Serviços
+          </ion-button>
+        </div>
+      </div>
     </div>
  
     <!-- GALERIA - MODO VISUALIZAÇÃO -->
@@ -268,7 +304,7 @@
             maxlength="50"
             autocomplete="current-password">
           </ion-input>
-          <ion-note slot="helper">Obrigatório para alterar a senha</ion-note>
+          <ion-note slot="helper">Digite a senha que você usa para fazer login</ion-note>
         </ion-item>
  
         <ion-item>
@@ -378,7 +414,7 @@
         <h2 class="section-title">Serviços</h2>
         <ion-button size="small" (click)="addService()">
           <ion-icon name="add" slot="start"></ion-icon>
-          Adicionar
+          ADICIONAR
         </ion-button>
       </div>
  
@@ -407,6 +443,7 @@
             </ion-item>
           </div>
  
+          <!-- BOTÃO DE LIXO PARA REMOVER SERVIÇO -->
           <ion-button
             fill="clear"
             color="danger"
@@ -494,17 +531,18 @@
   </form>
 </ion-content>
  
+<!-- Rodapé -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/calendarioP">
     <ion-icon name="calendar-outline"></ion-icon>
     <ion-label>Agendamentos</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/salao">
     <ion-icon name="person-outline"></ion-icon>
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
-
+ 
   <ion-tab-button routerLink="/reservaP">
     <ion-icon name="storefront-outline"></ion-icon>
     <ion-label>Salão</ion-label>

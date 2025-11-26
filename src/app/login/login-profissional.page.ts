@@ -62,9 +62,37 @@ export class LoginProfissionalPage {
       return;
     }
 
+    // 🚨 VERIFICAR SE O PROFISSIONAL ESTÁ CADASTRADO
+    const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
+    
+    // Remover o hífen do CEP para comparação
+    const cepNumerico = this.cep.replace('-', '');
+    
+    // Buscar profissional com email, senha e CEP correspondentes
+    const profissionalEncontrado = profissionaisSalvos.find((prof: any) => 
+      prof.email === this.email && 
+      prof.senha === this.senha && 
+      prof.cep === cepNumerico
+    );
+
+    if (!profissionalEncontrado) {
+      await this.showToast('Email, senha ou CEP incorretos. Verifique seus dados.', true);
+      return;
+    }
+
+    // ✅ Login bem-sucedido
     await this.showToast('Login realizado com sucesso!');
-    setTimeout(() => this.router.navigate(['/home']), 1000);
-    this.email = this.senha = this.cep = '';
+    
+    // Salvar informações do profissional logado
+    localStorage.setItem('profissionalLogado', JSON.stringify(profissionalEncontrado));
+    
+    // Navegar para a home
+    setTimeout(() => this.router.navigate(['/localizacaoP']), 1000);
+    
+    // Limpar campos
+    this.email = '';
+    this.senha = '';
+    this.cep = '';
   }
 
   abrirRecuperarSenha() {
@@ -78,6 +106,14 @@ export class LoginProfissionalPage {
     const basicEmail = /\S+@\S+\.\S+/;
     if (!basicEmail.test(this.emailRecuperar)) {
       return this.showToast('Digite um email válido.', true);
+    }
+
+    // 🚨 VERIFICAR SE O EMAIL EXISTE NO CADASTRO
+    const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
+    const emailExiste = profissionaisSalvos.some((prof: any) => prof.email === this.emailRecuperar);
+
+    if (!emailExiste) {
+      return this.showToast('Email não encontrado. Verifique se está cadastrado.', true);
     }
 
     await this.showToast('Código enviado para seu email!');
@@ -101,8 +137,26 @@ export class LoginProfissionalPage {
     if (this.novaSenha !== this.confirmarSenha)
       return this.showToast('As senhas não coincidem.', true);
 
-    await this.showToast('Senha alterada com sucesso!');
-    setTimeout(() => this.fecharAlterarSenha(), 1500);
+    // 🚨 ATUALIZAR SENHA NO LOCALSTORAGE
+    const profissionaisSalvos = JSON.parse(localStorage.getItem('profissionais') || '[]');
+    const profissionalIndex = profissionaisSalvos.findIndex((prof: any) => prof.email === this.emailRecuperar);
+
+    if (profissionalIndex !== -1) {
+      // Atualizar a senha do profissional
+      profissionaisSalvos[profissionalIndex].senha = this.novaSenha;
+      localStorage.setItem('profissionais', JSON.stringify(profissionaisSalvos));
+      
+      await this.showToast('Senha alterada com sucesso!');
+      setTimeout(() => this.fecharAlterarSenha(), 1500);
+      
+      // Limpar campos
+      this.emailRecuperar = '';
+      this.codigo = '';
+      this.novaSenha = '';
+      this.confirmarSenha = '';
+    } else {
+      await this.showToast('Erro ao alterar senha. Tente novamente.', true);
+    }
   }
 
   private async showToast(message: string, erro = false) {

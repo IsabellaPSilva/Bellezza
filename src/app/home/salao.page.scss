@@ -437,46 +437,149 @@ ion-content {
       }
     }
   }
- 
-  .services-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
- 
-    li {
-      padding: 12px 0;
-      font-size: 14px;
+}
+
+// ============================================
+// SERVIÇOS NO MODO VISUALIZAÇÃO
+// ============================================
+.services-section {
+  margin-top: 25px;
+  padding: 20px 0 0;
+  
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
+    
+    .services-title {
+      font-size: 18px;
+      font-weight: 600;
       color: $text-color;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #f0f0f0;
-      position: relative;
-      padding-left: 20px;
- 
-      &:last-child {
-        border-bottom: none;
-      }
- 
-      .service-name {
-        font-weight: 500;
-       
-        &::before {
-          content: "•";
-          position: absolute;
-          left: 0;
-          color: $primary-color;
-          font-size: 18px;
-          line-height: 1.2;
-        }
-      }
- 
-      .service-price {
-        font-weight: 600;
-        color: $primary-color;
+      margin: 0;
+    }
+    
+    .edit-services-btn {
+      --padding-start: 12px;
+      --padding-end: 12px;
+      height: 32px;
+      font-size: 13px;
+      font-weight: 500;
+      
+      ion-icon {
+        font-size: 16px;
+        margin-right: 4px;
       }
     }
   }
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-list-item {
+  padding: 14px 0;
+  font-size: 14px;
+  color: $text-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  padding-left: 20px;
+  transition: background-color 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding-left: 20px;
+    margin: 0 5px;
+  }
+
+  .service-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .service-name {
+      font-weight: 500;
+     
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 8px;
+        color: $primary-color;
+        font-size: 18px;
+        line-height: 1.2;
+      }
+    }
+
+    .service-price {
+      font-weight: 600;
+      color: $primary-color;
+      margin-right: 10px;
+    }
+  }
+
+  .remove-service-view-btn {
+    --padding-start: 6px;
+    --padding-end: 6px;
+    height: 32px;
+    min-width: 32px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.no-services {
+  text-align: center;
+  padding: 40px 20px;
+  color: $text-light;
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 2px dashed $border-color;
+
+  ion-icon {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  ion-button {
+    text-transform: none;
+    font-weight: 500;
+  }
+}
+
+// Estilos para o alerta de confirmação
+.alert-remove {
+  color: #ff3b30 !important;
+}
+
+.alert-cancel {
+  color: $primary-color !important;
 }
  
 // GALERIA - MODO VISUALIZAÇÃO
@@ -1012,14 +1115,26 @@ ion-item {
       margin-left: auto;
       margin-right: auto;
     }
- 
+  }
+
+  .services-section {
+    max-width: 600px;
+    margin: 25px auto 0;
+    
     .services-list {
-      max-width: 500px;
-      margin: 0 auto;
- 
-      li {
-        font-size: 15px;
-        padding: 10px 0;
+      background: white;
+      border-radius: 12px;
+      padding: 0 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .service-list-item {
+      padding: 16px 0;
+      margin: 0;
+      
+      &:hover {
+        margin: 0;
+        padding-left: 20px;
       }
     }
   }
@@ -1064,6 +1179,41 @@ ion-item {
   }
 }
  
+@media (max-width: 480px) {
+  .service-list-item {
+    padding: 12px 0;
+    
+    .service-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      
+      .service-price {
+        margin-right: 0;
+        align-self: flex-end;
+      }
+    }
+    
+    .remove-service-view-btn {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+      background-color: #000000;
+    }
+  }
+  
+  .services-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    
+    .edit-services-btn {
+      align-self: flex-end;
+    }
+  }
+}
+
 @media (max-width: 360px) {
   .salon-header {
     height: 250px;
@@ -1098,10 +1248,6 @@ ion-item {
  
     .salon-address {
       font-size: 11px;
-    }
- 
-    .services-list li {
-      font-size: 13px;
     }
   }
  
@@ -1203,7 +1349,7 @@ ion-tab-button {
     font-weight: 500;
     color: #ffffff !important;
   }
- 
+
   /* Quando o botão estiver selecionado */
   &.tab-selected {
     --background: rgba(252, 250, 250, 0.95);
@@ -1223,5 +1369,44 @@ ion-tab-button {
  
   &:active {
     transform: scale(0.96);
+  }
+} 
+
+.account-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 10px 10px 10px;
+}
+
+/* Botão Sair — cor padrão verde do app */
+.logout-btn {
+  --background: #7d8c6a !important;
+  --box-shadow: none;
+  color: #1f1d1d  !important;
+  border-radius: 10px;
+  font-weight: 600;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 44px;
+}
+
+/* Botão Excluir — usei tom levemente avermelhado para indicar ação destrutiva,
+   se preferir ambos totalmente verdes, troque a cor abaixo para $primary-color */
+.delete-account-btn {
+  --background: #7d8c6a !important; /* vermelho para deixar claro que é destrutivo */
+  color: #1f1d1d !important;
+  border-radius: 10px;
+  font-weight: 600;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 44px;
+}
+
+/* Pequena proteção para telas muito pequenas */
+@media (max-width: 360px) {
+  .account-actions {
+    padding: 0 6px 6px 6px;
   }
 }

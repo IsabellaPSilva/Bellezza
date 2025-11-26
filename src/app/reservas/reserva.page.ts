@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton, AlertController } from '@ionic/angular/standalone';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import {
   arrowBack, shareOutline,
@@ -26,7 +26,7 @@ export interface Categoria {
   templateUrl: './reserva.page.html',
   styleUrls: ['./reserva.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton, RouterModule],
+  imports: [CommonModule, IonContent, IonButton, IonIcon, IonLabel, IonTabBar, IonTabButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ReservaPage implements OnInit {
@@ -35,7 +35,8 @@ export class ReservaPage implements OnInit {
   servicosCabelo: Servico[] = [];
  
   constructor(
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {
     addIcons({
       arrowBack,
@@ -70,14 +71,14 @@ export class ReservaPage implements OnInit {
     this.servicosCabelo = categoriaCabelo ? categoriaCabelo.servicos : [];
   }
  
-  // CATEGORIAS INICIAIS (MESMAS DO reservaP)
+  // CATEGORIAS INICIAIS - MODIFICADO PARA INCLUIR "MATHEUS FAÇO COMPLETO"
   private getCategoriasIniciais(): Categoria[] {
     return [
       {
         id: '1',
         nome: 'Combos',
         servicos: [
-          { id: '1', nome: 'Combo Completo', preco: 120, tempo: '2h' },
+          { id: '1', nome: 'Matheus faço completo', preco: 10.00, tempo: '24hr' },
           { id: '2', nome: 'Combo Básico', preco: 80, tempo: '1h' }
         ]
       },
@@ -90,6 +91,19 @@ export class ReservaPage implements OnInit {
         ]
       }
     ];
+  }
+ 
+  // MÉTODO PARA RESERVAR SERVIÇO
+  reservarServico(servico: Servico) {
+    console.log('🔄 Salvando serviço no localStorage:', servico);
+   
+    // Salva o serviço selecionado no localStorage
+    localStorage.setItem('servicoSelecionado', JSON.stringify(servico));
+   
+    console.log('✅ Serviço salvo no localStorage:', servico.nome);
+   
+    // Navega para a página do calendário
+    this.router.navigate(['/calendario']);
   }
  
   async compartilhar() {
@@ -129,26 +143,6 @@ export class ReservaPage implements OnInit {
       header: 'Compartilhar',
       message: `Copie o link:\n\n${link}`,
       buttons: ['OK']
-    });
-    await alert.present();
-  }
- 
-  async reservar(servico: Servico) {
-    const alert = await this.alertController.create({
-      header: 'Confirmar Reserva',
-      message: `Deseja reservar: ${servico.nome}?\nValor: ${this.formatarPreco(servico.preco)}`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Reservar',
-          handler: () => {
-            this.mostrarToast('Reserva realizada com sucesso!');
-          }
-        }
-      ]
     });
     await alert.present();
   }
