@@ -43,7 +43,24 @@ ion-button.aceitar {
   --background-activated: #2f9e44;
 }
  
-/* Container dos botões */
+/* Botão Lixeira */
+ion-button.lixeira {
+  --background: #ff6b6b;
+  --color: #ffffff;
+  --border-radius: 8px;
+  --background-hover: #ff5252;
+  --background-activated: #ff0000;
+  margin: 15px;
+}
+ 
+/* Container dos botões superiores */
+.botoes-superiores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+/* Container dos botões de ação */
 .botoes-acao {
   display: flex;
   justify-content: space-between;

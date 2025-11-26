@@ -146,3 +146,49 @@ ion-tab-button {
  
  
 }
+.resumo-servicos {
+  margin: 20px 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+ 
+  h3 {
+    margin: 0 0 12px 0;
+    color: #333;
+    font-size: 16px;
+  }
+}
+ 
+.servico-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+}
+ 
+.servico-nome {
+  color: #555;
+}
+ 
+.servico-preco {
+  color: #3880ff;
+  font-weight: 500;
+}
+ 
+.total-adicional {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+  color: #2dd36f;
+  text-align: center;
+}
+ 
+ion-tab-bar ion-icon {
+  color: #ffffff !important;
+}
+ 
+ion-tab-bar ion-label {
+  color: #ffffff !important;
+}

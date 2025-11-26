@@ -14,18 +14,25 @@
     </ion-card-content>
   </ion-card>
  
-  <!-- Botão adicionar -->
-  <ion-button class="horario" expand="block" color="medium" (click)="adicionarHorario()">
-    <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-    Adicionar horário de serviço
-  </ion-button>
+  <!-- Botões de ação -->
+  <div class="botoes-superiores">
+    <ion-button class="horario" expand="block" color="medium" (click)="adicionarHorario()">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Adicionar horário de serviço
+    </ion-button>
+   
+    <ion-button class="lixeira" expand="block" color="danger" (click)="confirmarLimparHistorico()" [disabled]="reservas.length === 0">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Limpar histórico
+    </ion-button>
+  </div>
  
   <!-- Cards de agendamento dinâmicos -->
   <div *ngFor="let reserva of reservas; trackBy: trackByReservaId">
     <ion-card>
       <ion-card-content class="fundo">
         <h2>{{ reserva.cliente }}</h2>
-        <p><b>{{ reserva.preco }}</b></p>
+        <p><b>R${{ reserva.preco }}</b></p>
         <p>Serviço: {{ reserva.servico }}</p>
         <p>Data: {{ reserva.dataExibicao || reserva.data }}</p>
         <p>Horário: {{ reserva.horario }}</p>
@@ -60,7 +67,7 @@
     <ion-card>
       <ion-card-content>
         <p>Nenhuma reserva encontrada.</p>
-        <p>Faça uma reserva na página de calendário primeiro.</p>
+       
       </ion-card-content>
     </ion-card>
   </div>
@@ -69,18 +76,3 @@
  
 <!-- Rodapé -->
 <ion-tab-bar slot="bottom">
-  <ion-tab-button routerLink="/calendarioP">
-    <ion-icon name="calendar-outline"></ion-icon>
-    <ion-label>Agendamentos</ion-label>
-  </ion-tab-button>
- 
-  <ion-tab-button routerLink="/salao">
-    <ion-icon name="person-outline"></ion-icon>
-    <ion-label>Perfil</ion-label>
-  </ion-tab-button>
- 
-  <ion-tab-button routerLink="/reservaP">
-    <ion-icon name="storefront-outline"></ion-icon>
-    <ion-label>Salão</ion-label>
-  </ion-tab-button>
-</ion-tab-bar>

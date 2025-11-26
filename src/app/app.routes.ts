@@ -5,7 +5,7 @@
   import { ReservaPage } from './reservas/reserva.page';
   import { ReservaPPage } from './reservaP/reservaP.page';
   import { CalendarioPPage } from './calendarioP/calendarioP.page';
-  import { CalendarioPage } from './calendario/calendario.page';
+  import { CalendarioPage } from './agendamento/calendario/calendario.page';
   import { ServicosPage } from './servicos/servicos.page';
   import { NgModule } from '@angular/core';
   import { RouterModule } from '@angular/router';

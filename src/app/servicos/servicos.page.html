@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/calendario"></ion-back-button>
     </ion-buttons>
-    <ion-title>Adicionar serviço</ion-title>
+    <ion-title>Serviços Adicionais</ion-title>
   </ion-toolbar>
 </ion-header>
  
@@ -23,19 +23,44 @@
   </div>
  
   <!-- Lista de serviços -->
-  <div *ngFor="let service of filtered" class="service-card">
+  <div *ngFor="let service of filtered" class="service-card" (click)="toggleServico(service)">
     <div class="left">
       <div class="name">{{ service.name }}</div>
     </div>
  
     <div class="right">
-      <div class="price">R$: {{ service.price | number: '1.2-2' }}</div>
+      <div class="price">R$ {{ service.price | number: '1.2-2' }}</div>
       <div class="time">{{ service.time }}</div>
     </div>
  
-    <ion-checkbox class="quadrado">
-     
+    <ion-checkbox
+      class="quadrado"
+      [checked]="service.selected"
+      (ionChange)="toggleServico(service)">
     </ion-checkbox>
+  </div>
+ 
+  <!-- Resumo -->
+  <div *ngIf="servicosSelecionados.length > 0" class="resumo-servicos">
+    <h3>Serviços Selecionados:</h3>
+    <div *ngFor="let servico of servicosSelecionados" class="servico-item">
+      <span class="servico-nome">{{ servico.name }}</span>
+      <span class="servico-preco">R$ {{ servico.price | number: '1.2-2' }}</span>
+    </div>
+   
+    <div class="total-adicional">
+      <strong>Total adicional: R$ {{ calcularTotalAdicional() | number: '1.2-2' }}</strong>
+    </div>
+ 
+    <div class="total-geral">
+      <strong>Total geral: R$ {{ calcularTotalGeral() | number: '1.2-2' }}</strong>
+    </div>
+ 
+    <!-- Botão para limpar seleções -->
+    <ion-button expand="block" fill="clear" size="small" (click)="limparSelecoes()">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Limpar Todos
+    </ion-button>
   </div>
  
   <!-- Botões -->
@@ -44,26 +69,3 @@
     <ion-button (click)="onConfirmar()">Confirmar</ion-button>
   </div>
 </ion-content>
- 
-<!-- Barra inferior -->
-<ion-footer>
-  <ion-toolbar class="footer">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button>
-        <ion-icon name="home-outline"></ion-icon>
-        <ion-label>Início</ion-label>
-      </ion-tab-button>
- 
-      <ion-tab-button>
-        <ion-icon name="calendar-outline"></ion-icon>
-        <ion-label>Agendamentos</ion-label>
-      </ion-tab-button>
- 
-      <ion-tab-button>
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-toolbar>
-</ion-footer>
- 

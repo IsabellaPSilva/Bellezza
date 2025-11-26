@@ -1,0 +1,130 @@
+.fundo {
+  --background: #f9f6f5;
+  font-family: Arial, sans-serif;
+}
+/* Logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.logo img {
+  width: 70px;
+  height: auto;
+}
+/* Calendário */
+.card-calendario {
+  margin: 0 15px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+ion-datetime.calendario {
+  --background: transparent;
+  --color: #222;
+  --placeholder-color: #aaa;
+  width: 100%;
+  font-weight: bold;
+}
+/* Container de horários */
+.horarios-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.horario-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 80px;
+}
+.horarios-container ion-button {
+  border-radius: 10px;
+  min-width: 80px;
+  font-weight: bold;
+  transition: 0.3s;
+  flex: 1;
+  width: 100%;
+  --background: #e6c7d9;
+  --color: #222;
+  --background-hover: #d6b7c9;
+&.horario-disponivel {
+    --background: #b884aa;
+    --color: #fff;
+    --background-hover: #a8749a;
+  }
+&.horario-indisponivel {
+    --background: #cccccc;
+    --color: #666666;
+    --background-hover: #bbbbbb;
+  }
+&:disabled {
+    --background: #cccccc;
+    --color: #666666;
+    opacity: 0.7;
+  }
+}
+.horario-status {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #2b8a3e;
+  font-weight: 500;
+&.status-indisponivel {
+    color: #c92a2a;
+  }
+}
+.sem-horarios {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  ion-card {
+    background: #f8f9fa;
+    margin: 0 15px;
+  }
+}
+.card-servico {
+  margin: 0 15px 20px;
+  border-radius: 12px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.add-servico {
+  margin-top: 10px;
+  color: #222;
+  font-weight: bold;
+  font-size: 14px;
+}
+.btn-reservar {
+  margin: 0 15px 20px;
+  --background: #d6a8c4;
+  --color: #fff;
+  border-radius: 12px;
+  font-weight: bold;
+&:disabled {
+    --background: #cccccc;
+    --color: #666666;
+  }
+}
+ion-tab-bar {
+  --background: #d69bb1;
+  --color: white;
+  --color-selected: white;
+}
+.disponiveis {
+  color: #000000;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+}
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  --color: #333;
+}
