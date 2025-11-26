@@ -1,12 +1,12 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
   IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-  IonInput, IonTextarea, IonNote, IonLoading, AlertController, ToastController, LoadingController
-} from '@ionic/angular/standalone';
+  IonInput, IonTextarea, IonNote, IonLoading, AlertController, ToastController, LoadingController, IonTabBar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   shareOutline, pencilOutline, closeOutline, checkmarkOutline,
@@ -55,7 +55,8 @@ interface PasswordChange {
     FormsModule,
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon,
     IonTitle, IonContent, IonFooter, IonGrid, IonRow, IonCol, IonItem, IonLabel,
-    IonInput, IonTextarea, IonNote, IonLoading
+    IonInput, IonTextarea, IonNote, IonLoading, IonTabBar,
+    RouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
