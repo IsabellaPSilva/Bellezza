@@ -1,95 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController, IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
-@Component({
-  selector: 'app-agendamentos',
-  templateUrl: './agendamento.page.html',
-  styleUrls: ['./agendamento.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, RouterLink]
-})
-export class AgendamentosPage implements OnInit {
-  reservas: any[] = [];
+  import { Component, OnInit } from '@angular/core';
+  import { AlertController, IonicModule } from '@ionic/angular';
+  import { CommonModule } from '@angular/common';
+  import { Router, RouterLink } from '@angular/router';
  
-  constructor(
-    private alertCtrl: AlertController,
-    private router: Router
-  ) {}
+  @Component({
+    selector: 'app-agendamentos',
+    templateUrl: './agendamento.page.html',
+    styleUrls: ['./agendamento.page.scss'],
+    standalone: true,
+    imports: [IonicModule, CommonModule, RouterLink]
+  })
+  export class AgendamentosPage implements OnInit {
+    reservas: any[] = [];
  
-  ngOnInit() {
-    this.carregarReservas();
-  }
+    constructor(
+      private alertCtrl: AlertController,
+      private router: Router
+    ) {}
  
-  ionViewWillEnter() {
-    this.carregarReservas();
-  }
+    ngOnInit() {
+      this.carregarReservas();
+    }
  
-  carregarReservas() {
-    const reservasSalvas = JSON.parse(localStorage.getItem('reservas') || '[]');
-    this.reservas = reservasSalvas;
-  }
+    ionViewWillEnter() {
+      this.carregarReservas();
+    }
  
-  async confirmarCancelamento(index: number) {
-    const alert = await this.alertCtrl.create({
-      header: 'Cancelar Atendimento',
-      message: 'Você tem certeza que deseja cancelar este atendimento?',
-      buttons: [
-        {
-          text: 'Não',
-          role: 'cancel',
-          cssClass: 'secondary'
-        },
-        {
-          text: 'Sim, cancelar',
-          handler: () => {
-            // Remove a reserva da lista
-            this.reservas.splice(index, 1);
-            // Atualiza o localStorage
-            localStorage.setItem('reservas', JSON.stringify(this.reservas));
+    carregarReservas() {
+      const reservasSalvas = JSON.parse(localStorage.getItem('reservas') || '[]');
+      this.reservas = reservasSalvas;
+    }
+ 
+    async confirmarCancelamento(index: number) {
+      const alert = await this.alertCtrl.create({
+        header: 'Cancelar Atendimento',
+        message: 'Você tem certeza que deseja cancelar este atendimento?',
+        buttons: [
+          { text: 'Não', role: 'cancel', cssClass: 'secondary' },
+          {
+            text: 'Sim, cancelar',
+            handler: () => {
+              this.reservas.splice(index, 1);
+              localStorage.setItem('reservas', JSON.stringify(this.reservas));
+            }
           }
-        }
-      ]
-    });
+        ]
+      });
  
-    await alert.present();
-  }
+      await alert.present();
+    }
  
-  irParaReserva() {
-    this.router.navigate(['/reserva']);
-  }
- 
-  irParaHome() {
-    this.router.navigate(['/home']);
-  }
- 
-  irParaPerfil() {
-    this.router.navigate(['/perfil']);
-  }
- 
-  // Adicione esta função na classe AgendamentosPage
-  formatarDataResumo(data: string): string {
-    try {
-      const date = new Date(data);
-      if (isNaN(date.getTime())) {
-        // Se a data já estiver no formato "DD/MM/AAAA", retorna apenas o dia e mês
-        if (data.includes('/')) {
-          const partes = data.split('/');
-          if (partes.length === 3) {
-            const dia = partes[0];
-            const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
-            const mes = meses[parseInt(partes[1]) - 1];
-            return `${dia} ${mes}`;
+    formatarDataResumo(data: string): string {
+      try {
+        const date = new Date(data);
+        if (isNaN(date.getTime())) {
+          if (data.includes('/')) {
+            const partes = data.split('/');
+            if (partes.length === 3) {
+              const dia = partes[0];
+              const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+              const mes = meses[parseInt(partes[1]) - 1];
+              return `${dia} ${mes}`;
+            }
           }
+          return 'Data inválida';
         }
+        const dia = date.getDate();
+        const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+        const mes = meses[date.getMonth()];
+        return `${dia} ${mes}`;
+      } catch (error) {
         return 'Data inválida';
       }
-      const dia = date.getDate();
-      const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
-      const mes = meses[date.getMonth()];
-      return `${dia} ${mes}`;
-    } catch (error) {
-      return 'Data inválida';
     }
   }
-}

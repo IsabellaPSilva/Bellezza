@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
  
 @Component({
   selector: 'app-calendarioP',
   templateUrl: './calendarioP.page.html',
   styleUrls: ['./calendarioP.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class CalendarioPPage implements OnInit {
   selectedDate: string | null = null;
@@ -311,4 +311,3 @@ export class CalendarioPPage implements OnInit {
     return reserva.id;
   }
 }
- 

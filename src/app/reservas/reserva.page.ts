@@ -31,8 +31,6 @@ export interface Categoria {
 })
 export class ReservaPage implements OnInit {
   categorias: Categoria[] = [];
-  combos: Servico[] = [];
-  servicosCabelo: Servico[] = [];
  
   constructor(
     private alertController: AlertController,
@@ -51,7 +49,7 @@ export class ReservaPage implements OnInit {
     this.carregarServicos();
   }
  
-  // CARREGAR SERVIÇOS DO LOCAL STORAGE
+  // CARREGAR TODAS AS CATEGORIAS DO LOCAL STORAGE
   private carregarServicos() {
     if (typeof window !== 'undefined' && window.localStorage) {
       const dados = localStorage.getItem('categorias-servicos');
@@ -59,19 +57,9 @@ export class ReservaPage implements OnInit {
     } else {
       this.categorias = this.getCategoriasIniciais();
     }
-    this.atualizarServicos();
   }
  
-  // ATUALIZAR LISTAS DE SERVIÇOS
-  private atualizarServicos() {
-    const categoriaCombos = this.categorias.find(c => c.nome === 'Combos');
-    const categoriaCabelo = this.categorias.find(c => c.nome === 'Cabelo');
-   
-    this.combos = categoriaCombos ? categoriaCombos.servicos : [];
-    this.servicosCabelo = categoriaCabelo ? categoriaCabelo.servicos : [];
-  }
- 
-  // CATEGORIAS INICIAIS - MODIFICADO PARA INCLUIR "MATHEUS FAÇO COMPLETO"
+  // CATEGORIAS INICIAIS - MANTER COMPATÍVEL COM reservaP
   private getCategoriasIniciais(): Categoria[] {
     return [
       {
@@ -95,15 +83,21 @@ export class ReservaPage implements OnInit {
  
   // MÉTODO PARA RESERVAR SERVIÇO
   reservarServico(servico: Servico) {
-    console.log('🔄 Salvando serviço no localStorage:', servico);
+    console.log('🔄 Salvando serviço e navegando para calendário:', servico);
    
-    // Salva o serviço selecionado no localStorage
+    // Salva também no localStorage para compatibilidade
     localStorage.setItem('servicoSelecionado', JSON.stringify(servico));
    
-    console.log('✅ Serviço salvo no localStorage:', servico.nome);
-   
-    // Navega para a página do calendário
-    this.router.navigate(['/calendario']);
+    // Navega para a página do calendário passando o serviço via state
+    this.router.navigate(['/calendario'], {
+      state: {
+        servicoSelecionado: {
+          nome: servico.nome,
+          preco: servico.preco,
+          tempo: servico.tempo
+        }
+      }
+    });
   }
  
   async compartilhar() {

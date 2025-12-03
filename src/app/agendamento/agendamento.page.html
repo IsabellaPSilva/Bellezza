@@ -13,98 +13,59 @@
     </div>
   </div>
  
-  <h1>    </h1>
-  <h1>    </h1>
-  <h1>    </h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
  
-  <!-- Agendamentos Atuais (Dinâmicos) -->
+  <!-- 🔥 AGENDAMENTOS COMPLETOS DO CLIENTE -->
   <div *ngFor="let reserva of reservas; let i = index">
     <ion-card class="card-agendamento">
       <ion-card-content>
+ 
+        <!-- Linha do topo igual ao admin -->
         <div class="linha-topo">
-          <strong>Serviço: {{ reserva.servico }}</strong>
+          <strong>{{ reserva.servico }}</strong>
           <span class="data">{{ formatarDataResumo(reserva.data) }}</span>
         </div>
  
-        <p class="nome">{{ reserva.cliente }}</p>
-        <p class="preco">{{ reserva.preco }}</p>
+        <!-- Nome do cliente -->
+        <p class="nome">Cliente: {{ reserva.cliente }}</p>
  
+        <!-- Preço -->
+        <p class="preco">Preço: {{ reserva.preco }}</p>
+ 
+        <!-- Data completa -->
+        <p class="info">Data completa: {{ reserva.data }}</p>
+ 
+        <!-- Horário -->
+        <p class="info">Horário: {{ reserva.horario }}</p>
+ 
+        <!-- Status (caso exista) -->
+        <p class="status" *ngIf="reserva.status">
+          Status:
+          <span [ngClass]="{
+            'pendente': reserva.status === 'Pendente',
+            'aceito': reserva.status === 'Aceito',
+            'recusado': reserva.status === 'Recusado'
+          }">
+            {{ reserva.status }}
+          </span>
+        </p>
+ 
+        <!-- Botão cancelar -->
         <div class="acoes">
-          <ion-button class="btn-cancelar" (click)="confirmarCancelamento(i)">Cancelar</ion-button>
+          <ion-button class="btn-cancelar" (click)="confirmarCancelamento(i)">
+            Cancelar
+          </ion-button>
         </div>
  
-        <p class="hora">h {{ reserva.horario }}</p>
       </ion-card-content>
     </ion-card>
   </div>
  
-  <!-- Reservas Finalizadas -->
-  <ion-list class="list">
-    <ion-item-divider class="finalizados">
-      <ion-label>Reservas Finalizadas</ion-label>
-    </ion-item-divider>
- 
-    <ion-card class="card-finalizado">
-      <ion-card-content>
-        <div class="linha-topo">
-          <strong>Serviço: Cabelo</strong>
-          <span class="data">25 JUL</span>
-        </div>
- 
-        <p class="nome">Carol Azevedo</p>
-        <p class="preco">R$ 40,0</p>
- 
-        <div class="acoes">
-          <ion-button class="btn-reserve" fill="outline" size="small" (click)="irParaHome()">Reserve Novamente</ion-button>
-        </div>
- 
-        <p class="hora">h 10:00</p>
-      </ion-card-content>
-    </ion-card>
- 
-    <ion-card class="card-finalizado">
-      <ion-card-content>
-        <div class="linha-topo">
-          <strong>Serviço: Cílios</strong>
-          <span class="data">14 ABR</span>
-        </div>
- 
-        <p class="nome">Lara Souza</p>
-        <p class="preco">R$ 35,0</p>
- 
-        <div class="acoes">
-          <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
-        </div>
- 
-        <p class="hora">h 15:00</p>
-      </ion-card-content>
-    </ion-card>
- 
-    <ion-card class="card-finalizado">
-      <ion-card-content>
-        <div class="linha-topo">
-          <strong>Serviço: Sobrancelha</strong>
-          <span class="data">6 MAR</span>
-        </div>
- 
-        <p class="nome">Amanda Rocha</p>
-        <p class="preco">R$ 50,0</p>
- 
-        <div class="acoes">
-          <ion-button class="btn-reserve" fill="outline" size="small">Reserve Novamente</ion-button>
-        </div>
- 
-        <p class="hora">h 14:00</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
- 
-  <!-- Espaço extra para não sobrepor o rodapé -->
-  <div style="height: 80px;"></div>
- 
 </ion-content>
  
-<!-- ⚙️ Rodapé fixo -->
+<!-- Rodapé fixo -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>
@@ -121,3 +82,4 @@
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
+ 

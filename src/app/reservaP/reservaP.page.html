@@ -21,12 +21,15 @@
  
   <!-- Categorias Dinâmicas com Edição -->
   <div class="services-section" *ngFor="let categoria of categorias">
-    <!-- Header da Categoria com Botão + -->
+    <!-- Header da Categoria com Botão + e Excluir -->
     <div class="section-header">
       <button class="btn-add-categoria" (click)="adicionarCategoria()">
         <ion-icon name="add-circle-outline"></ion-icon>
       </button>
       <h2 class="section-title">{{ categoria.nome }}</h2>
+      <button class="btn-excluir-categoria" (click)="excluirCategoria(categoria)">
+        excluir
+      </button>
     </div>
    
     <div class="services-list">

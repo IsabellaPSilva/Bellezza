@@ -68,4 +68,24 @@
     <ion-button class="cancelar" (click)="onCancelar()">Cancelar</ion-button>
     <ion-button (click)="onConfirmar()">Confirmar</ion-button>
   </div>
+
+ 
+  <!-- 🔥 RODAPÉ DO CALENDÁRIO COPIADO AQUI -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/agendamento-home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Início</ion-label>
+    </ion-tab-button>
+  
+    <ion-tab-button routerLink="/agendamento">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label>Agendamentos</ion-label>
+    </ion-tab-button>
+  
+    <ion-tab-button routerLink="/perfil">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
 </ion-content>

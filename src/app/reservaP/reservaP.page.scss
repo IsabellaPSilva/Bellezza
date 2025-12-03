@@ -105,7 +105,6 @@ ion-content {
   align-items: center;
   gap: 12px;
   margin: 20px 0 15px 0;
-  justify-content: center;
 }
  
 .btn-add-categoria {
@@ -113,6 +112,7 @@ ion-content {
   border: none;
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
  
   ion-icon {
     font-size: 32px;
@@ -129,6 +129,30 @@ ion-content {
   font-weight: bold;
   color: #333;
   margin: 0;
+  flex: 1;
+}
+
+.btn-excluir-categoria {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+ 
+  &:hover {
+    background: #c0392b;
+  }
+ 
+  &:active {
+    transform: scale(0.95);
+    background: #a93226;
+  }
 }
  
 .services-list {

@@ -1,199 +1,207 @@
-/* styles.css */
+/* ================================
+   🎀 ESTILO MODERNO E ORGANIZADO
+   ================================ */
  
-body, ion-content {
-  font-family: Arial, sans-serif;
-  background-color: #f2efeb;  /* ou a cor de fundo que aparece no seu Canva */
-  margin: 0;
-  padding: 16px;
-}
+   body, ion-content {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #fff7f9;
+    margin: 0;
+  }
  
-.ion-card {
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
+  /* Fundo suave */
+  .custom-background {
+    --background: #fff7f9 !important;
+  }
  
-.card-agendamento, .card-finalizado {
-  background-color: #d4a7c2; /* cor rosada similar ao Canva */
-  box-shadow: none;
-  width: 290px;      /* Largura fixa */
-  height: 142px;  
-  --background: white;
+  /* ======================
+     💖 HEADER E TÍTULO
+     ====================== */
  
-}
+  .header-container {
+    text-align: center;
+    margin: 25px 0 10px;
+  }
  
-.linha-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  color: #000000;
-}
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d48aa7;
+  }
  
-.data {
-  font-weight: bold;
-  font-size: 13px;
-  color: #000000;
-}
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 2px solid #d48aa7;
+    margin: 0 10px;
+  }
  
-.nome {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
-}
+  .star {
+    color: #d48aa7;
+    font-size: 20px;
+  }
  
-.preco {
-  margin: 4px 0 10px 0;
-  font-size: 15px;
-  color: #000000;
-}
- 
-.acoes {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  color: #000000;
-}
- 
-ion-button.btn-confirmada,
-ion-button.btn-cancelar,
-ion-button.btn-reserve {
-  --border-width: 1px;
-  --border-style: solid;
-  --padding-end: 10px;
-  --padding-top: 4px;
-  --padding-bottom: 4px;
-  font-weight: bold;
-  font-size: 11px;
-  text-transform: uppercase;
-  --color: rgb(0, 0, 0);
-  --background: white; /* para deixar branco com borda */
-}
- 
-ion-button.btn-confirmada {
-  --border-color: rgb(255, 255, 255); /* ajustar conforme tom que o Canva usa */
-}
- 
-ion-button.btn-cancelar {
-  --border-color: rgb(255, 255, 255);
-}
- 
-ion-button.btn-reserve {
-  --border-color: rgb(255, 255, 255);
-}
- 
-.hora {
-  text-align: right;
-  font-size: 14px;
-  color: #000000;
-}
- 
-.custom-background{
- --background: #f2efeb;
-}
- 
-.list,.finalizados{
- background: #f2efeb;
- .finalizados {
-  border-top: 1px solid #ccc;  
-  border-bottom: none;          
-  margin-top: 10px;             /* espaço antes da linha */
-}
-}
- 
-/* ⚙️ Rodapé */
-ion-tab-bar {
-  --background: #7d8c6a;
-  --color: white;
-  --color-selected: white;
-}
- 
-/* ⚙️ Rodapé */
-ion-tab-bar {
-  --background: #d69bb1;
-  --color: white;
-  --color-selected: white;
-}
- 
-.agendamento{
-  color: #333;
-  font-size: 17px;
-  font-weight: bold;
-  margin-bottom: 10px;
- 
-}
- 
-.header-container {
-  text-align: center;
-  margin: 15px 0 20px;
-}
- 
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d48aa7; /* rosa */
-  margin-bottom: 8px;
- 
-}
- 
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 2px solid #d48aa7;
-  margin: 0 10px;
-}
- 
-.star {
-  color: #d48aa7;
-  font-size: 18px;
-}
- 
-.title-row {
-  display: flex;
-  gap: 35px; /* espaço entre logo e texto */
-  color: #000;
- 
- 
-}
+  /* Logo + título */
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 16px;
+  }
  
   .logo {
-  width: 65px !important;
-  height: auto !important;
-}
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
  
-ion-card {
-  background-color: #f3c2d0; /* rosa claro do seu tema */
-  border-radius: 12px;
-  color: #000;
-}
+  .agendamento {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
  
-ion-card-content {
-  background: transparent;
-}
+  /* ================================
+     💎 CARTÕES DE AGENDAMENTO
+     ================================ */
  
-ion-list, ion-item-divider {
-  background: transparent !important;
-}
+  ion-card.card-agendamento {
+    background: #fce1eb;
+    border-radius: 18px;
+    padding: 12px;
+    margin: 18px;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
+    border: 1px solid #f3bfd1;
+  }
  
-.custom-background {
-  --background: #fffaf9 !important; /* fundo claro */
-}
+  ion-card-content {
+    padding: 0;
+  }
  
-.header-container,
-ion-content,
-ion-list {
-  background-color: transparent !important;
-}
+  /* Cabeçalho do card (serviço + data) */
+  .linha-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
  
-.card-agendamento {
-  margin: 16px;
-}
+  .linha-topo strong {
+    font-size: 16px;
+    color: #3a3030;
+  }
  
-.linha-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  /* ======================
+     📅 DATA (12 MAR)
+     ====================== */
+ 
+  .data {
+    font-weight: 700;
+    font-size: 20px;   /* ⬆ DATA AUMENTADA */
+    color: #000000;
+    background: #ffffffee;
+    padding: 5px 12px;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.15);
+  }
+ 
+  /* Nome */
+  .nome {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #463e3e;
+  }
+ 
+  /* Preço */
+  .preco {
+    margin: 6px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a5050;
+  }
+ 
+  /* Info (data completa, horário) */
+  .info {
+    font-size: 14px;
+    margin: 3px 0;
+    color: #6a5a5a;
+  }
+ 
+  /* Status */
+  .status {
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+ 
+  .status span {
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+ 
+  .pendente {
+    background: #fff3cd;
+    color: #856404;
+  }
+ 
+  .aceito {
+    background: #d4edda;
+    color: #155724;
+  }
+ 
+  .recusado {
+    background: #f8d7da;
+    color: #721c24;
+  }
+ 
+  /* ======================
+     🔘 BOTÃO CANCELAR
+     ====================== */
+ 
+  .acoes {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+ 
+  .btn-cancelar {
+    --background: #ffffff;
+    --color: #d9534f;
+    --border-color: #d9534f;
+    --border-width: 1.5px;
+    --border-radius: 10px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+ 
+  /* ======================
+     🕒 Horário no canto
+     ====================== */
+ 
+  .hora {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #433;
+    font-weight: 500;
+  }
+ 
+  /* ======================
+     📌 RODAPÉ
+     ====================== */
+ 
+  ion-tab-bar {
+    --background: #d48aa7;
+    --color: #ffffff;
+    --color-selected: #ffffff;
+  }
+ 
+ 
  

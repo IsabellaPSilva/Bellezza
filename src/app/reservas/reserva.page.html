@@ -24,32 +24,12 @@
     </div>
   </div>
  
-  <!-- Seção Combos -->
-  <div class="services-section" *ngIf="combos.length > 0">
-    <h2 class="section-title">Combos</h2>
+  <!-- Seções Dinâmicas para cada Categoria -->
+  <div class="services-section" *ngFor="let categoria of categorias">
+    <h2 class="section-title">{{ categoria.nome }}</h2>
    
-    <div class="services-list">
-      <div class="service-card" *ngFor="let combo of combos">
-        <div class="service-info">
-          <h3>{{ combo.nome }}</h3>
-          <div class="service-details">
-            <span class="price">{{ formatarPreco(combo.preco) }}</span>
-            <span class="time">{{ combo.tempo }}</span>
-          </div>
-        </div>
-        <button class="btn-reservar" (click)="reservarServico(combo)">
-          reservar
-        </button>
-      </div>
-    </div>
-  </div>
- 
-  <!-- Seção Cabelo -->
-  <div class="services-section" *ngIf="servicosCabelo.length > 0">
-    <h2 class="section-title">Cabelo</h2>
-   
-    <div class="services-list">
-      <div class="service-card" *ngFor="let servico of servicosCabelo">
+    <div class="services-list" *ngIf="categoria.servicos && categoria.servicos.length > 0">
+      <div class="service-card" *ngFor="let servico of categoria.servicos">
         <div class="service-info">
           <h3>{{ servico.nome }}</h3>
           <div class="service-details">
@@ -62,12 +42,19 @@
         </button>
       </div>
     </div>
+ 
+    <!-- Mensagem quando não há serviços na categoria -->
+    <div class="empty-state" *ngIf="!categoria.servicos || categoria.servicos.length === 0">
+      <div class="empty-message">
+        <p>Nenhum serviço disponível nesta categoria.</p>
+      </div>
+    </div>
   </div>
  
-  <!-- Mensagem quando não há serviços -->
-  <div class="empty-state" *ngIf="combos.length === 0 && servicosCabelo.length === 0">
+  <!-- Mensagem quando não há categorias -->
+  <div class="empty-state" *ngIf="categorias.length === 0">
     <div class="empty-message">
-      <p>Nenhum serviço disponível no momento.</p>
+      <p>Nenhuma categoria disponível no momento.</p>
     </div>
   </div>
 </ion-content>

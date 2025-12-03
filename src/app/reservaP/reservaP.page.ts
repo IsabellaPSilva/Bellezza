@@ -162,6 +162,35 @@ export class ReservaPPage implements OnInit {
     this.categorias.push(novaCategoria);
     this.salvarCategorias();
   }
+
+  // EXCLUIR CATEGORIA
+  async excluirCategoria(categoria: Categoria) {
+    const mensagemServicos = categoria.servicos.length > 0 
+      ? ` e ${categoria.servicos.length} serviço(s)` 
+      : '';
+    
+    const alert = await this.alertController.create({
+      header: 'Excluir Categoria',
+      message: `Tem certeza que deseja excluir a categoria "${categoria.nome}"${mensagemServicos}?`,
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Excluir',
+          role: 'destructive',
+          handler: () => {
+            this.excluirCategoriaLocal(categoria.id);
+            this.mostrarToast('Categoria excluída!');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  private excluirCategoriaLocal(categoriaId: string) {
+    this.categorias = this.categorias.filter(categoria => categoria.id !== categoriaId);
+    this.salvarCategorias();
+  }
  
   // ADICIONAR NOVO SERVIÇO
   async adicionarServico(categoria: Categoria) {

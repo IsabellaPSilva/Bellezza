@@ -88,48 +88,12 @@
         <p><strong>{{ salonData.appointmentNotice }}</strong></p>
       </div>
  
-      <!-- SERVIÇOS NO MODO VISUALIZAÇÃO COM BOTÃO DE LIXO -->
-      <div class="services-section">
-        <div class="services-header">
-          <h3 class="services-title">Serviços</h3>
-          <ion-button
-            size="small"
-            fill="clear"
-            color="primary"
-            (click)="enableEditMode()"
-            class="edit-services-btn">
-            <ion-icon name="pencil-outline" slot="start"></ion-icon>
-            Editar
-          </ion-button>
-        </div>
-       
-        <ul class="services-list">
-          <li *ngFor="let service of salonData.services; let i = index" class="service-list-item">
-            <div class="service-content">
-              <span class="service-name">{{ service.name }}</span>
-              <span class="service-price">R$ {{ service.price }}</span>
-            </div>
-            <!-- BOTÃO DE LIXO NA VISUALIZAÇÃO -->
-            <ion-button
-              fill="clear"
-              color="danger"
-              size="small"
-              class="remove-service-view-btn"
-              (click)="removeServiceView(i)">
-              <ion-icon name="trash-outline"></ion-icon>
-            </ion-button>
-          </li>
-        </ul>
- 
-        <div class="no-services" *ngIf="salonData.services.length === 0">
-          <ion-icon name="cut-outline"></ion-icon>
-          <p>Nenhum serviço cadastrado</p>
-          <ion-button size="small" (click)="enableEditMode()">
-            <ion-icon name="add" slot="start"></ion-icon>
-            Adicionar Serviços
-          </ion-button>
-        </div>
-      </div>
+      <ul class="services-list">
+        <li *ngFor="let service of salonData.services">
+          <span class="service-name">{{ service.name }}</span>
+          <span class="service-price">R$ {{ service.price }}</span>
+        </li>
+      </ul>
     </div>
  
     <!-- GALERIA - MODO VISUALIZAÇÃO -->
@@ -304,7 +268,7 @@
             maxlength="50"
             autocomplete="current-password">
           </ion-input>
-          <ion-note slot="helper">Digite a senha que você usa para fazer login</ion-note>
+          <ion-note slot="helper">Obrigatório para alterar a senha</ion-note>
         </ion-item>
  
         <ion-item>
@@ -408,62 +372,6 @@
       </ion-item>
     </div>
  
-    <!-- Serviços -->
-    <div class="edit-section">
-      <div class="section-header">
-        <h2 class="section-title">Serviços</h2>
-        <ion-button size="small" (click)="addService()">
-          <ion-icon name="add" slot="start"></ion-icon>
-          ADICIONAR
-        </ion-button>
-      </div>
- 
-      <div class="services-edit-list">
-        <div *ngFor="let service of salonData.services; let i = index" class="service-item">
-          <div class="service-inputs">
-            <ion-item>
-              <ion-label position="stacked">Nome do Serviço</ion-label>
-              <ion-input
-                [(ngModel)]="service.name"
-                [name]="'serviceName' + i"
-                placeholder="Ex: Maquiagem"
-                required>
-              </ion-input>
-            </ion-item>
- 
-            <ion-item class="price-item">
-              <ion-label position="stacked">Preço (R$)</ion-label>
-              <ion-input
-                [(ngModel)]="service.price"
-                [name]="'servicePrice' + i"
-                type="text"
-                placeholder="Ex: 120 ou 800/1500"
-                required>
-              </ion-input>
-            </ion-item>
-          </div>
- 
-          <!-- BOTÃO DE LIXO PARA REMOVER SERVIÇO -->
-          <ion-button
-            fill="clear"
-            color="danger"
-            class="remove-service-btn"
-            (click)="removeService(i)">
-            <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
-        </div>
- 
-        <div class="empty-services" *ngIf="salonData.services.length === 0">
-          <ion-icon name="cut-outline"></ion-icon>
-          <p>Nenhum serviço cadastrado</p>
-          <ion-button size="small" (click)="addService()">
-            <ion-icon name="add" slot="start"></ion-icon>
-            Adicionar Serviço
-          </ion-button>
-        </div>
-      </div>
-    </div>
- 
     <!-- GALERIA DE FOTOS - MODO EDIÇÃO -->
     <div class="edit-section">
       <div class="section-header">
@@ -526,6 +434,19 @@
       <ion-note class="gallery-note">
         {{ salonData.galleryImages.length }}/10 fotos • Máximo 5MB por foto
       </ion-note>
+ 
+      <!-- ===== BOTÕES DE CONTA (APENAS MODO EDIÇÃO) ===== -->
+      <div class="account-actions">
+        <ion-button expand="block" class="logout-btn" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          Sair da Conta
+        </ion-button>
+ 
+        <ion-button expand="block" class="delete-account-btn" (click)="deleteAccount()">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Excluir Conta
+        </ion-button>
+      </div>
     </div>
    
   </form>
