@@ -8,6 +8,7 @@ import {
   IonInput, IonTextarea, IonNote, IonLoading, AlertController, ToastController, LoadingController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+import { SalonDataService } from './salondata.service';
 import {
   shareOutline, pencilOutline, closeOutline, checkmarkOutline,
   camera, add, trashOutline, images, close, saveOutline, home, calendar, person,
@@ -103,7 +104,8 @@ export class SalaoPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private salonDataService: SalonDataService
   ) {
     addIcons({
       'share-outline': shareOutline,
@@ -139,11 +141,27 @@ export class SalaoPage implements OnInit {
   ngOnInit() {
     this.loadSalonData();
   }
- 
+
   loadSalonData() {
-    console.log('Dados do salão carregados');
+    const savedData = this.salonDataService.getSalonData();
+    if (savedData) {
+      this.salonData = {
+        name: savedData.name || 'Salão Mãe & Filhas',
+        description: savedData.description || 'Salão de beleza Mãe & Filhas, é um salão família. voltada para o público feminino, com especialidade em cabelos afros.',
+        username: savedData.username || 'Isabella',
+        profession: savedData.profession || 'Cabeleireira Profissional',
+        address: savedData.address || 'Rua das Flores, 123 - Centro, São José dos Pinhais - PR',
+        appointmentNotice: savedData.appointmentNotice || 'Atendimento com hora marcada !!',
+        services: savedData.services || [],
+        galleryImages: savedData.galleryImages || [],
+        socialMedia: savedData.socialMedia || { whatsapp: '', instagram: '', facebook: '' }
+      };
+      this.headerImage = savedData.headerImage || '';
+      this.logoImage = savedData.logoImage || '';
+      console.log('✅ Dados do salão carregados:', this.salonData);
+    }
   }
- 
+
   get salonInitials(): string {
     if (!this.salonData.name) {
       return 'M&F';
@@ -365,11 +383,6 @@ export class SalaoPage implements OnInit {
       return false;
     }
  
-    if (this.salonData.services.length === 0) {
-      this.showToast('Adicione pelo menos um serviço', 'warning');
-      return false;
-    }
- 
     const invalidService = this.salonData.services.find(
       service => !service.name || !service.price ||
         service.name.trim() === '' || service.price.trim() === ''
@@ -410,21 +423,41 @@ export class SalaoPage implements OnInit {
       message: 'Salvando alterações...',
       spinner: 'crescent'
     });
- 
+
     await loading.present();
- 
+
     try {
       // Simulando requisição - substitua pela sua chamada real de API
       await new Promise((resolve) => setTimeout(resolve, 1500));
- 
+
+      // Salvar dados usando o serviço
+      const success = this.salonDataService.saveSalonData({
+        name: this.salonData.name,
+        description: this.salonData.description,
+        username: this.salonData.username,
+        profession: this.salonData.profession,
+        address: this.salonData.address,
+        appointmentNotice: this.salonData.appointmentNotice,
+        headerImage: this.headerImage,
+        logoImage: this.logoImage,
+        galleryImages: this.salonData.galleryImages,
+        services: this.salonData.services,
+        socialMedia: this.salonData.socialMedia
+      });
+
       // Atualizar backup com os novos dados
       this.originalSalonData = JSON.parse(JSON.stringify(this.salonData));
       this.originalHeaderImage = this.headerImage;
       this.originalLogoImage = this.logoImage;
- 
+
       this.isEditMode = false;
-      await this.showToast('Alterações salvas com sucesso!', 'success');
-      console.log('Salvamento concluído!');
+      
+      if (success) {
+        await this.showToast('Alterações salvas com sucesso!', 'success');
+        console.log('✅ Salvamento concluído!');
+      } else {
+        await this.showToast('Erro ao salvar alterações', 'danger');
+      }
     } catch (error) {
       console.error('Erro no salvamento:', error);
       await this.showToast('Erro ao salvar alterações', 'danger');
@@ -436,9 +469,7 @@ export class SalaoPage implements OnInit {
       }
       this.isLoading = false;
     }
-  }
- 
-  // ============================================
+  }  // ============================================
   // ALTERAÇÃO DE SENHA
   // ============================================
   resetPasswordFields() {

@@ -32,19 +32,36 @@
     <ion-card>
       <ion-card-content class="fundo">
         <h2>{{ reserva.cliente }}</h2>
-        <p><b>R${{ reserva.preco }}</b></p>
-        <p>Serviço: {{ reserva.servico }}</p>
-        <p>Data: {{ reserva.dataExibicao || reserva.data }}</p>
-        <p>Horário: {{ reserva.horario }}</p>
-        <p>Status:
+        <p><b>Serviço Principal:</b> {{ reserva.servico }}</p>
+       
+        <!-- Mostra serviços adicionais se existirem -->
+        <div *ngIf="reserva.servicosAdicionais && reserva.servicosAdicionais.length > 0">
+          <p><b>Serviços adicionais:</b></p>
+          <ul style="margin: 5px 0; padding-left: 15px;">
+            <li *ngFor="let servico of reserva.servicosAdicionais">
+              {{ servico.name }} - R$ {{ servico.price | number:'1.2-2' }}
+            </li>
+          </ul>
+        </div>
+       
+        <p><b>Preço Total:</b> {{ reserva.preco }}</p>
+        <p><b>Data:</b> {{ reserva.dataExibicao || reserva.data }}</p>
+        <p><b>Horário:</b> {{ reserva.horario }}</p>
+        <p><b>Status:</b>
           <span [ngClass]="{
             'status-pendente': reserva.status === 'pendente',
             'status-aceito': reserva.status === 'aceito',
-            'status-recusado': reserva.status === 'recusado'
+            'status-recusado': reserva.status === 'recusado',
+            'status-cancelado': reserva.status === 'cancelado'
           }">
             {{ reserva.status === 'pendente' ? 'Pendente' :
-               reserva.status === 'aceito' ? 'Aceito' : 'Recusado' }}
+               reserva.status === 'aceito' ? 'Aceito' :
+               reserva.status === 'recusado' ? 'Recusado' :
+               'Cancelado pelo cliente' }}
           </span>
+        </p>
+        <p *ngIf="reserva.status === 'cancelado' && reserva.motivo">
+          <small>Motivo: {{ reserva.motivo }}</small>
         </p>
  
         <!-- Mostrar botões apenas se o status for pendente -->
@@ -67,7 +84,6 @@
     <ion-card>
       <ion-card-content>
         <p>Nenhuma reserva encontrada.</p>
-       
       </ion-card-content>
     </ion-card>
   </div>
@@ -75,19 +91,19 @@
 </ion-content>
  
 <!-- RODAPÉ -->
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <ion-label>Agendamentos</ion-label>
-    </ion-tab-button>
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="tab1">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>Agendamentos</ion-label>
+  </ion-tab-button>
  
-    <ion-tab-button tab="tab2" routerLink="/salao">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Perfil</ion-label>
-    </ion-tab-button>
+  <ion-tab-button tab="tab2" routerLink="/salao">
+    <ion-icon name="person-outline"></ion-icon>
+    <ion-label>Perfil</ion-label>
+  </ion-tab-button>
  
-    <ion-tab-button tab="tab3" routerLink="/reservaP">
-      <ion-icon name="storefront-outline"></ion-icon>
-      <ion-label>Salão</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
+  <ion-tab-button tab="tab3" routerLink="/reservaP">
+    <ion-icon name="storefront-outline"></ion-icon>
+    <ion-label>Salão</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

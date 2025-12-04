@@ -1,112 +1,161 @@
-// salao-detalhes.page.scss
-
+// detalhes-salao.page.scss
+ 
 ion-content {
   --background: #f5f5f5;
 }
-
+ 
 .back-button {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 16px;
+  left: 16px;
   z-index: 10;
   --color: #333;
 }
-
-.header-section {
+ 
+// ========== HEADER ==========
+.header-new {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-}
-
-.logo-container {
-  flex-shrink: 0;
-  
-  .logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
-    object-fit: cover;
-    background: #d4b5d4;
-  }
-}
-
-.title-section {
-  flex: 1;
-  
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 15px 0;
-    color: #333;
-    line-height: 1.2;
-  }
-}
-
-.services-button {
-  --background: #d4b5d4;
-  --color: #333;
-  --border-radius: 8px;
-  font-weight: 600;
-  height: 45px;
-  margin: 0;
-}
-
-.social-icons {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  
-  ion-icon {
-    font-size: 24px;
-    color: #333;
-  }
-}
-
-.description {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 70px 20px 30px;
   background: white;
-  padding: 15px;
-  border-radius: 8px;
+  margin: -16px -16px 20px -16px;
+}
+ 
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
-  
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
-    text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+ 
+  .initials {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ce4ecc;
+    letter-spacing: 1px;
+  }
+ 
+  .logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  .camera-icon {
+    font-size: 40px;
+    color: #000000;
   }
 }
-
+ 
+.salon-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+ 
+.salon-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+  max-width: 500px;
+}
+ 
+.professional-info {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 500px;
+ 
+  .professional-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+  }
+ 
+  .professional-role {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #666;
+   
+    ion-icon {
+      font-size: 16px;
+      color: #666;
+      flex-shrink: 0;
+    }
+  }
+}
+ 
+.address-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+  max-width: 500px;
+ 
+  ion-icon {
+    font-size: 16px;
+    color: #666;
+    flex-shrink: 0;
+  }
+}
+ 
+.appointment-banner {
+  width: 100%;
+  background: #c8d5b9;
+  color: #333;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 15px;
+  border-radius: 0;
+}
+ 
+// ========== GALERIA ==========
 .image-gallery {
   margin-bottom: 30px;
   overflow: hidden;
 }
-
+ 
 .gallery-scroll {
   display: flex;
   gap: 10px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 10px; /* menos espaço embaixo */
-
-  
+  padding-bottom: 10px;
+ 
   &::-webkit-scrollbar {
     height: 6px;
   }
-  
+ 
   &::-webkit-scrollbar-thumb {
     background: #d4b5d4;
     border-radius: 3px;
   }
 }
-
+ 
 .gallery-item {
   flex-shrink: 0;
   width: 45%;
   scroll-snap-align: start;
-  
+  position: relative;
+ 
   img {
     width: 100%;
     height: 225px;
@@ -114,173 +163,100 @@ ion-content {
     object-fit: cover;
   }
 }
-
+ 
+// ========== AVALIAÇÕES ==========
 .ratings-section {
   background: white;
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 80px;
 }
-
+ 
 .rating-title {
   text-align: center;
   color: #999;
   font-size: 14px;
   margin-bottom: 10px;
 }
-
+ 
 .stars-input {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 25px;
-  
+  margin-bottom: 15px;
+ 
   ion-icon {
     font-size: 32px;
     color: #ddd;
     cursor: pointer;
-    
+    transition: all 0.2s;
+   
+    &[name="star"] {
+      color: #fab6eb;
+    }
+   
     &:hover {
-      color: #8b4789;
+      color: #f382f3;
+      transform: scale(1.15);
     }
   }
 }
-
+ 
 .rating-summary {
   display: flex;
   gap: 20px;
   align-items: center;
+  margin-top: 30px;
 }
-
+ 
 .rating-score {
   flex-shrink: 0;
-  text-align: center;
-  
-  h2 {
-    font-size: 14px;
-    margin: 0 0 8px 0;
-    font-weight: 600;
-    
-    .score {
-      font-weight: bold;
-    }
-    
-    .total {
-      font-weight: normal;
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+ 
   .stars-display {
     display: flex;
+    flex-direction: column;
     gap: 2px;
-    justify-content: center;
-    margin-bottom: 8px;
-    
+   
     ion-icon {
-      font-size: 18px;
+      font-size: 22px;
       color: #8b4789;
     }
   }
-  
+ 
   .total-reviews {
-    font-size: 12px;
-    color: #666;
-    margin: 0;
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0 0 0;
+    font-weight: 600;
   }
 }
-
+ 
 .rating-bars {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
+ 
 .bar-item {
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
-
+ 
 .bar-container {
-  flex: 1;
-  height: 12px;
+  width: 100%;
+  height: 14px;
   background: #f0f0f0;
-  border-radius: 6px;
+  border-radius: 7px;
   overflow: hidden;
-  
+ 
   .bar-fill {
     height: 100%;
     background: #8b4789;
     transition: width 0.3s ease;
   }
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  
-  .nav-toolbar {
-    --background: #d4b5d4;
-    --border-width: 0;
-    --min-height: 70px;
-  }
-}
-
-/* ⚙️ Rodapé */
-ion-tab-bar {
-  --background: #d69bb1;
-  --color: white;
-  --color-selected: white;
-}
-
-.nav-items {
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  
-  ion-icon {
-    font-size: 28px;
-    color: #fff;
-  }
-  
-  span {
-    font-size: 11px;
-    color: #fff;
-  }
-  
-  &.active {
-    ion-icon {
-      color: #8b4789;
-    }
-    
-    span {
-      color: #8b4789;
-      font-weight: 600;
-    }
-  }
-}
-
-.stars-input ion-icon {
-  font-size: 28px;        /* tamanho das estrelas */
-  color: #ccc;             /* cor padrão (apagada) */
-  transition: color 0.2s;
-  cursor: pointer;
-}
-
-.stars-input ion-icon[name="star"] {
-  color: #fab6eb;          /* ⭐ cor quando selecionada (dourado) */
-}
-
-.stars-input ion-icon:hover {
-  color: #f382f3;          /* cor quando passa o mouse por cima */
-}
+} 
+ 

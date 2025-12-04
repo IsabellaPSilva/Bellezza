@@ -106,6 +106,9 @@ export class ServicosPage {
   }
  
   onConfirmar() {
+    // Salva no localStorage para manter os dados
+    localStorage.setItem('servicosAdicionais', JSON.stringify(this.servicosSelecionados));
+   
     // Navega de volta para o calendário com os serviços selecionados
     this.router.navigate(['/calendario'], {
       state: {
@@ -120,5 +123,7 @@ export class ServicosPage {
     this.servicosSelecionados = [];
     this.services.forEach(service => service.selected = false);
     this.filtered = [...this.services];
+    localStorage.removeItem('servicosAdicionais');
   }
 }
+ 

@@ -1,77 +1,76 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <!-- Botão Voltar -->
+ 
+  <!-- BOTÃO VOLTAR -->
   <ion-button fill="clear" class="back-button" routerLink="/categoria">
     <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
   </ion-button>
-
-  <!-- Header -->
-  <div class="header-section">
-    <div class="logo-container">
-      <img src="assets/SalãoMãeeFilhas.jpeg" alt="Logo do Salão" class="logo" />
+ 
+  <div class="header-new">
+    <div class="logo-circle">
+      <img *ngIf="salonData.logoUrl" [src]="salonData.logoUrl" alt="Logo" class="logo-image">
+      <span class="initials" *ngIf="!salonData.logoUrl">{{ salonData.initials }}</span>
     </div>
-
-    <div class="title-section">
-      <h1>Salão<br />Mãe & Filhas</h1>
-      <ion-button expand="block" class="services-button" routerLink="/reserva">Serviços</ion-button>
+ 
+    <h1 class="salon-title">{{ salonData.title }}</h1>
+    <p class="salon-description">{{ salonData.description }}</p>
+ 
+    <div class="professional-info">
+      <p class="professional-name">{{ salonData.professionalName }}</p>
+      <div class="professional-role">
+        <ion-icon name="cut-outline"></ion-icon>
+        <span>{{ salonData.professionalRole }}</span>
+      </div>
     </div>
+ 
+    <div class="address-info">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>{{ salonData.address }}</span>
+    </div>
+ 
+    <div class="appointment-banner">{{ salonData.appointmentText }}</div>
   </div>
-
-  <!-- Redes Sociais -->
-  <div class="social-icons">
-    <ion-icon name="logo-instagram"></ion-icon>
-    <ion-icon name="logo-facebook"></ion-icon>
-  </div>
-
-  <!-- Descrição -->
-  <div class="description">
-    <p>
-      Salão de beleza Mãe & Filhas, é um salão família, voltada para o público feminino, com especialidade em cabelos
-      afros. Atendimento com hora marcada !!
-    </p>
-  </div>
-
-  <!-- Galeria -->
+ 
+  <!-- GALERIA -->
   <div class="image-gallery">
     <div class="gallery-scroll">
-      <div class="gallery-item" *ngFor="let img of images">
-        <img [src]="img" alt="Foto do salão" />
+      <div class="gallery-item" *ngFor="let img of salonData.images">
+        <img [src]="img" />
       </div>
     </div>
   </div>
-
-  <!-- Avaliações -->
-<div class="ratings-section">
-  <p class="rating-title">Dê sua opinião</p>
-
-  <!-- ⭐ Avaliação clicável -->
-  <div class="stars-input">
-    <ion-icon
-      *ngFor="let star of [1,2,3,4,5]"
-      [name]="star <= selectedRating ? 'star' : 'star-outline'"
-      (click)="setRating(star)">
-    </ion-icon>
-  </div>
-
-  <p class="user-rating" *ngIf="selectedRating > 0">
-    Você avaliou com <strong>{{ selectedRating }}</strong> estrela{{ selectedRating > 1 ? 's' : '' }}!
-  </p>
-
-  <div class="rating-summary">
-    <div class="rating-score">
-      <h2>Notas <span class="score">4,</span> <span class="total">9</span></h2>
-      <div class="stars-display">
-        <ion-icon name="star" *ngFor="let star of [1,2,3,4]"></ion-icon>
-        <ion-icon name="star-outline"></ion-icon>
-      </div>
-      <p class="total-reviews">100</p>
+ 
+  <!-- AVALIAÇÃO -->
+  <div class="ratings-section">
+    <p class="rating-title">Dê sua opinião</p>
+ 
+    <div class="stars-input">
+      <ion-icon *ngFor="let star of [1,2,3,4,5]"
+        [name]="star <= selectedRating ? 'star' : 'star-outline'"
+        (click)="setRating(star)">
+      </ion-icon>
     </div>
-
-    <div class="rating-bars">
-      <div class="bar-item" *ngFor="let avaliacao of avaliacoes">
-        <div class="bar-container">
-          <div class="bar-fill" [style.width]="getProgressWidth(avaliacao.quantidade)"></div>
+ 
+    <div class="rating-summary">
+      <div class="rating-score">
+        <div class="stars-display">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <p class="total-reviews">{{ getTotalReviews() }}</p>
+      </div>
+ 
+      <div class="rating-bars">
+        <div class="bar-item" *ngFor="let avaliacao of avaliacoes">
+          <div class="bar-container">
+            <div class="bar-fill" [style.width]="getProgressWidth(avaliacao.quantidade)"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+ 
+</ion-content> detalhes-salao.html
+ 

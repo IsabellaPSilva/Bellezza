@@ -1,4 +1,4 @@
-<!-- perfil.page.html - COMPLETO E ATUALIZADO -->
+<!-- perfil.page.html -->
 
 <ion-content class="perfil-page">
 
@@ -31,17 +31,17 @@
 
   <!-- Métodos de entrada -->
   <ion-list>
-
     <ion-item lines="none">
       <ion-label><b>Senha:</b><br>{{ senhaExibida }}</ion-label>
       <ion-icon slot="end" name="lock-closed-outline" (click)="editarSenha()"></ion-icon>
     </ion-item>
   </ion-list>
 
-  <!-- Pessoal -->
+  <!-- Gênero -->
   <ion-list>
     <ion-label><b>Gênero (opcional)</b></ion-label>
-    <ion-radio-group>
+
+    <ion-radio-group [(ngModel)]="genero">
       <ion-item>
         <ion-label>Feminino</ion-label>
         <ion-radio value="feminino"></ion-radio>
@@ -53,12 +53,13 @@
     </ion-radio-group>
   </ion-list>
 
-  <!-- Botões de ação -->
-  <ion-button expand="block" class="botao-sair" (click)="sair()" routerLink="/home">Sair</ion-button>
+  <!-- Botões -->
+  <ion-button expand="block" class="botao-sair" (click)="sair()">Sair</ion-button>
   <ion-button expand="block" class="botao-excluir" (click)="excluir()">Excluir</ion-button>
+
 </ion-content>
 
-<!-- ⚙️ Rodapé fixo -->
+<!-- Rodapé -->
 <ion-tab-bar slot="bottom">
   <ion-tab-button routerLink="/agendamento-home">
     <ion-icon name="home-outline"></ion-icon>

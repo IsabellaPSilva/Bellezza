@@ -130,7 +130,7 @@ export class CadastroClientePage {
     });
     await toast.present();
 
-    await this.router.navigate(['/agendamento-home']);
+    await this.router.navigate(['/localizacao']);
 
     // 🧹 5. Limpar os campos
     this.nome = '';

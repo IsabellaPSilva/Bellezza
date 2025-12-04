@@ -27,7 +27,6 @@ export class CalendarioPPage implements OnInit {
   // Carrega as reservas do localStorage
   carregarReservas() {
     const reservasSalvas = localStorage.getItem('reservasP');
-    console.log('Dados do localStorage:', reservasSalvas);
    
     if (reservasSalvas) {
       this.reservas = JSON.parse(reservasSalvas);
@@ -103,19 +102,22 @@ export class CalendarioPPage implements OnInit {
  
   // Aceitar reserva
   aceitarReserva(reserva: any) {
-    reserva.status = 'aceito';
-    this.atualizarLocalStorage();
-    console.log('Agendamento aceito:', reserva);
-   
-    // Enviar reserva para a página de agendamentos
-    this.enviarParaAgendamentos(reserva);
-   
-    this.mostrarAlertaSucesso('Agendamento aceito com sucesso!');
+    const index = this.reservas.findIndex(r => r.id === reserva.id);
+    if (index > -1) {
+      // Atualiza o status do registro existente
+      this.reservas[index].status = 'aceito';
+      this.atualizarLocalStorage();
+     
+      // Envia para a página de agendamentos do cliente
+      this.enviarParaAgendamentos(this.reservas[index]);
+     
+      console.log('Agendamento aceito:', this.reservas[index]);
+      this.mostrarAlertaSucesso('Agendamento aceito com sucesso!');
+    }
   }
  
   // Recusar reserva
   recusarReserva(reserva: any) {
-    // Encontra o índice da reserva pelo ID
     const index = this.reservas.findIndex(r => r.id === reserva.id);
     if (index > -1) {
       this.reservas.splice(index, 1);
@@ -125,29 +127,49 @@ export class CalendarioPPage implements OnInit {
     }
   }
  
-  // Enviar reserva para a página de agendamentos
+  // Enviar reserva para a página de agendamentos do cliente
   enviarParaAgendamentos(reserva: any) {
-    // Carrega as reservas existentes na página de agendamentos
     const reservasAgendamento = JSON.parse(localStorage.getItem('reservas') || '[]');
-   
-    // Cria um objeto compatível com a página de agendamentos
-    const reservaAgendamento = {
-      id: reserva.id,
-      servico: reserva.servico,
-      preco: reserva.preco,
-      data: reserva.dataExibicao || reserva.data,
-      horario: reserva.horario,
-      cliente: reserva.cliente,
-      status: 'confirmado'
-    };
-   
-    // Adiciona à lista de agendamentos
-    reservasAgendamento.push(reservaAgendamento);
-   
-    // Salva no localStorage da página de agendamentos
+ 
+    // Usar apenas os serviços adicionais como identificador de duplicatas
+    const listaAdicionais = reserva.listaServicosAdicionais || '';
+ 
+    const existeIndex = reservasAgendamento.findIndex((r: any) =>
+      r.cliente === reserva.cliente &&
+      r.listaServicosAdicionais === listaAdicionais &&
+      (r.data === reserva.dataExibicao || r.data === reserva.data) &&
+      r.horario === reserva.horario
+    );
+ 
+    if (existeIndex > -1) {
+      // Atualiza status do existente
+      reservasAgendamento[existeIndex].status = 'confirmado';
+      reservasAgendamento[existeIndex].servicosAdicionais = reserva.servicosAdicionais || [];
+      // Mantém nome e preço caso já existam
+      if (reserva.servico) {
+        reservasAgendamento[existeIndex].servico = reserva.servico;
+      }
+      if (reserva.preco) {
+        reservasAgendamento[existeIndex].preco = reserva.preco;
+      }
+    } else {
+      // Adiciona novo - incluindo o serviço principal e serviços adicionais
+      const reservaAgendamento = {
+        id: reserva.id,
+        servico: reserva.servico || '',
+        preco: reserva.preco || '',
+        data: reserva.dataExibicao || reserva.data,
+        horario: reserva.horario,
+        cliente: reserva.cliente,
+        servicosAdicionais: reserva.servicosAdicionais || [],
+        listaServicosAdicionais: listaAdicionais,
+        status: 'confirmado'
+      };
+      reservasAgendamento.push(reservaAgendamento);
+    }
+ 
     localStorage.setItem('reservas', JSON.stringify(reservasAgendamento));
-   
-    console.log('Reserva enviada para agendamentos:', reservaAgendamento);
+    console.log('Reserva enviada para cliente (apenas adicionais):', reserva);
   }
  
   // Atualiza o localStorage com as reservas modificadas
@@ -210,16 +232,13 @@ export class CalendarioPPage implements OnInit {
   // Salvar horário disponível no localStorage do calendário
   async salvarHorarioDisponivel(horario: string, data: string) {
     try {
-      // Valida o formato do horário
       if (!this.validarFormatoHorario(horario)) {
         this.mostrarAlertaErro('Formato de horário inválido! Use HH:MM (ex: 14:30)');
         return;
       }
  
-      // Carrega horários existentes do calendário
       const horariosExistentes = JSON.parse(localStorage.getItem('horariosDisponiveis') || '[]');
      
-      // Garante que a data está no formato YYYY-MM-DD
       const dataObj = new Date(data);
       if (isNaN(dataObj.getTime())) {
         this.mostrarAlertaErro('Data inválida!');
@@ -228,7 +247,6 @@ export class CalendarioPPage implements OnInit {
      
       const dataFormatada = dataObj.toISOString().split('T')[0];
      
-      // Verifica se o horário já existe para esta data
       const horarioExistente = horariosExistentes.find((h: any) =>
         h.data === dataFormatada && h.horario === horario
       );
@@ -238,7 +256,6 @@ export class CalendarioPPage implements OnInit {
         return;
       }
  
-      // Cria o novo horário
       const novoHorario = {
         id: new Date().getTime(),
         horario: horario,
@@ -248,14 +265,8 @@ export class CalendarioPPage implements OnInit {
         timestamp: new Date().toISOString()
       };
  
-      // Adiciona à lista
       horariosExistentes.push(novoHorario);
- 
-      // Salva no localStorage
       localStorage.setItem('horariosDisponiveis', JSON.stringify(horariosExistentes));
- 
-      console.log('✅ Horário adicionado:', novoHorario);
-      console.log('💾 Todos os horários salvos:', horariosExistentes);
      
       this.mostrarAlertaSucesso(`Horário ${horario} adicionado para ${novoHorario.dataExibicao}!`);
      

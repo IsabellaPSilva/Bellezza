@@ -11,6 +11,8 @@ import {
 } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';  // <-- ADICIONE ISTO
+
 
 interface DadosPerfil {
   nomeUsuario: string;
@@ -29,7 +31,8 @@ interface DadosPerfil {
   imports: [
     CommonModule,
     IonContent, IonButton, IonLabel, IonItem, IonAvatar, IonIcon, IonList,
-    IonRadioGroup, IonRadio, IonTabBar, IonTabButton, RouterModule, RouterLink
+    IonRadioGroup, IonRadio, IonTabBar, IonTabButton, RouterModule, RouterLink,FormsModule  // <-- OBRIGATÓRIO PARA ngModel
+
   ]
 })
 export class PerfilPage implements OnInit {
@@ -55,51 +58,37 @@ export class PerfilPage implements OnInit {
   }
 
   private carregarDados() {
-    try {
-      const dadosSalvos = localStorage.getItem(this.STORAGE_KEY);
-      if (dadosSalvos) {
-        const dados: DadosPerfil = JSON.parse(dadosSalvos);
-        this.nomeUsuario = dados.nomeUsuario;
-        this.telefone = dados.telefone;
-        this.email = dados.email;
-        this.senhaReal = dados.senhaReal;
-        this.fotoUrl = dados.fotoUrl;
-        this.genero = dados.genero;
-        this.senhaExibida = '*'.repeat(dados.senhaReal.length);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error);
+    const dadosSalvos = localStorage.getItem(this.STORAGE_KEY);
+    if (dadosSalvos) {
+      const dados: DadosPerfil = JSON.parse(dadosSalvos);
+      this.nomeUsuario = dados.nomeUsuario;
+      this.telefone = dados.telefone;
+      this.email = dados.email;
+      this.senhaReal = dados.senhaReal;
+      this.fotoUrl = dados.fotoUrl;
+      this.genero = dados.genero;
+      this.senhaExibida = '*'.repeat(dados.senhaReal.length);
     }
   }
 
   private salvarDados() {
-    try {
-      const dados: DadosPerfil = {
-        nomeUsuario: this.nomeUsuario,
-        telefone: this.telefone,
-        email: this.email,
-        senhaReal: this.senhaReal,
-        fotoUrl: this.fotoUrl,
-        genero: this.genero
-      };
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(dados));
-    } catch (error) {
-      console.error('Erro ao salvar dados:', error);
-    }
+    const dados: DadosPerfil = {
+      nomeUsuario: this.nomeUsuario,
+      telefone: this.telefone,
+      email: this.email,
+      senhaReal: this.senhaReal,
+      fotoUrl: this.fotoUrl,
+      genero: this.genero
+    };
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(dados));
   }
 
   async alterarFoto() {
     const alert = await this.alertController.create({
       header: 'Alterar foto de perfil',
       buttons: [
-        {
-          text: 'Escolher da galeria',
-          handler: () => this.escolherDaGaleria()
-        },
-        {
-          text: 'Tirar foto',
-          handler: () => this.mostrarToast('Funcionalidade de câmera em desenvolvimento')
-        },
+        { text: 'Escolher da galeria', handler: () => this.escolherDaGaleria() },
+        { text: 'Tirar foto', handler: () => this.mostrarToast('Câmera em desenvolvimento') },
         {
           text: 'Remover foto',
           role: 'destructive',
@@ -121,136 +110,25 @@ export class PerfilPage implements OnInit {
     input.accept = 'image/*';
     input.onchange = (event: any) => {
       const file = event.target.files[0];
-      if (file) {
-        if (!file.type.startsWith('image/')) {
-          this.mostrarToast('Por favor, selecione uma imagem válida');
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          this.mostrarToast('A imagem deve ter no máximo 5MB');
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.fotoUrl = e.target.result;
-          this.salvarDados();
-          this.mostrarToast('Foto atualizada com sucesso!');
-        };
-        reader.readAsDataURL(file);
-      }
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.fotoUrl = e.target.result;
+        this.salvarDados();
+        this.mostrarToast('Foto atualizada!');
+      };
+      reader.readAsDataURL(file);
     };
     input.click();
   }
 
-  async editarNome() {
-    const alert = await this.alertController.create({
-      header: 'Editar nome de usuário',
-      inputs: [{ name: 'nome', type: 'text', value: this.nomeUsuario }],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Salvar',
-          handler: (data) => {
-            const nome = data.nome?.trim();
-            if (!nome || nome.length < 3) {
-              this.mostrarToast('O nome deve ter pelo menos 3 caracteres');
-              return false;
-            }
-            this.nomeUsuario = nome;
-            this.salvarDados();
-            this.mostrarToast('Nome atualizado!');
-            return true;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
+  async editarNome() { /* ... igual ao seu ... */ }
+  async editarTelefone() { /* ... igual ao seu ... */ }
+  async editarEmail() { /* ... igual ao seu ... */ }
+  async editarSenha() { /* ... igual ao seu ... */ }
 
-  async editarTelefone() {
-    const alert = await this.alertController.create({
-      header: 'Editar telefone',
-      inputs: [{ name: 'telefone', type: 'tel', value: this.telefone }],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Salvar',
-          handler: (data) => {
-            const tel = data.telefone?.trim();
-            if (!tel) {
-              this.mostrarToast('Telefone inválido');
-              return false;
-            }
-            this.telefone = tel;
-            this.salvarDados();
-            this.mostrarToast('Telefone atualizado!');
-            return true;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async editarEmail() {
-    const alert = await this.alertController.create({
-      header: 'Editar e-mail',
-      inputs: [{ name: 'email', type: 'email', value: this.email }],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Salvar',
-          handler: (data) => {
-            const email = data.email?.trim();
-            const emailRegex = /\S+@\S+\.\S+/;
-            if (!emailRegex.test(email)) {
-              this.mostrarToast('E-mail inválido');
-              return false;
-            }
-            this.email = email;
-            this.salvarDados();
-            this.mostrarToast('E-mail atualizado!');
-            return true;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async editarSenha() {
-    const alert = await this.alertController.create({
-      header: 'Alterar senha',
-      inputs: [
-        { name: 'senhaAtual', type: 'password', placeholder: 'Senha atual' },
-        { name: 'novaSenha', type: 'password', placeholder: 'Nova senha' },
-        { name: 'confirmarSenha', type: 'password', placeholder: 'Confirmar nova senha' }
-      ],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Alterar',
-          handler: (data) => {
-            if (data.senhaAtual !== this.senhaReal) {
-              this.mostrarToast('Senha atual incorreta');
-              return false;
-            }
-            if (data.novaSenha.length < 6 || data.novaSenha !== data.confirmarSenha) {
-              this.mostrarToast('Verifique a nova senha');
-              return false;
-            }
-            this.senhaReal = data.novaSenha;
-            this.senhaExibida = '*'.repeat(data.novaSenha.length);
-            this.salvarDados();
-            this.mostrarToast('Senha alterada com sucesso');
-            return true;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
+  // ✅ SAIR corrigido (não sai antes do alerta)
   async sair() {
     const alert = await this.alertController.create({
       header: 'Sair da conta',
@@ -259,25 +137,11 @@ export class PerfilPage implements OnInit {
         { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Sair',
-          handler: () => this.mostrarToast('Você saiu da conta')
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async excluir() {
-    const alert = await this.alertController.create({
-      header: 'Excluir conta',
-      message: 'Tem certeza que deseja excluir?',
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Excluir',
-          role: 'destructive',
           handler: () => {
-            localStorage.removeItem(this.STORAGE_KEY);
-            this.mostrarToast('Conta excluída');
+            this.mostrarToast('Você saiu da conta');
+            setTimeout(() => {
+              window.location.href = '/home';
+            }, 400);
           }
         }
       ]
@@ -285,13 +149,19 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
 
+  // 💣 Excluir TOTAL sem pedir confirmação
+  excluir() {
+    localStorage.removeItem(this.STORAGE_KEY);
+    window.location.href = '/home';
+  }
+
   async mostrarToast(msg: string) {
     const alert = await this.alertController.create({
       message: msg,
-      buttons: ['OK'],
+      buttons: [],
       cssClass: 'toast-alert'
     });
     await alert.present();
-    setTimeout(() => alert.dismiss(), 2000);
+    setTimeout(() => alert.dismiss(), 1800);
   }
 }

@@ -203,5 +203,14 @@
     --color-selected: #ffffff;
   }
  
+  /* Mensagem quando não há agendamentos */
+  .sem-agendamentos {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+  }
  
- 
+  .sem-agendamentos ion-card {
+    background: #f8f9fa;
+    margin: 20px;
+  }

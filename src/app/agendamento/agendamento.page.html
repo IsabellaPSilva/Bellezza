@@ -31,24 +31,35 @@
         <!-- Nome do cliente -->
         <p class="nome">Cliente: {{ reserva.cliente }}</p>
  
+        <!-- Serviços adicionais -->
+        <div *ngIf="reserva.servicosAdicionais && reserva.servicosAdicionais.length > 0" class="extras">
+          <p><strong>Serviços adicionais:</strong></p>
+          <ul style="margin: 5px 0; padding-left: 15px;">
+            <li *ngFor="let servico of reserva.servicosAdicionais">
+              {{ servico.name }} - R$ {{ servico.price | number:'1.2-2' }}
+            </li>
+          </ul>
+        </div>
+       
+        <!-- Ou mostra a lista formatada -->
+        <p *ngIf="reserva.listaServicosAdicionais && reserva.listaServicosAdicionais !== ''" class="info">
+          <strong>Serviços extras:</strong> {{ reserva.listaServicosAdicionais }}
+        </p>
+ 
         <!-- Preço -->
-        <p class="preco">Preço: {{ reserva.preco }}</p>
+        <p class="preco">Preço Total: {{ reserva.preco }}</p>
  
         <!-- Data completa -->
-        <p class="info">Data completa: {{ reserva.data }}</p>
+        <p class="info">Data: {{ reserva.data }}</p>
  
         <!-- Horário -->
         <p class="info">Horário: {{ reserva.horario }}</p>
  
-        <!-- Status (caso exista) -->
-        <p class="status" *ngIf="reserva.status">
+        <!-- Status -->
+        <p class="status">
           Status:
-          <span [ngClass]="{
-            'pendente': reserva.status === 'Pendente',
-            'aceito': reserva.status === 'Aceito',
-            'recusado': reserva.status === 'Recusado'
-          }">
-            {{ reserva.status }}
+          <span class="aceito">
+            Confirmado
           </span>
         </p>
  
@@ -59,6 +70,15 @@
           </ion-button>
         </div>
  
+      </ion-card-content>
+    </ion-card>
+  </div>
+ 
+  <!-- Mensagem quando não há agendamentos -->
+  <div *ngIf="reservas.length === 0" class="sem-agendamentos">
+    <ion-card>
+      <ion-card-content>
+        <p>Nenhum agendamento confirmado encontrado.</p>
       </ion-card-content>
     </ion-card>
   </div>
@@ -82,4 +102,3 @@
     <ion-label>Perfil</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
- 
